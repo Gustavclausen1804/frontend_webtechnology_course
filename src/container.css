@@ -31,3 +31,24 @@
     min-width: 100px;
     text-align: right;
 }
+.frame{
+    width: auto;
+}
+
+.slet{
+    padding-right: 35px;
+}
+
+.produkt{
+    padding-left: 35px;
+    padding-right: 275px;
+}
+
+.antal{
+    padding-right: 55px;
+}
+
+table{
+    border-bottom: 5px solid;
+    display: block;
+}

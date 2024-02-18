@@ -18,6 +18,17 @@ const ProductItem: React.FC<ProductItemProps> = ({ image, name, price }) => {
   const formattedPrice = new Intl.NumberFormat('da-DK', { style: 'currency', currency: 'DKK' }).format(price * amount);
 
   return (
+    <div className="frame">
+      <table>
+      <tr>
+      <th className ="slet" >Slet</th>
+      <th className ="produkt">Produkt:</th>
+      <th className ="antal">Antal:</th>
+  
+      <th className ="prisalt">Pris i alt:</th>
+      </tr>
+      </table>
+  
     <div className="product-item">
       <button className="delete-btn" onClick={lambda => console.log("you deleted " + name)}>X</button>
       <img src={image} alt={name} className="product-image" />
@@ -29,6 +40,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ image, name, price }) => {
         onChange={handleAmountChange}
       />
       <span className="product-price">{formattedPrice}</span>
+    </div>
     </div>
   );
 };
