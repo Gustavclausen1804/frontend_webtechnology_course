@@ -32,7 +32,12 @@
     text-align: right;
 }
 .frame{
-    width: auto;
+     width: auto; /* eller en bredde efter dit valg */
+    height: 60vh; /* eller en højde efter dit valg */
+    overflow-y: scroll; /* gør boxen scrollable */
+    border: 1px solid #000; /* tilføj en ramme til boxen */
+    margin: 10px;
+    padding: 5px;
 }
 
 .slet{
