@@ -1,21 +1,33 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import AlbumPicker from './AlbumPicker'
-import ProductItem from './container'
+import ProductItem from './ProductItem'
+import { products } from './products'
+
+import { Product, CartItem } from './types'
+import CartList from './CartList'
+
+
+
+
 
 function App() {
   const [count, setCount] = useState(0)
+
+  const sampleCartItems : CartItem[] = products.slice(0, 10).map((product: Product) => ({
+    product: product,
+    quantity: 2,
+    giftWrap: false
+    }));
+
+
 
   return (
     <>
 
 
-      <ProductItem
-      image = "src\assets\easis-is.jpg"
-      name = "Saltkaramelis/0,75 l / uden tilsat sukker/EASIS"
-      price = {43.33}></ProductItem>
+      <CartList items={sampleCartItems}></CartList>
+
+
     </>
     
   )
