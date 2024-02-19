@@ -26,7 +26,7 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
           console.log(index),
           <ProductItem
             key={item.product.id}
-            image='src\assets\easis-is.jpg' //TODO: Billerne har faktisk ikke billeder lige nu.
+            image='src\assets\easis-is.jpg' //TODO: produkterne har faktisk ikke billeder lige nu.
             name={item.product.name}
             price={item.product.price}
             // Placeholder functions for now, you will replace them with actual implementations later
