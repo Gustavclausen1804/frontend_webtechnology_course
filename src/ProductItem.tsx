@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './container.css'; 
+import './container.css';
+import './RemoveButton.tsx';
 
 interface ProductItemProps {
   image: string;
