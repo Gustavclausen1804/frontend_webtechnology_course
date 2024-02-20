@@ -5,9 +5,10 @@ interface ProductItemProps {
   image: string;
   name: string;
   price: number;
+  onChange: (value: any) => void;
 }
 
-const ProductItem: React.FC<ProductItemProps> = ({ image, name, price }) => {
+const ProductItem: React.FC<ProductItemProps> = ({ image, name, price, onChange }) => {
   const [amount, setAmount] = useState(1);
 
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
