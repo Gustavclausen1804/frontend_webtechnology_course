@@ -14,8 +14,10 @@ const ProductItem: React.FC<ProductItemProps> = ({ image, name, price }) => {
     setAmount(Number(event.target.value) >= 0 ? Number(event.target.value) : 0);
   };
 
+  function formatPrice(value: number): string {
+    return new Intl.NumberFormat('da-DK', { style: 'currency', currency: 'DKK' }).format(value);
+  }
   
-  const formattedPrice = new Intl.NumberFormat('da-DK', { style: 'currency', currency: 'DKK' }).format(price * amount);
 
   return (
  
@@ -30,7 +32,8 @@ const ProductItem: React.FC<ProductItemProps> = ({ image, name, price }) => {
         value={amount} 
         onChange={handleAmountChange}
       />
-      <span className="product-price">{formattedPrice}</span>
+      <span className="product-price">{formatPrice(price)}</span>
+      <span className="product-total">{formatPrice(price * amount)}</span>
     </div>
   );
 };
