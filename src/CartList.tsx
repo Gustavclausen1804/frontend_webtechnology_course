@@ -16,7 +16,7 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
         <th className ="slet" >Slet</th>
         <th className ="produkt">Produkt:</th>
         <th className ="antal">Antal:</th>
-    
+        <th className ="prispr">Pris pr. stk.:</th>
         <th className ="prisalt">Pris i alt:</th>
         </tr>
         </table>
