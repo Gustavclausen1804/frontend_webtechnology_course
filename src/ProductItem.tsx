@@ -2,17 +2,21 @@ import React, { useState } from 'react';
 import './container.css'; 
 
 interface ProductItemProps {
+  key: string;
   image: string;
   name: string;
   price: number;
-  onChange: (value: any) => void;
+  quantity: number;
+ // onQuantityChange: (key: string, quantity: number) => void;
 }
 
-const ProductItem: React.FC<ProductItemProps> = ({ image, name, price, onChange }) => {
+const ProductItem: React.FC<ProductItemProps> = ({key, image, name, price }) => {
   const [amount, setAmount] = useState(1);
+  
 
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAmount(Number(event.target.value) >= 0 ? Number(event.target.value) : 0);
+    setAmount(Number(event.target.value) >= 0 ? Number(event.target.value) : 1);
+//    onQuantityChange(key, Number(event.target.value));
   };
 
   

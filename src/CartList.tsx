@@ -4,13 +4,11 @@ import ProductItem from './ProductItem';
 
 type CartListProps = {
     items: CartItem[];
+ //   quantities: { [key: string]: number };
 };
 
 const CartList: React.FC<CartListProps> = ({ items }) => {
  
-  const totalPrice = items.reduce((total, item) => {
-    return total + item.product.price;// * item.quantity;
-}, 0);
 
     return (
 
@@ -36,7 +34,9 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
             image='src\assets\easis-is.jpg' //TODO: produkterne har faktisk ikke billeder lige nu.
             name={item.product.name}
             price={item.product.price}
-            onChange={totalPrice => {console.log(totalPrice)}}
+            quantity={item.quantity}
+     //       onQuantityChange={console.log("hej")}
+     //       onChange= {console.log(totalPrice)}
             // Placeholder functions for now, you will replace them with actual implementations later
           />
         ))}       

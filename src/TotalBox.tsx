@@ -1,13 +1,15 @@
+import React from 'react';
+
 type ShowTotalPriceProps = {
     totalPrice: number;
   }
 
-function ShowTotalPrice ({ totalPrice }: ShowTotalPriceProps)  {
+  const ShowTotalPrice: React.FC<ShowTotalPriceProps> = ({ totalPrice }) => {
  
 
     return (
 
-        <div className="frame">
+        <div className="frameTot">
        
       
       <table>
