@@ -45,16 +45,20 @@
 }
 
 .slet{
-    padding-right: 35px;
+    padding-right: 100px;
 }
 
 .produkt{
-    padding-left: 35px;
-    padding-right: 275px;
+    padding-left: 125px;
+    padding-right: 150px;
 }
 
 .antal{
-    padding-right: 55px;
+    padding-right: 35px;
+}
+.prispr{
+    padding-left: 5px;
+    padding-right: 25px;   
 }
 
 table{
