@@ -31,6 +31,10 @@
     min-width: 100px;
     text-align: right;
 }
+.product-total {
+    min-width: 100px;
+    text-align: right;
+}
 .frame{
      width: auto; /* eller en bredde efter dit valg */
     height: 60vh; /* eller en højde efter dit valg */
