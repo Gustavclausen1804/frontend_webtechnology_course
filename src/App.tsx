@@ -1,37 +1,20 @@
-import { useState } from 'react'
+//import { useState } from 'react'
+//import reactLogo from './assets/react.svg'
+//import viteLogo from '/vite.svg'
 import './App.css'
-import ProductItem from './ProductItem'
-import { products } from './products'
-import RemoveButton from './RemoveButton'
-
-import { Product, CartItem } from './types'
-import CartList from './CartList'
-
-
-
-
+import VareListe from './VareListe';
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  const sampleCartItems : CartItem[] = products.slice(0, 10).map((product: Product) => ({
-    product: product,
-    quantity: 2,
-    giftWrap: false
-    }));
-
-
+ // const [count, setCount] = useState(0)
 
   return (
-    <>
-
-
-      <CartList items={sampleCartItems}></CartList>
-
-
-    </>
-    
-  )
+    <div className="App">
+      <header className="App-header">
+        <h1>Vareliste</h1>
+      </header>
+      <VareListe />
+    </div>
+  );
 }
 
 export default App
