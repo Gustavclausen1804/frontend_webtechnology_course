@@ -4,10 +4,17 @@ import ProductItem from './ProductItem';
 
 type CartListProps = {
     items: CartItem[];
- //   quantities: { [key: string]: number };
+  //  quantities: { [key: string]: number };
 };
 
 const CartList: React.FC<CartListProps> = ({ items }) => {
+
+ // onQuantityChange: (key: string, quantity: number) => void;
+
+ const onQuantityChange = (key: string, quantity: number) => {
+    console.log(`You changed the quantity of ${key} to ${quantity}`);
+    quantity = item.quantity;
+  }
  
 
     return (
@@ -35,7 +42,7 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
             name={item.product.name}
             price={item.product.price}
             quantity={item.quantity}
-     //       onQuantityChange={console.log("hej")}
+            onQuantityChange={onQuantityChange}
      //       onChange= {console.log(totalPrice)}
             // Placeholder functions for now, you will replace them with actual implementations later
           />

@@ -13,7 +13,7 @@ export interface Product {
     product: Product;
     quantity: number;
     giftWrap: boolean;
-
+    quantities: { [key: string]: number };
   }
 
 
