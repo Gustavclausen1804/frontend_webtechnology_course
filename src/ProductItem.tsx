@@ -5,9 +5,10 @@ interface ProductItemProps {
   image: string;
   name: string;
   price: number;
+  onClickDelete: any;
 }
 
-const ProductItem: React.FC<ProductItemProps> = ({ image, name, price }) => {
+const ProductItem: React.FC<ProductItemProps> = ({ image, name, price, onClickDelete }) => {
   const [amount, setAmount] = useState(1);
 
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,11 +24,11 @@ const ProductItem: React.FC<ProductItemProps> = ({ image, name, price }) => {
  
   
     <div className="product-item">
-      <button className="delete-btn" onClick={lambda => console.log("you deleted " + name)}>X</button>
+      <button className="delete-btn" onClick={() => onClickDelete(name)}>X</button>
       <img src={image} alt={name} className="product-image" />
       <span className="product-name">{name}</span>
       <input 
-        type="number" 
+        type="text" 
         className="product-amount" 
         value={amount} 
         onChange={handleAmountChange}

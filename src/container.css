@@ -24,7 +24,9 @@
 }
 
 .product-amount {
-    width: 50px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
 }
 
 .product-price {
