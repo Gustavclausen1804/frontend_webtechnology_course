@@ -11,20 +11,10 @@ interface ProductItemProps {
   onQuantityChange: (productId: string, quantity: number) => void;
 }
 
- // onQuantityChange: (key: string, quantity: number) => void;
-
-// const ProductItem: React.FC<ProductItemProps> = ({productId, image, name, price, onQuantityChange }) => {
- // const [amount, setAmount] = useState(1);
-  
-
- // const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-//    setAmount(Number(event.target.value) >= 0 ? Number(event.target.value) : 1);
-//    onQuantityChange(key, Number(event.target.value));
- // };
+ 
  const ProductItem: React.FC<ProductItemProps> = ({ productId, image, name, price, quantity, onQuantityChange }) => {
   const [amount, setAmount] = useState(1);
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
- //   const newQuantity = Number(event.target.value);
     const newAmount = Number(event.target.value);
     setAmount(newAmount); 
     onQuantityChange(productId, quantity = newAmount);
