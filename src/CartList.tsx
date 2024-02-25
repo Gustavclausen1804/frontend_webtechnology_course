@@ -9,17 +9,17 @@ type CartListProps = {
 onQuantityChange: (key: string, quantity: number) => void;
 };
 
-const CartList: React.FC<CartListProps> = ({ items }) => {
+const CartList: React.FC<CartListProps> = ({ items, onQuantityChange  }) => {
 
  // onQuantityChange: (key: string, quantity: number) => void;
 
- const onQuantityChange = (productId: string, quantity: number) => {
-    console.log(`You changed the quantity of ${productId} to ${quantity}`);
-    const item = items.find(item => item.product.id === productId);
-    if (item) {
-      item.quantity = quantity;
-    }
-  }
+// const onQuantityChange = (productId: string, quantity: number) => {
+ //   console.log(`You changed the quantity of ${productId} to ${quantity}`);
+ //   const item = items.find(item => item.product.id === productId);
+ //   if (item) {
+ //     item.quantity = quantity;
+ //   }
+ // }
  
 
     return (

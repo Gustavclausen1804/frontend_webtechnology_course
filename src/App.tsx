@@ -39,6 +39,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const newTotalPrice = sampleCartItems.reduce((sum, item) => {
  //     return sum + (item.product.price * item.quantity);
+      console.log(`useEffect ${item.product.price} to ${quantities[item.product.id]}`);
         const itemTotal = item.product.price * (quantities[item.product.id] || item.quantity);
         return sum + itemTotal;
     }, 0);
