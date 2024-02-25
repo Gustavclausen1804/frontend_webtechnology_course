@@ -2,6 +2,7 @@ import React from 'react';
 import { CartItem  } from './types';
 import ProductItem from './ProductItem';
 import { useState } from 'react';
+import ShowTotalPrice from './showTotalPrice';
 
 type CartListProps = {
     items: CartItem[];
@@ -65,7 +66,7 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
           />
         ))}
       </div>
-      <h1>{getTotalPrice()}</h1>
+      <ShowTotalPrice totalPrice={getTotalPrice()} />
       </div>
     );
   };

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 type ShowTotalPriceProps = {
     totalPrice: number;
   }
 
   const ShowTotalPrice: React.FC<ShowTotalPriceProps> = ({ totalPrice }) => {
+    useState(totalPrice);
  
 
     return (
