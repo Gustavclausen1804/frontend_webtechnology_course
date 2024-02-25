@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './container.css'; 
 
 interface ProductItemProps {
-  image: string;
+ // image: string; TODO: tilføj billeder senere. 
   name: string;
   price: number;
   onClickDelete: (name: string) => void;
@@ -10,7 +10,7 @@ interface ProductItemProps {
   productQuantity: number;
 }
 
-const ProductItem: React.FC<ProductItemProps> = ({ image, name, price, onClickDelete, productQuantity, onChangeAmount }) => {
+const ProductItem: React.FC<ProductItemProps> = ({  name, price, onClickDelete, productQuantity, onChangeAmount }) => {
 
   const [amount, setAmount] = useState(productQuantity);
 
@@ -30,7 +30,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ image, name, price, onClickDe
   
     <div className="product-item">
       <button className="delete-btn" onClick={() => onClickDelete(name)}>X</button>
-      <img src={image} alt={name} className="product-image" />
+      {/* TODO: Tilføj billede her senere. <img src={image} alt={name} className="product-image" /> */}
       <span className="product-name">{name}</span>
       <input 
         type="text" 
