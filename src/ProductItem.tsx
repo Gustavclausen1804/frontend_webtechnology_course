@@ -2,25 +2,31 @@ import React, { useState } from 'react';
 import './container.css'; 
 
 interface ProductItemProps {
+  productId: string;
   key: string;
   image: string;
   name: string;
   price: number;
   quantity: number;
-  onQuantityChange: (key: string, quantity: number) => void;
+  onQuantityChange: (productId: string, quantity: number) => void;
 }
 
  // onQuantityChange: (key: string, quantity: number) => void;
 
- const ProductItem: React.FC<ProductItemProps> = ({key, image, name, price, onQuantityChange }) => {
+ const ProductItem: React.FC<ProductItemProps> = ({productId, image, name, price, onQuantityChange }) => {
   const [amount, setAmount] = useState(1);
   
 
-  const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAmount(Number(event.target.value) >= 0 ? Number(event.target.value) : 1);
-    onQuantityChange(key, Number(event.target.value));
-  };
+ // const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+//    setAmount(Number(event.target.value) >= 0 ? Number(event.target.value) : 1);
+//    onQuantityChange(key, Number(event.target.value));
+ // };
 
+ const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const newAmount = Number(event.target.value);
+  setAmount(newAmount); // Opdater lokalt state
+  onQuantityChange(productId, newAmount); // Informér App komponenten om ændringen
+};
   
   const formattedPrice = new Intl.NumberFormat('da-DK', { style: 'currency', currency: 'DKK' }).format(price * amount);
 

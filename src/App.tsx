@@ -48,7 +48,7 @@ const App: React.FC = () => {
 
   return (
     <>
-      <CartList items={sampleCartItems}></CartList>
+      <CartList items={sampleCartItems}  onQuantityChange={handleQuantityChange}></CartList>
       <ShowTotalPrice totalPrice={totalPrice}/>
     </>
   )

@@ -4,16 +4,21 @@ import ProductItem from './ProductItem';
 
 type CartListProps = {
     items: CartItem[];
-  //  quantities: { [key: string]: number };
+//    quantities: { [key: string]: number };
+//onQuantityChange: (productId: string, quantity: number) => void;
+onQuantityChange: (key: string, quantity: number) => void;
 };
 
 const CartList: React.FC<CartListProps> = ({ items }) => {
 
  // onQuantityChange: (key: string, quantity: number) => void;
 
- const onQuantityChange = (key: string, quantity: number) => {
-    console.log(`You changed the quantity of ${key} to ${quantity}`);
-    quantity = item.quantity;
+ const onQuantityChange = (productId: string, quantity: number) => {
+    console.log(`You changed the quantity of ${productId} to ${quantity}`);
+    const item = items.find(item => item.product.id === productId);
+    if (item) {
+      item.quantity = quantity;
+    }
   }
  
 
@@ -38,6 +43,7 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
           console.log(index),
           <ProductItem
             key={item.product.id}
+            productId={item.product.id}
             image='src\assets\easis-is.jpg' //TODO: produkterne har faktisk ikke billeder lige nu.
             name={item.product.name}
             price={item.product.price}
