@@ -12,7 +12,7 @@ function App() {
 
   const sampleCartItems : CartItem[] = products.slice(0, 10).map((product: Product) => ({
     product: product,
-    quantity: 2,
+    quantity: 1,
     giftWrap: false
     }));
 
