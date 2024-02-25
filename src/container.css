@@ -21,6 +21,7 @@
 
 .product-name {
     flex-grow: 1;
+    text-align: left;
 }
 
 .product-amount {
