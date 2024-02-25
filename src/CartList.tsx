@@ -12,11 +12,31 @@ type CartListProps = {
 const CartList: React.FC<CartListProps> = ({ items }) => {
   const [itemList, setItemList] = useState(items);
 
-  function delteItem(id: string){
+  function delteItem(id: string) : void {
     setItemList(itemList.filter(item => item.product.name != id));
-  }  
+  }
+  
+  function getTotalPrice() : number {
+    let totalPrice = 0;
+    for (let i = 0; i < itemList.length; i++) {
+      totalPrice += itemList[i].product.price * itemList[i].quantity;
+      
+    }
+    return totalPrice;
+  }
+
+  function setAmountOfProduct(name: string, amount: number) : void {
+    const newItemList = [...itemList];
+    for (let i = 0; i < itemList.length; i++) {
+      if (itemList[i].product.name == name) {
+          newItemList[i].quantity = amount;
+      }
+    }
+    setItemList(newItemList);
+  }
   
   return (
+    
 
         <div className="frame">
           <table>
@@ -38,10 +58,14 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
             name={item.product.name}
             price={item.product.price}
             onClickDelete={delteItem}
+            productQuantity={item.quantity}
+            onChangeAmount={setAmountOfProduct}
+
             // Placeholder functions for now, you will replace them with actual implementations later
           />
         ))}
       </div>
+      <h1>{getTotalPrice()}</h1>
       </div>
     );
   };

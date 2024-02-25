@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './container.css'; 
 
 interface ProductItemProps {
   image: string;
   name: string;
   price: number;
-  onClickDelete: any;
+  onClickDelete: (name: string) => void;
+  onChangeAmount: (name : string, amount: number) => void;
+  productQuantity: number;
 }
 
-const ProductItem: React.FC<ProductItemProps> = ({ image, name, price, onClickDelete }) => {
-  const [amount, setAmount] = useState(1);
+const ProductItem: React.FC<ProductItemProps> = ({ image, name, price, onClickDelete, productQuantity, onChangeAmount }) => {
+
+  const [amount, setAmount] = useState(productQuantity);
 
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAmount(Number(event.target.value) >= 0 ? Number(event.target.value) : 0);
+    const newAmount = Number(event.target.value);
+    setAmount(newAmount);
+    onChangeAmount(name, newAmount);
   };
 
   function formatPrice(value: number): string {
