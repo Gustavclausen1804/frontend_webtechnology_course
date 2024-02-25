@@ -1,35 +1,48 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
-import ProductItem from './ProductItem'
 import { products } from './products'
-
 import { Product, CartItem } from './types'
 import CartList from './CartList'
+import ProductItem from './ProductItem'
+
+
+import ShowTotalPrice from './TotalBox'
 
 
 
 
 
-function App() {
-  const [count, setCount] = useState(0)
 
-  const sampleCartItems : CartItem[] = products.slice(0, 10).map((product: Product) => ({
+const App: React.FC = () => {
+  const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
+
+  const handleQuantityChange = (key: string, quantity: number) => {
+    setQuantities(prevQuantities => ({ ...prevQuantities, [key]: quantity }));
+  };
+  
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const sampleCartItems: CartItem[] = products.slice(0, 10).map((product: Product) => ({
     product: product,
-    quantity: 2,
+    quantity: 1,
     giftWrap: false
-    }));
+  }));
 
+  
+  // Beregn den samlede pris når sampleCartItems ændres
+  useEffect(() => {
+    const newTotalPrice = sampleCartItems.reduce((sum, item) => {
+      return sum + (item.product.price * item.quantity);
+    }, 0);
+    setTotalPrice(newTotalPrice);
+  }, [quantities]); // Afhængighedsarrayet sikrer at effekten kun kører når sampleCartItems ændres
 
 
   return (
     <>
-
-
       <CartList items={sampleCartItems}></CartList>
-
-
+      <ShowTotalPrice totalPrice={totalPrice}/>
     </>
-    
   )
 }
 

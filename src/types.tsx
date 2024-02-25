@@ -5,6 +5,7 @@ export interface Product {
     currency: string;
     rebateQuantity: number;
     rebatePercent: number;
+  //  quantityInStock: number;
     upsellProductId: string | null;
   }
   
