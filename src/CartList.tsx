@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CartItem  } from './types';
 import ProductItem from './ProductItem';
-import { removeProductById } from './products';
+//import { ProductsComponent, removeProductById } from './products';
+import removeProductById from "./products"
 import './RemoveButton';
+import { products } from './products';
 
 
 type CartListProps = {
@@ -12,13 +14,18 @@ type CartListProps = {
 const CartList: React.FC<CartListProps> = ({ items }) => {
   const [products, setProducts] = useState<CartItem[]>(items);
 
+  useEffect(() => {
+    setProducts(items);
+  }, [items]);
+
   const handleDelete = (id: string) => {
     // Use removeProductById and explicitly specify the type
-    const updatedProducts = removeProductById<CartItem>(id, products);
-    console.log("hD_"+id)
+    //const updatedProducts = 
+    removeProductById(id, products);
+    console.log("hD_" + id);
     console.log("hD_pL_"+products.length)
     // Update the state with the new array of products
-    setProducts(updatedProducts);
+    //setProducts(updatedProducts);
   };
   
 

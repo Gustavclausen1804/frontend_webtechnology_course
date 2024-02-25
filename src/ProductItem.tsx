@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import {Product, CartItem} from './types';
 import './container.css';
 import './RemoveButton.tsx';
-import RemoveButton from './RemoveButton.tsx';
 
 interface ProductItemProps {
   image: string;
   name: string;
   price: number;
-  onDelete: (id: string) => void
+  onDelete: (name: string) => void
 }
 
 const ProductItem: React.FC<ProductItemProps> = ({ image, name, price, onDelete }) => {
@@ -27,7 +26,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ image, name, price, onDelete 
   
     <div className="product-item">
       
-      <button className="delete-btn" onClick={() => onDelete(ProductItem.name)}>X</button>
+      <button className="delete-btn" onClick={() => onDelete(name)}>X</button>
       <img src={image} alt={name} className="product-image" />
       <span className="product-name">{name}</span>
       <input 
