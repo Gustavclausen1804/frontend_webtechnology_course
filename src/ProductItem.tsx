@@ -16,14 +16,20 @@ const ProductItem: React.FC<ProductItemProps> = ({  name, price, onClickDelete, 
 
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newAmount = Number(event.target.value);
-    setAmount(newAmount);
-    onChangeAmount(name, newAmount);
+    if (isNaN(newAmount)) {
+      setAmount(0);
+      onChangeAmount(name, 0);
+  }
+      else {setAmount(newAmount);
+      onChangeAmount(name, newAmount);
+    }
   };
 
   function formatPrice(value: number): string {
     return new Intl.NumberFormat('da-DK', { style: 'currency', currency: 'DKK' }).format(value);
   }
   
+
 
   return (
  
