@@ -38,8 +38,8 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
   
   return (
     
-
-        <div className="frame">
+<div> 
+        <div>
           <table>
             <tr>
               <th className ="slet" >Slet</th>
@@ -50,7 +50,7 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
             </tr>
           </table>
           
-        <div>
+        <div  className="frame">
         {itemList.map((item, index) => (
           console.log(index),
           <ProductItem
@@ -66,8 +66,11 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
           />
         ))}
       </div>
+      </div>
+
       <ShowTotalPrice totalPrice={getTotalPrice()} />
       </div>
+
     );
   };
             

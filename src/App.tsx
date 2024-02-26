@@ -10,7 +10,7 @@ import CartList from './CartList'
 
 function App() {
 
-  const sampleCartItems : CartItem[] = products.slice(0, 10).map((product: Product) => ({
+  const sampleCartItems : CartItem[] = products.slice(0, 50).map((product: Product) => ({
     product: product,
     quantity: 1,
     giftWrap: false
