@@ -13,7 +13,8 @@ interface ProductItemProps {
 const ProductItem: React.FC<ProductItemProps> = ({  name, price, onClickDelete, productQuantity, onChangeAmount }) => {
 
   const [amount, setAmount] = useState(productQuantity);
-
+  //simple lambda expression for if we have 3 or more products then we get a 10% discount
+  const discount = amount >= 3 ? 0.9 : 1;
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let newAmount = Number(event.target.value);
     if (isNaN(newAmount)) {
@@ -31,8 +32,8 @@ const ProductItem: React.FC<ProductItemProps> = ({  name, price, onClickDelete, 
   function formatPrice(value: number): string {
     return new Intl.NumberFormat('da-DK', { style: 'currency', currency: 'DKK' }).format(value);
   }
-  
 
+  const displayPopup = amount == 2 ? 'block' : 'none';
 
   return (
  
@@ -47,8 +48,12 @@ const ProductItem: React.FC<ProductItemProps> = ({  name, price, onClickDelete, 
         value={amount} 
         onChange={handleAmountChange}
       />
-      <span className="product-price">{formatPrice(price)}</span>
-      <span className="product-total">{formatPrice(price * amount)}</span>
+      <div id="discountNudge" style={{ display: displayPopup }}>
+        <p>Buy 3 of the same item to get a 10% discount!</p>
+      </div>
+
+      <span className="product-price">{formatPrice(price * discount)}</span>
+      <span className="product-total">{formatPrice(price * amount * discount)}</span>
     </div>
   );
 };

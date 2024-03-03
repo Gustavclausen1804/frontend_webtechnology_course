@@ -77,3 +77,15 @@ table{
     border-bottom: 5px solid;
     display: block;
 }
+
+#discountNudge {
+    position: fixed; 
+    bottom: 20px; /* bottom right of the screen */
+    right: 20px; /* so it doesnt annoy the user too much */
+    border: 1px solid #ddd;
+    background-color: #f9f9f9; /* slighly differs from our site so it stands out but still fits with the theme */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    z-index: 1000; /* So the popup is above all other content */
+  }
