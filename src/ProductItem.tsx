@@ -36,6 +36,8 @@ const ProductItem: React.FC<ProductItemProps> = ({  name, price, onClickDelete, 
 
   const displayPopup = productQuantity == 2 ? 'block' : 'none';
 
+  
+
   return (
  
   
@@ -44,7 +46,7 @@ const ProductItem: React.FC<ProductItemProps> = ({  name, price, onClickDelete, 
       {/* TODO: Tilføj billede her senere. <img src={image} alt={name} className="product-image" /> */}
       <span className="product-name">{name}</span>
       <input 
-        type="text" 
+        type="number"  
         className="product-amount" 
         value={productQuantity} 
         onChange={handleAmountChange}
