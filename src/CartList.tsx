@@ -51,7 +51,8 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
           </table>
           
         <div  className="frame">
-        {itemList.map((item, index) => (
+          {itemList.length > 0  ? (
+          itemList.map((item, index) => (
           console.log(index),
           <ProductItem
             key={item.product.id}
@@ -64,14 +65,17 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
 
             // Placeholder functions for now, you will replace them with actual implementations later
           />
-        ))}
+        ))
+        ) : (
+        <p> Der er ingen varer i kurven</p>
+        )}
+     
       </div>
-      </div>
-
       <ShowTotalPrice totalPrice={getTotalPrice()} />
       </div>
 
-    );
+      </div> 
+   );
   };
             
     
