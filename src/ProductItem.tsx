@@ -16,11 +16,12 @@ const ProductItem: React.FC<ProductItemProps> = ({  name, price, onClickDelete, 
 
   
   //simple lambda expression for if we have 3 or more products then we get a 10% discount
-  const discount = productQuantity >= 3 ? 0.9 : 1;
+  const discount = amount >= 3 ? 0.9 : 1;
+ 
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let newAmount = Number(event.target.value);
-    if (isNaN(newAmount)) {
-     newAmount = 0;
+    if (isNaN(newAmount) || newAmount < 1) {
+     newAmount = 1;
   } else if (newAmount > 999 ) {
     newAmount  = 999;
   }
