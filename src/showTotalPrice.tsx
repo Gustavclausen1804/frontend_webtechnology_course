@@ -5,7 +5,7 @@ type ShowTotalPriceProps = {
   }
 
   const ShowTotalPrice: React.FC<ShowTotalPriceProps> = ({ totalPrice }) => {
-    useState(totalPrice);
+  
  
     function totalPrisMedRabat() : number {
       let rabat = 0;
