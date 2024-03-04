@@ -1,8 +1,9 @@
 import React from 'react';
-import { CartItem  } from './types';
+import { CartItem, Product  } from './types';
 import ProductItem from './ProductItem';
 import { useState } from 'react';
 import ShowTotalPrice from './showTotalPrice';
+import UpSellProductList from './UpSellProductsList';
 
 type CartListProps = {
     items: CartItem[];
@@ -35,6 +36,39 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
     }
     setItemList(newItemList);
   }
+
+  function replaceItem(currentProduct: Product, newProduct : Product) : void {
+    const newItemList = [...itemList];
+    for (let i = 0; i < itemList.length; i++) {
+      if (itemList[i].product.id === currentProduct.id) {
+          newItemList[i].product = newProduct;
+          console.log("replaced product" + newProduct.name + " with " + currentProduct.name)
+
+      }
+    }
+    setItemList(newItemList);
+  }
+
+  function addItemToCart(product: Product) : void {
+    const newItemList = [...itemList];
+
+    for (let i = 0; i < itemList.length; i++) {
+      if (itemList[i].product.id === product.id) {
+        newItemList[i].quantity += 1;
+        setItemList(newItemList);
+        return;
+      }
+    }
+    
+    newItemList.push({
+      product: product, quantity: 1,
+      giftWrap: false
+    });
+    setItemList(newItemList);
+    return;
+  }
+
+  
   
   return (
     
@@ -52,7 +86,7 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
           
         <div  className="frame">
         {itemList.map((item, index) => (
-          console.log(index),
+        //  console.log(index),
           <ProductItem
             key={item.product.id}
           // image='src\assets\easis-is.jpg' //TODO: produkterne har faktisk ikke billeder lige nu.
@@ -62,6 +96,7 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
             productQuantity={item.quantity}
             onChangeAmount={setAmountOfProduct}
 
+
             // Placeholder functions for now, you will replace them with actual implementations later
           />
         ))}
@@ -69,7 +104,14 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
       </div>
 
       <ShowTotalPrice totalPrice={getTotalPrice()} />
+
+      <UpSellProductList cartItems={itemList} onAddToCart={addItemToCart} onReplaceInCart={replaceItem}   />
+      
+
+   
       </div>
+
+      
 
     );
   };
