@@ -3,6 +3,7 @@ import { products } from './products'
 
 import { Product, CartItem } from './types'
 import CartList from './CartList'
+import { MyForm } from './ZipForm'
 
 
 
@@ -23,6 +24,8 @@ function App() {
 
 
       <CartList items={sampleCartItems}></CartList>
+      <h1>hello</h1>
+      <MyForm/>
 
 
     </>
