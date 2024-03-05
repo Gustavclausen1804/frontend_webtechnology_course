@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import ShowTotalPriceCSS from './ShowTotalPrice.css';
 
 type ShowTotalPriceProps = {
-    totalPrice: number;
-  }
+  totalPrice: number;
+}
 
   const ShowTotalPrice: React.FC<ShowTotalPriceProps> = ({ totalPrice }) => {
   
@@ -13,6 +14,15 @@ type ShowTotalPriceProps = {
         rabat = totalPrice * 0.1;
       }
       return totalPrice - rabat;
+    }
+
+    
+    function Rabat() : number {
+      let rabat = 0;
+      if (totalPrice > 300) {
+        rabat = totalPrice * 0.1;
+      }
+      return rabat;
     }
 
     if (totalPrice > 300) {
@@ -26,7 +36,24 @@ type ShowTotalPriceProps = {
         <tbody>
         <div className="total-sum">
         
-                  <span>Ialt købes for: {totalPrice} DKK. Afregningspris med 10% rabat: {totalPrisMedRabat().toString()} DKK.</span> {/* Antag at priserne er i DKK */}
+                  <span>Ialt købes for: {totalPrice} DKK. </span> 
+              </div>
+              </tbody>
+              </table>
+              
+        <table>
+        <tbody>
+        <div className="total-rabat">
+        
+                  <span> 10% rabat. Sparet: {Rabat().toString()} DKK.</span> 
+              </div>
+              </tbody>
+              </table>
+              <table>
+        <tbody>
+        <div className="total-sum-med-rabat">
+        
+                  <span> Afregningspris: {totalPrisMedRabat().toString()} DKK.</span> 
               </div>
               </tbody>
               </table>
@@ -38,10 +65,30 @@ type ShowTotalPriceProps = {
     else {
       return (
         <div className="frameTot">
-          <table>
-          <tbody>
-          <div className="total-sum">
-                  <span>Ialt købes for: {totalPrice} DKK. Der gives 10% rabat ved et samlet køb på over 300 DKK.</span> {/* Antag at priserne er i DKK */}
+         
+        
+        <table>
+        <tbody>
+        <div className="total-sum">
+        
+                  <span>Ialt købes for: {totalPrice} DKK. </span> 
+              </div>
+              </tbody>
+              </table>
+              
+        <table>
+        <tbody>
+        <div className="ingen-rabat">
+        
+                  <span> Køb mindre end 300 kr. Ingen rabat</span> 
+              </div>
+              </tbody>
+              </table>
+              <table>
+        <tbody>
+        <div className="total-sum">
+        
+                  <span> Afregningspris: {totalPrisMedRabat().toString()} DKK.</span> 
               </div>
               </tbody>
               </table>
