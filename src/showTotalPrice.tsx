@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import ShowTotalPriceCSS from './ShowTotalPrice.css';
+import React from 'react';
+//import ShowTotalPriceCSS from './ShowTotalPrice.css';
 
 type ShowTotalPriceProps = {
   totalPrice: number;
