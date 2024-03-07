@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './container.css'; 
 
 interface ProductItemProps {

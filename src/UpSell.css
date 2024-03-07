@@ -12,6 +12,8 @@
     flex-wrap: wrap;
     justify-content: flex-start; /* Align items to the start (left) */
     gap: 10px; /* Space between items */
+    padding-left: 10px; /* Ensures content aligns to the left, including single items */
+    width: 100%; /* Ensures row takes full width of its container */
   }
   
   /* Styles for each upsell product item */
@@ -22,8 +24,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: flex-start; /* Aligns item content to the left */
     width: calc(25% - 10px); /* Adjust width to fit 4 items per row */
     min-height: 150px;
+    min-width: 250px; /* Ensures items don't become too narrow */
     margin-bottom: 10px; /* Space below each item */
   }
   
@@ -51,13 +55,13 @@
   /* Styles for buttons within the product-actions to ensure equal size */
   .product-actions button {
     flex: 1; /* Each button will take an equal amount of space in the container */
+    min-width: 50px; /* Prevents buttons from becoming too narrow */
   }
   
   /* Styles for product details to ensure text is on separate lines and left-aligned */
-  .product-details .product-name,
-  .product-details .product-price {
-    display: block; /* Each on their own line */
+.product-name .product-details .product-price {
+    display: block; /* Ensures each is on its own line */ 
     margin-bottom: 5px; /* Space between name and price */
-    text-align: left; /* Text aligned left */
+    text-align: left; /* Ensures text is aligned to the left */
   }
   
