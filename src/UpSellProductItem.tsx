@@ -1,5 +1,7 @@
 import React from 'react';
 import { Product } from './types'; // Assuming the types are in a file named types.ts
+import './UpSell.css';
+
 
 interface UpSellProductItemProps {
   product: Product;
@@ -22,7 +24,7 @@ const UpSellProductItem: React.FC<UpSellProductItemProps> = ({ product, onAddToC
   return (
     <div className="upsell-product-item">
       <div className="product-details">
-        <span className="product-name">{name}</span>
+        <span className="product-name">{name + " "}</span>
         <span className="product-price">{`${price} ${currency}`}</span>
       </div>
       <div className="product-actions">

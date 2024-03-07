@@ -1,0 +1,63 @@
+/* Base styles for the upsell product list */
+.upsell-product-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* Styles for each row of upsell products */
+  .upsell-product-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Align items to the start (left) */
+    gap: 10px; /* Space between items */
+  }
+  
+  /* Styles for each upsell product item */
+  .upsell-product-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: calc(25% - 10px); /* Adjust width to fit 4 items per row */
+    min-height: 150px;
+    margin-bottom: 10px; /* Space below each item */
+  }
+  
+  /* Responsive styles for the upsell product item on smaller screens */
+  @media (max-width: 768px) {
+    .upsell-product-item {
+      width: calc(50% - 10px); /* Adjust width to fit 2 items per row */
+    }
+  }
+  
+  /* Further responsive styles for even smaller screens */
+  @media (max-width: 480px) {
+    .upsell-product-item {
+      width: 100%; /* Each item takes full width on small screens */
+    }
+  }
+  
+  /* Styles for the actions within each upsell product item */
+  .product-actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+  
+  /* Styles for buttons within the product-actions to ensure equal size */
+  .product-actions button {
+    flex: 1; /* Each button will take an equal amount of space in the container */
+  }
+  
+  /* Styles for product details to ensure text is on separate lines and left-aligned */
+  .product-details .product-name,
+  .product-details .product-price {
+    display: block; /* Each on their own line */
+    margin-bottom: 5px; /* Space between name and price */
+    text-align: left; /* Text aligned left */
+  }
+  

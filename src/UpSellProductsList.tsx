@@ -2,6 +2,7 @@ import React from 'react';
 import UpSellProductItem from './UpSellProductItem'; // Adjust the import path as necessary
 import { CartItem, Product } from './types'; // Assuming the types are in a file named types.ts
 import { products, findProductById, isUpsellProductEligible } from './products'
+import './UpSell.css';
 
 
 interface UpSellProductListProps {
