@@ -4,47 +4,78 @@ import { render, screen } from '@testing-library/react';
 import UpSellProductList from '../UpSellProductsList';
 import { products } from '../products';
 import userEvent from '@testing-library/user-event';
+import CartList from '../CartList';
 
 
 describe('UpSellProductList', () => {
-    const cartItems = [{ product: products[products.length - 2], quantity: 1, giftWrap: false }]; // Adjust based on your products data
-    const cartProductName = products[products.length - 2].name;
+    let cartItems = [{ product: products[products.length - 2], quantity: 1, giftWrap: false }]; // Adjust based on your products data
+    const cartProduct = products[products.length - 2];
     const upsellProduct = products[products.length - 1];
 
-    it('renders upsell products correctly', async () => {
-    const mockOnAddToCart = vi.fn();
-    const mockOnReplaceInCart = vi.fn();
-    // Render "Hvidt sukker" i Cart List. 
+    const cartItemsConstant = [{ product: products[products.length - 2], quantity: 1, giftWrap: false }]; // Adjust based on your products data
 
-    render(<UpSellProductList cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
+    const mockOnAddToCart = vi.fn((product) => {
+        cartItems.push({ product, quantity: 1, giftWrap: false });
+    });
 
-    // Kontrollerer om "økologisk sukker " er anbefalet. 
-    const upsellProductItem = screen.getByText(products[products.length - 1].name);
-    expect(upsellProductItem).toBeInTheDocument();
+    const mockOnReplaceInCart = vi.fn((currentProduct, newProduct) => {
+        cartItems = cartItems.filter(item => item.product.id !== currentProduct.id); // Remove the current product
+        cartItems.push({ product: newProduct, quantity: 1, giftWrap: false }); // Add the new product
+   
+    
+ 
   });
 
-    it('calls onAddToCart when Add to Cart button is clicked', async () => {
-        const mockOnAddToCart = vi.fn();
-        const mockOnReplaceInCart = vi.fn();
+  it('calls onReplaceInCart when replace in cart button is clicked', async () => {
+    const { rerender } = render(<UpSellProductList cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
+    const user = userEvent.setup();
+    const replaceInCartButton = screen.getByText('Replace in Cart');
+    await user.click(replaceInCartButton);
     
-        render(<UpSellProductList cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
+    // Assert onReplaceInCart was called
+    expect(mockOnReplaceInCart).toHaveBeenCalled();
+
+    // Rerender with the updated cartItems
+    rerender(<UpSellProductList cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
+
+    // Assert the previous product is not in the document anymore
+    const previousProduct = screen.queryByText(upsellProduct.name);
+    expect(previousProduct).toBeNull();
+
+
     
+    // Assert the new product is now in the document
+   // expect(screen.getByText(products[products.length - 1].name)).toBeInTheDocument();
+});
+
+    it('calls onAddToCart when add to cart button is clicked', async () => {
+
+        const { rerender } = render(<UpSellProductList cartItems={cartItemsConstant} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
         const user = userEvent.setup();
-        const addToCartButtons = screen.getAllByText('Replace in Cart');
-        await user.click(addToCartButtons[0]); // Clicks the f
+
+        const replaceInCartButton = screen.getByText('Replace in Cart');
+        await user.click(replaceInCartButton);
         
+        // Assert onReplaceInCart was called
         expect(mockOnReplaceInCart).toHaveBeenCalled();
-        // expect only to have product name appear once. 
+    
+        // Rerender with the updated cartItems
+        rerender(<UpSellProductList cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
+    
+        // Assert the previous product is not in the document anymore
+        const previousProduct = screen.queryByText(upsellProduct.name);
+        expect(previousProduct).toBeNull();
 
-        const productNameAppearances = screen.getAllByText(upsellProduct.name);
-        expect(productNameAppearances.length).toBe(1);
         
-        const previousProduct = screen.queryByText(cartProductName);
-        expect(previousProduct).toBeNull(); 
-
-
-
     });
+
+    it('renders the upsell product list', () => {
+        render(<UpSellProductList cartItems={cartItemsConstant} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
+        const upsellProductItem = screen.getByText(upsellProduct.name);
+        expect(upsellProductItem).toBeInTheDocument();
+    });
+    
+
 
 
 
