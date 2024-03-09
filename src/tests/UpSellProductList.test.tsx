@@ -1,6 +1,6 @@
 // Assuming CartItem, Product types are defined in your types file.
 import { CartItem, Product } from '../types'; 
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import UpSellProductList from '../UpSellProductsList';
 import { products } from '../products';
@@ -41,15 +41,16 @@ describe('UpSellProductList', () => {
     });
 
     it('calls onAddToCart when add to cart button is clicked', async () => {
-        render(<UpSellProductList cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
+        const { rerender } = render(<UpSellProductList cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
         const addToCartButton = await screen.findByText('Add to Cart');
         await user.click(addToCartButton);
 
         expect(mockOnAddToCart).toHaveBeenCalled();
 
+        rerender(<UpSellProductList cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
 
-
-       
+        const previousProduct = screen.queryByText(upsellProduct.name);
+        expect(previousProduct).toBeNull();
     });
 
     it('renders the upsell product list', () => {
