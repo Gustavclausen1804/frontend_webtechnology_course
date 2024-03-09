@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './container.css'; 
 
 interface ProductItemProps {
@@ -12,16 +11,19 @@ interface ProductItemProps {
 
 const ProductItem: React.FC<ProductItemProps> = ({  name, price, onClickDelete, productQuantity, onChangeAmount }) => {
 
-  const [amount, setAmount] = useState(productQuantity);
+  // TODO: Behøves ikke her, da vi har state i CartList. 
 
+  
+  //simple lambda expression for if we have 3 or more products then we get a 10% discount
+  const discount = productQuantity >= 3 ? 0.9 : 1;
+ 
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let newAmount = Number(event.target.value);
-    if (isNaN(newAmount)) {
-     newAmount = 0;
+    if (isNaN(newAmount) || newAmount < 1) {
+     newAmount = 1;
   } else if (newAmount > 999 ) {
     newAmount  = 999;
   }
-      setAmount(newAmount);
       onChangeAmount(name, newAmount);
       
     }
@@ -31,8 +33,10 @@ const ProductItem: React.FC<ProductItemProps> = ({  name, price, onClickDelete, 
   function formatPrice(value: number): string {
     return new Intl.NumberFormat('da-DK', { style: 'currency', currency: 'DKK' }).format(value);
   }
-  
 
+  const displayPopup = productQuantity == 2 ? 'block' : 'none';
+
+  
 
   return (
  
@@ -42,13 +46,17 @@ const ProductItem: React.FC<ProductItemProps> = ({  name, price, onClickDelete, 
       {/* TODO: Tilføj billede her senere. <img src={image} alt={name} className="product-image" /> */}
       <span className="product-name">{name}</span>
       <input 
-        type="text" 
+        type="number"  
         className="product-amount" 
-        value={amount} 
+        value={productQuantity} 
         onChange={handleAmountChange}
       />
-      <span className="product-price">{formatPrice(price)}</span>
-      <span className="product-total">{formatPrice(price * amount)}</span>
+      <div id="discountNudge" style={{ display: displayPopup }}>
+        <p>Buy 3 of the same item to get a 10% discount!</p>
+      </div>
+
+      <span className="product-price">{formatPrice(price * discount)}</span>
+      <span className="product-total">{formatPrice(price * productQuantity * discount)}</span>
     </div>
   );
 };

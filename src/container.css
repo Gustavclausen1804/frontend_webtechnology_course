@@ -48,8 +48,9 @@
 }
 
 .frameTot{
-    width: auto; /* eller en bredde efter dit valg */
-   height: 6vh; /* eller en højde efter dit valg */
+    background-color: white; 
+    width: 30vh; /* eller en bredde efter dit valg */
+   height: 12vh; /* eller en højde efter dit valg */
    border: 1px solid #000; /* tilføj en ramme til boxen */
    margin: 10px;
    padding: 5px;
@@ -77,3 +78,15 @@ table{
     border-bottom: 5px solid;
     display: block;
 }
+
+#discountNudge {
+    position: fixed; 
+    bottom: 20px; /* bottom right of the screen */
+    right: 20px; /* so it doesnt annoy the user too much */
+    border: 1px solid #ddd;
+    background-color: #f9f9f9; /* slighly differs from our site so it stands out but still fits with the theme */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    z-index: 1000; /* So the popup is above all other content */
+  }
