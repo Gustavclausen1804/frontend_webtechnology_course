@@ -1,6 +1,5 @@
 import Header from '../components/Header'
 
-import AntalBox from '../AntalBox';
 //import PostcodeInput from '../components/PostCodeInput';
 import CheckoutForm from '../components/CheckoutForm';
 
@@ -15,7 +14,7 @@ export default function Checkout() {
             <CheckoutForm/>
             
 
-            <AntalBox />
+            
         </>
     )
 }

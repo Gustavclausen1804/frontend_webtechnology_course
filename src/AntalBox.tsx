@@ -53,13 +53,29 @@ export default function Adress(){
     }
 
     return(
-        <>
-            <input type="text" className="antal" value={zipCode} onChange={zipCodeChanged}></input>
+        <form>
 
-            <input type="text" className="antal" value={city} onChange={cityChange}></input>
+<div style={{ display: 'flex' }}>
+              <div style={{ width: '50%' }}>
+                <label>ZipCode</label>
+              </div>
+              <div style={{ width: '50%' }}>
+                <label>City</label>
+              </div>
+            </div>
 
-            <div>{validMes}</div>
 
-        </>
+        <div style={{ display: 'flex' }}>
+          <div style={{ width: '50%' }}>
+            <input type="text" className="antal" value={zipCode} onChange={zipCodeChanged} style={{ width: '64%' }}></input>
+          </div>
+          <div style={{ width: '50%' }}>
+            <input type="text" className="antal" value={city} onChange={cityChange} style={{ width: '64%' }}></input>
+            </div>
+          <div>{validMes}</div>
+          </div>
+
+        </form>
+          
     )
 }

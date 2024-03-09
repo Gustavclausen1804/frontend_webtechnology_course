@@ -1,4 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
+import AntalBox from '../AntalBox';
+
 
 interface FormData {
   addressLine1: string;
@@ -78,76 +80,140 @@ const CheckoutForm: React.FC = () => {
   };
 
   return (
+    
     <form onSubmit={handleFormSubmit}>
-      <div>
+
+
+      
+
+    
+      {/* ----------------------------- NAMES ----------------------------- */}
+
+      <div className="name-fields">
+        <div style={{ display: 'flex' }}>
+            <div style={{ width: '50%' }}>
+                <label>First Name</label>
+            </div>
+            
+            <div style={{ width: '50%' }}>
+                <label>Last Name</label>
+            </div>
+            </div>
+
+        <div style={{ display: 'flex' }}>
+          <div style={{ width: '50%' }}>
+            <input
+                type="text"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleInputChange}
+            />
+            <div> 
+                {errors.firstName && <span>{errors.firstName}</span>}
+            </div>
+          </div>
+          <div style={{ width: '50%' }}>
+            <input
+                type="text"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleInputChange}
+            />
+            <div>
+            {errors.lastName && <span>{errors.lastName}</span>}
+            </div>
+            </div>
+          </div>
+      </div>
+    
+    {/* ----------------------------- ADDRESSES ----------------------------- */}
+
+    <div style={{ display: 'flex' }}>
+      <div style={{ width: '50%' }}>
         <label>Address Line 1</label>
+      </div>
+      <div style={{ width: '50%' }}>
+        <label>Address Line 2</label>
+      </div>
+    </div>
+
+    <div style={{ display: 'flex' }}>    
+      <div style={{ width: '50%' }}>
         <input
           type="text"
           name="addressLine1"
           value={formData.addressLine1}
           onChange={handleInputChange}
-        />
+        /> 
+        <div>
         {errors.addressLine1 && <span>{errors.addressLine1}</span>}
+        </div>
       </div>
 
-      <div>
-        <label>Address Line 2</label>
+      
+      <div style={{ width: '50%' }}>
         <input
           type="text"
           name="addressLine2"
           value={formData.addressLine2}
           onChange={handleInputChange}
         />
-      </div>
-
-      <div className="name-fields">
-        <div>
-          <label>First Name</label>
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleInputChange}
-          />
-          {errors.firstName && <span>{errors.firstName}</span>}
-        </div>
-
-        <div>
-          <label>Last Name</label>
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleInputChange}
-          />
-          {errors.lastName && <span>{errors.lastName}</span>}
         </div>
       </div>
 
-      <div>
-        <label>Phone</label>
+    {/* ----------------------------- Phone and Email ----------------------------- */}
+
+    <div style={{ display: 'flex' }}>
+      <div style={{ width: '50%' }}>
+          <label>Phone</label>
+        </div>
+        <div style={{ width: '50%' }}>
+          <label>Email</label>
+        </div>
+      </div>
+
+      <div style={{ display: 'flex' }}>
+        <div style={{ width: '50%' }}>
         <input
           type="text"
           name="phone"
           value={formData.phone}
           onChange={handleInputChange}
         />
+        <div>
         {errors.phone && <span>{errors.phone}</span>}
+        </div>
       </div>
 
-      <div>
-        <label>Email</label>
+      <div style={{ width: '50%' }}>
+        
         <input
           type="email"
           name="email"
           value={formData.email}
           onChange={handleInputChange}
         />
+        <div>
         {errors.email && <span>{errors.email}</span>}
+        </div>
+      </div>
       </div>
 
-      <div>
+    {/* ----------------------------- CompanyName and VAT ----------------------------- */}
+
+    <div style={{ display: 'flex' }}>
+      <div style={{ width: '50%' }}>
         <label>Company Name</label>
+      </div>
+      <div style={{ width: '50%' }}>
+        <label>VAT Number</label>
+      </div>
+    </div>
+
+
+        
+    <div style={{ display: 'flex' }}>
+      <div style={{ width: '50%' }}>
         <input
           type="text"
           name="companyName"
@@ -157,16 +223,21 @@ const CheckoutForm: React.FC = () => {
         {errors.companyName && <span>{errors.companyName}</span>}
       </div>
 
-      <div>
-        <label>VAT Number</label>
+      <div style={{ width: '50%' }}>
         <input
           type="text"
           name="vatNumber"
           value={formData.vatNumber}
           onChange={handleInputChange}
         />
+        <div>
         {errors.vatNumber && <span>{errors.vatNumber}</span>}
+        </div>
       </div>
+      </div>
+
+      <AntalBox />
+      
 
       <button type="submit">Submit</button>
     </form>
