@@ -1,35 +1,29 @@
 import './App.css'
-import { products } from './products'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+  
 
-import { Product, CartItem } from './types'
-import CartList from './CartList'
-import { MyForm } from './ZipForm'
+import Cart from './pages/Cart'
+import Checkout from './pages/Checkout'
+import Payment from './pages/Payment'
+import Receipt from './pages/Receipt'
 
 
 
 
 
 function App() {
-
-  const sampleCartItems : CartItem[] = products.slice(0, 50).map((product: Product) => ({
-    product: product,
-    quantity: 1,
-    giftWrap: false
-    }));
-
-
-
   return (
     <>
-
-
-      <CartList items={sampleCartItems}></CartList>
-      <h1>hello</h1>
-      <MyForm/>
-
-
-    </>
-    
+      <BrowserRouter>
+        <Routes>
+          <Route index element ={<Cart/>}></Route>
+          <Route path="/cart" element = {<Cart/>} />
+          <Route path="/checkout" element = {<Checkout/>} />
+          <Route path="/payment" element = {<Payment/>} />
+          <Route path="/receipt" element = {<Receipt/>} />
+        </Routes>
+      </BrowserRouter>
+    </> 
   )
 }
 
