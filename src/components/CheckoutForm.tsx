@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import AntalBox from '../AntalBox';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 interface FormData {
@@ -26,6 +27,9 @@ const CheckoutForm: React.FC = () => {
   });
 
   const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [isValid, setIsValid] = useState<boolean>(false);
+
+  const navigate = useNavigate();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -47,12 +51,12 @@ const CheckoutForm: React.FC = () => {
 
     if (!formData.firstName.trim() || /\d/.test(formData.firstName)) {
       validationErrors.firstName =
-        'First Name is required and should not contain numbers';
+        'First Name is required';
     }
 
     if (!formData.lastName.trim() || /\d/.test(formData.lastName)) {
       validationErrors.lastName =
-        'Last Name is required and should not contain numbers';
+        'Last Name is required';
     }
 
     if (!/^\d{8}$/.test(formData.phone)) {
@@ -67,15 +71,20 @@ const CheckoutForm: React.FC = () => {
       validationErrors.companyName = 'Company Name is required';
     }
 
-    if (formData.vatNumber && !/^\d{8}$/.test(formData.vatNumber)) {
-      validationErrors.vatNumber = 'VAT Number must be 8 digits';
-    }
+    // if (formData.vatNumber && !/^\d{8}$/.test(formData.vatNumber)) {
+    //   validationErrors.vatNumber = 'VAT Number must be 8 digits';
+    // }
 
     setErrors(validationErrors);
 
+    // Check if there are no validation errors
+    setIsValid(Object.keys(validationErrors).length === 0);
+
     // Perform actions if the form is valid
-    if (Object.keys(validationErrors).length === 0) {
+    if (isValid) {
       console.log('Form submitted successfully:', formData);
+      // Redirect to the payment page
+      navigate('/payment');
     }
   };
 
@@ -220,7 +229,9 @@ const CheckoutForm: React.FC = () => {
           value={formData.companyName}
           onChange={handleInputChange}
         />
+        <div>
         {errors.companyName && <span>{errors.companyName}</span>}
+        </div>
       </div>
 
       <div style={{ width: '50%' }}>
@@ -231,15 +242,19 @@ const CheckoutForm: React.FC = () => {
           onChange={handleInputChange}
         />
         <div>
-        {errors.vatNumber && <span>{errors.vatNumber}</span>}
+            {errors.vatNumber && <span>{errors.vatNumber}</span>}
         </div>
       </div>
       </div>
 
       <AntalBox />
       
+      
 
-      <button type="submit">Submit</button>
+      
+      <button type="submit">
+        Submit
+      </button>
     </form>
   );
 };
