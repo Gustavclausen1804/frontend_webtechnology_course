@@ -99,20 +99,21 @@ const CheckoutForm: React.FC = () => {
       {/* ----------------------------- NAMES ----------------------------- */}
 
       <div className="name-fields">
-        <div style={{ display: 'flex' }}>
-            <div style={{ width: '50%' }}>
-                <label>First Name</label>
-            </div>
-            
-            <div style={{ width: '50%' }}>
-                <label>Last Name</label>
-            </div>
-            </div>
+    <div style={{ display: 'flex' }}>
+        <div style={{ width: '50%' }}>
+            <label htmlFor="firstName">First Name</label>
+        </div>
+        
+        <div style={{ width: '50%' }}>
+            <label htmlFor="lastName">Last Name</label>
+        </div>
+    </div>
 
-        <div style={{ display: 'flex' }}>
-          <div style={{ width: '50%' }}>
+    <div style={{ display: 'flex' }}>
+        <div style={{ width: '50%' }}>
             <input
                 type="text"
+                id="firstName"
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleInputChange}
@@ -120,20 +121,23 @@ const CheckoutForm: React.FC = () => {
             <div> 
                 {errors.firstName && <span>{errors.firstName}</span>}
             </div>
-          </div>
-          <div style={{ width: '50%' }}>
+        </div>
+
+        <div style={{ width: '50%' }}>
             <input
                 type="text"
+                id="lastName"
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleInputChange}
             />
             <div>
-            {errors.lastName && <span>{errors.lastName}</span>}
+                {errors.lastName && <span>{errors.lastName}</span>}
             </div>
-            </div>
-          </div>
-      </div>
+        </div>
+    </div>
+</div>
+
     
     {/* ----------------------------- ADDRESSES ----------------------------- */}
 
