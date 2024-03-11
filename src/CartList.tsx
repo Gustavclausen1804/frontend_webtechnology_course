@@ -4,6 +4,7 @@ import ProductItem from './ProductItem';
 import { useState } from 'react';
 import ShowTotalPrice from './showTotalPrice';
 import UpSellProductList from './UpSellProductsList';
+import { Link } from 'react-router-dom';
 
 type CartListProps = {
     items: CartItem[];
@@ -107,6 +108,9 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
      
       </div>
       <ShowTotalPrice totalPrice={getTotalPrice()} />
+      <Link to="/checkout">
+                    <button>Proceed to Checkout</button>
+                </Link>
 
       <UpSellProductList cartItems={itemList} onAddToCart={addItemToCart} onReplaceInCart={replaceItem}   />
       

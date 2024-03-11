@@ -61,6 +61,7 @@ const UpSellProductList: React.FC<UpSellProductListProps> = ({ cartItems, onAddT
 
   return (
     <div className="upsell-product-list">
+      <h2> Anbefalet Upgrades </h2>
       {renderProductRows()}
     </div>
   );
