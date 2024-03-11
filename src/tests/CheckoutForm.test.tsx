@@ -15,7 +15,7 @@ describe('CheckoutForm Component Tests', () => {
   });
 
   it('renders CheckoutForm component', async () => {
-    // Verify that the form elements are rendered
+    // Verify that the form elements are renderedd
     expect(screen.getByLabelText('First Name')).toBeInTheDocument();
     expect(screen.getByLabelText('Last Name')).toBeInTheDocument();
     // Add similar checks for other form elements
