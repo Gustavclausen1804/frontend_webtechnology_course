@@ -48,7 +48,7 @@
 }
 
 .frameTot{
-    background-color: white; 
+    background-color: dark gray;/*white; */
     width: 30vh; /* eller en bredde efter dit valg */
    height: 12vh; /* eller en højde efter dit valg */
    border: 1px solid #000; /* tilføj en ramme til boxen */
