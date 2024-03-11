@@ -334,7 +334,7 @@ const CheckoutForm: React.FC = () => {
 
         <div style={{ display: 'flex' }}>
           <div style={{ width: '50%' }}>
-            <input type="text"value={zipCode} onChange={zipCodeChanged} style={{ width: '64%' }}></input>
+            <input type="text"value={zipCode} onChange={zipCodeChanged} ></input>
             <div>
               {errors.zipCode && <span>{errors.zipCode}</span>}
             </div>
@@ -342,7 +342,7 @@ const CheckoutForm: React.FC = () => {
 
 
           <div style={{ width: '50%' }}>
-            <input id="city" type="text" value={city} onChange={cityChange} style={{ width: '64%' }}></input>
+            <input id="city" type="text" value={city} onChange={cityChange} ></input>
             <div>
               {errors.city && <span>{errors.city}</span>}
             </div>
