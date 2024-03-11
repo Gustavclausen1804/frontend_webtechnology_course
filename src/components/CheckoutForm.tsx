@@ -14,6 +14,7 @@ interface FormData {
   vatNumber: string;
   city: string;
   zipCode: string;
+  country: string;
 }
 
 const CheckoutForm: React.FC = () => {
@@ -27,7 +28,8 @@ const CheckoutForm: React.FC = () => {
     companyName: '',
     vatNumber: '',
     city: '',
-    zipCode: ''
+    zipCode: '',
+    country: 'Denmark'
   });
 
   const [errors, setErrors] = useState<Partial<FormData>>({});
@@ -125,6 +127,9 @@ const CheckoutForm: React.FC = () => {
     if (!formData.companyName.trim()) {
       validationErrors.companyName = 'Company Name is required';
     }
+    if (!formData.country.trim()) {
+      validationErrors.country = 'Country is required';
+    }
 
     //NEW 
     formData.zipCode = zipCode;
@@ -164,7 +169,20 @@ const CheckoutForm: React.FC = () => {
 
 
       
+      {/* Country */}
+      <div>
+        <label htmlFor="country">Country</label>
+        <input
+                type="text"
+                id="country"
+                name="country"
+                value={formData.country}
+                onChange={handleInputChange}
+            /><div> 
+            {errors.country && <span>{errors.country}</span>}
+        </div>
 
+      </div>
     
       {/* ----------------------------- NAMES ----------------------------- */}
 
