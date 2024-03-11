@@ -68,7 +68,7 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
     return;
   }
 
-  
+ // CharGPT har givet forslag til vordan det detekteres at kurven er tom og angive hvordan man vises begge situationer. Er efterføgnede tilrettet  
   
   return (
     
