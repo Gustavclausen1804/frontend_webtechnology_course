@@ -54,7 +54,8 @@ const CheckoutForm: React.FC = () => {
         getValidZipCodes();
     }, []);
 
-
+      // Used ai in the first if, to find the 
+      // right regex to the zip code formular for danish zip codes
     function zipCodeChanged(e : any){
         var value = e.target.value;
         if( /^\d{0,4}$/.test(value)){
