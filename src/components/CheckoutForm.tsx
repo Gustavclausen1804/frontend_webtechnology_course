@@ -1,5 +1,5 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
-import AntalBox from '../AntalBox';
+import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
+
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -12,6 +12,8 @@ interface FormData {
   email: string;
   companyName: string;
   vatNumber: string;
+  city: string;
+  zipCode: string;
 }
 
 const CheckoutForm: React.FC = () => {
@@ -24,6 +26,8 @@ const CheckoutForm: React.FC = () => {
     email: '',
     companyName: '',
     vatNumber: '',
+    city: '',
+    zipCode: ''
   });
 
   const [errors, setErrors] = useState<Partial<FormData>>({});
@@ -38,6 +42,57 @@ const CheckoutForm: React.FC = () => {
       [name]: value,
     }));
   };
+  
+  //NEW
+  const [zipCode, setZipCode] = useState("");
+    const [city, setCity] = useState("");
+    const [validZipCodes, setValidZipCodes] = useState<string[]>([]);
+
+    useEffect(() => {
+        getValidZipCodes();
+    }, []);
+
+
+    function zipCodeChanged(e : any){
+        var value = e.target.value;
+        if( /^\d{0,4}$/.test(value)){
+            errors.zipCode = "";
+            setZipCode(value);
+            if (value.length == 4){
+                if (validZipCodes.includes(value)){
+                    getCity(value)
+                }
+                else {
+                    setCity("");
+                    errors.zipCode = "Not Valid Zip Code";
+                }
+            }
+        }
+    }
+
+    function cityChange(e : any){
+        setCity(e.target.value);
+    }
+
+    async function getValidZipCodes(){
+        const url = `https://api.dataforsyningen.dk/postnumre`;
+        
+        const response = await fetch(url);
+        const zipCodes = (await response.json()) as [{
+            nr: string;
+        }];
+        setValidZipCodes(zipCodes.map(({ nr }) => nr));
+    }
+
+    async function getCity(zipCode: string){
+      const url = `https://api.dataforsyningen.dk/postnumre/${zipCode}`;
+      const response = await fetch(url);
+      const city = (await response.json()) as {
+          navn: string;
+      };
+      setCity(city.navn);
+    }
+      //NEW
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -70,6 +125,21 @@ const CheckoutForm: React.FC = () => {
     if (!formData.companyName.trim()) {
       validationErrors.companyName = 'Company Name is required';
     }
+
+    //NEW 
+    formData.zipCode = zipCode;
+    if (!/^\d{4}$/.test(formData.zipCode)) {
+      validationErrors.zipCode = 'Zip code must be 4 digits';
+    }
+    if (!validZipCodes.includes(formData.zipCode)){
+      validationErrors.zipCode = "Not Valid Zip Code";
+    }
+
+    formData.city = city;
+    if (!formData.city.trim()) {
+      validationErrors.city = 'City is required';
+    }
+    //NEW
 
     // if (formData.vatNumber && !/^\d{8}$/.test(formData.vatNumber)) {
     //   validationErrors.vatNumber = 'VAT Number must be 8 digits';
@@ -251,7 +321,33 @@ const CheckoutForm: React.FC = () => {
       </div>
       </div>
 
-      <AntalBox />
+      {/* ----------------------------- ZipCode and City ----------------------------- */}
+      <div style={{ display: 'flex' }}>
+              <div style={{ width: '50%' }}>
+                <label>ZipCode</label>
+              </div>
+              <div style={{ width: '50%' }}>
+                <label>City</label>
+              </div>
+            </div>
+
+
+        <div style={{ display: 'flex' }}>
+          <div style={{ width: '50%' }}>
+            <input type="text"value={zipCode} onChange={zipCodeChanged} style={{ width: '64%' }}></input>
+            <div>
+              {errors.zipCode && <span>{errors.zipCode}</span>}
+            </div>
+          </div>
+
+
+          <div style={{ width: '50%' }}>
+            <input id="city" type="text" value={city} onChange={cityChange} style={{ width: '64%' }}></input>
+            <div>
+              {errors.city && <span>{errors.city}</span>}
+            </div>
+          </div> 
+        </div>
       
       
 
