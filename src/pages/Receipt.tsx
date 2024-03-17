@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 
 
@@ -7,6 +8,10 @@ export default function Receipt() {
         <>
             <Header/>
             <h2>Receipt Page not found 404</h2>
+            <Link to="/payment">
+              <button>Proceed to Checkout</button>
+            </Link>
         </>
+        
     )
 }

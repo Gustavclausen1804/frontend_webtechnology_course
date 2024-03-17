@@ -12,6 +12,7 @@ export default function Payment() {
             <Link to="/cart">
               <button type="submit">Tilbage til cart</button>
             </Link>
+            
         </>
     )
 }
