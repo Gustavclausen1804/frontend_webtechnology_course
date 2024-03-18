@@ -1,5 +1,6 @@
 import React from 'react';
-//import ShowTotalPriceCSS from './ShowTotalPrice.css';
+//import './ShowTotalPrice.css';
+
 
 type ShowTotalPriceProps = {
   totalPrice: number;
@@ -29,14 +30,16 @@ type ShowTotalPriceProps = {
       
     return (
 
+          
+
           <div className="frameTot">
          
         
         <table>
         <tbody>
-        <div className="total-sum">
+        <div className="frameTotprice">
         
-                  <span>Ialt købes for: {totalPrice} DKK. </span> 
+                  <span>Ialt købes for: {totalPrice.toFixed(2)} DKK. </span> 
               </div>
               </tbody>
               </table>
@@ -45,7 +48,7 @@ type ShowTotalPriceProps = {
         <tbody>
         <div className="total-rabat">
         
-                  <span> 10% rabat. Sparet: {Rabat().toString()} DKK.</span> 
+                  <span> 10% rabat. Sparet: {Rabat().toFixed(2)} DKK.</span> 
               </div>
               </tbody>
               </table>
@@ -53,7 +56,7 @@ type ShowTotalPriceProps = {
         <tbody>
         <div className="total-sum-med-rabat">
         
-                  <span> Afregningspris: {totalPrisMedRabat().toString()} DKK.</span> 
+                  <span> Afregningspris: {totalPrisMedRabat().toFixed(2)} DKK.</span> 
               </div>
               </tbody>
               </table>
@@ -69,9 +72,9 @@ type ShowTotalPriceProps = {
         
         <table>
         <tbody>
-        <div className="total-sum">
+        <div className="frameTotprice">
         
-                  <span>Ialt købes for: {totalPrice} DKK. </span> 
+                  <span>Ialt købes for: {totalPrice.toFixed(2)} DKK. </span> 
               </div>
               </tbody>
               </table>
@@ -86,9 +89,9 @@ type ShowTotalPriceProps = {
               </table>
               <table>
         <tbody>
-        <div className="total-sum">
+        <div className="total-sum-uden-rabat">
         
-                  <span> Afregningspris: {totalPrisMedRabat().toString()} DKK.</span> 
+                  <span> Afregningspris: {totalPrisMedRabat().toFixed(2)} DKK.</span> 
               </div>
               </tbody>
               </table>
