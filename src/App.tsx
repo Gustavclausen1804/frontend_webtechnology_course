@@ -11,7 +11,7 @@ function App() {
 
     async function fetchApi() {
         try {
-            const response = await fetch('http://130.225.170.52:10331/api');
+            const response = await fetch('https://dtu62597.eduhost.dk:10332/api');
             if (!response.ok) {
                 throw new Error(`HTTP fejl: status ${response.status}`);
             }
