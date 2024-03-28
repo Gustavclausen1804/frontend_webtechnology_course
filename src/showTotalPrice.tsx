@@ -11,7 +11,7 @@ type ShowTotalPriceProps = {
  
     function totalPrisMedRabat() : number {
       let rabat = 0;
-      if (totalPrice > 300) {
+      if (totalPrice >= 300) {
         rabat = totalPrice * 0.1;
       }
       return totalPrice - rabat;
@@ -20,13 +20,13 @@ type ShowTotalPriceProps = {
     
     function Rabat() : number {
       let rabat = 0;
-      if (totalPrice > 300) {
+      if (totalPrice >= 300) {
         rabat = totalPrice * 0.1;
       }
       return rabat;
     }
 
-    if (totalPrice > 300) {
+    if (totalPrice >= 300) {
       
     return (
 

@@ -49,9 +49,9 @@
 
 .frameTot{
 
-    width: 25vh; /* eller en bredde efter dit valg */
-   height: 12vh; /* eller en højde efter dit valg */
-   border: 1px solid #000; /* tilføj en ramme til boxen */
+    width: 35vh; /*  bredde  */
+   height: 12vh; /*  højde  */
+   border: 1px solid #000; /*  ramme  */
    margin: 10px;
    padding: 5px;
 }
