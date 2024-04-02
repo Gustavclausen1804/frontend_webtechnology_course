@@ -34,9 +34,22 @@
     min-width: 100px;
     text-align: right;
 }
+
+.product-price-discount {
+    min-width: 100px;
+    text-align: right;
+    color: rgb(36, 207, 59);
+}
+
+
 .product-total {
     min-width: 100px;
     text-align: right;
+}
+.product-total-discount {
+    min-width: 100px;
+    text-align: right;
+    color:rgb(36, 207, 59);
 }
 .frame{
      width: auto; /* eller en bredde efter dit valg */
@@ -93,6 +106,8 @@ table{
 
   
 .frameTotprice {
+    display: right;
+    align-items: center;
     color: black; /* Tekstfarve */
     background-color: rgb(217, 228, 230); /* Baggrundsfarve */
 }
@@ -122,4 +137,14 @@ table{
 .total-sum-uden-rabat {
     color: black; /* Tekstfarve */
     background-color: rgb(217, 228, 230); /* Baggrundsfarve */
+}
+
+ 
+.frameDiscountInfo {
+    display: right;
+    align-items: right;
+    width: 350px;
+    height: 20px;
+    color: black; /* Tekstfarve */
+    background-color: hwb(56 22% 4% / 0.808); /* Baggrundsfarve */
 }

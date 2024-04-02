@@ -97,29 +97,35 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
             onClickDelete={delteItem}
             productQuantity={item.quantity}
             onChangeAmount={setAmountOfProduct}
-
-
-            // Placeholder functions for now, you will replace them with actual implementations later
           />
         ))
         ) : (
         <p> Der er ingen varer i kurven</p>
         )}
+        
      
       </div>
-      <ShowTotalPrice totalPrice={getTotalPrice()} />
+      <div style={{ textAlign: 'right' }}>
+      <h6> Når du har fået 10% mængderabat
+        er farven på prisen er <span style={{ color: 'rgb(36, 207, 59)' }}>grøn</span></h6>
+      </div>
+      <ShowTotalPrice totalPrice={getTotalPrice()} /> 
+      
       <Link to="/checkout">
                     <button>Proceed to Checkout</button>
                 </Link>
 
       <UpSellProductList cartItems={itemList} onAddToCart={addItemToCart} onReplaceInCart={replaceItem}   />
       
-
+      
+     
    
       </div>
 
       </div> 
+      
    );
+   
   };
             
     
