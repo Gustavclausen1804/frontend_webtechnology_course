@@ -7,16 +7,19 @@ import Receipt from './pages/Receipt';
 import './App.css';
 
 function App() {
-    const [response, setResponse] = useState<string>("");
+    const [response, setResponse] = useState<string>('');
 
+    
     async function fetchApi() {
         try {
-            const response = await fetch('https://dtu62597.eduhost.dk:10332/api');
+            const response = await fetch('http://dtu62597.eduhost.dk:10331/api');
             if (!response.ok) {
                 throw new Error(`HTTP fejl: status ${response.status}`);
             }
-            const data = await response.text();
-            setResponse(data); // Opdater tilstanden med data hentet fra API'en
+            const data = await response.json();
+            console.log(data);
+            
+            setResponse(JSON.stringify(data)); // Opdater tilstanden med data hentet fra API'en
         } catch (error) {
             console.error("Der opstod en fejl under hentning af data: ", error);
         }
