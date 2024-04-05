@@ -8,12 +8,19 @@ import { Link } from 'react-router-dom';
 
 type CartListProps = {
     items: CartItem[];
+    products: Product[];
 };
 
 
 
-const CartList: React.FC<CartListProps> = ({ items }) => {
+const CartList: React.FC<CartListProps> = ({ items }, {products}) => {
   const [itemList, setItemList] = useState(items);
+ 
+  
+
+  console.log("CartList: ", items);
+
+  console.log("CartList itemList: ", itemList);
 
   function delteItem(id: string) : void {
     setItemList(itemList.filter(item => item.product.name != id));
@@ -70,7 +77,7 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
   }
 
  // CharGPT har givet forslag til vordan det detekteres at kurven er tom og angive hvordan man vises begge situationer. Er efterføgnede tilrettet  
-  
+ 
   return (
     
 <div> 
@@ -115,7 +122,7 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
                     <button>Proceed to Checkout</button>
                 </Link>
 
-      <UpSellProductList cartItems={itemList} onAddToCart={addItemToCart} onReplaceInCart={replaceItem}   />
+      <UpSellProductList cartItems={itemList} products={products} onAddToCart={addItemToCart} onReplaceInCart={replaceItem}   />
       
       
      

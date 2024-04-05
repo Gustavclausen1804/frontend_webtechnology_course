@@ -17,12 +17,14 @@ type CartProps = {
         quantity: 1,
         giftWrap: false
         }));
+        console.log("products: ", products);
+        console.log("sampleCartItems: ", sampleCartItems);
     return (
         <>
             <Header/>
             <h2>Cart Page</h2>
             <>
-                <CartList items={sampleCartItems}></CartList>
+                <CartList items={sampleCartItems} products={products}></CartList>
 
             </>
         </>

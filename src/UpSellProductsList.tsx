@@ -1,17 +1,18 @@
 import React from 'react';
 import UpSellProductItem from './UpSellProductItem'; // Adjust the import path as necessary
 import { CartItem, Product } from './types'; // Assuming the types are in a file named types.ts
-import { products, findProductById } from './products'
+import {  findProductById } from './products'
 import './UpSell.css';
 
 
 interface UpSellProductListProps {
   cartItems: CartItem[];
+  products: Product[];
   onAddToCart: (product: Product) => void;
   onReplaceInCart: (currentProduct: Product, newProduct : Product) => void;
 }
 
-const UpSellProductList: React.FC<UpSellProductListProps> = ({ cartItems, onAddToCart, onReplaceInCart }) => {
+const UpSellProductList: React.FC<UpSellProductListProps> = ({ cartItems, products, onAddToCart, onReplaceInCart }) => {
 
   const renderProductRows = (): JSX.Element[] => {
     const rows: JSX.Element[] = [];
