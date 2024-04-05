@@ -1,7 +1,6 @@
 import React from 'react';
 import { CartItem, Product  } from './types';
 import ProductItem from './ProductItem';
-import { useState } from 'react';
 import ShowTotalPrice from './showTotalPrice';
 import UpSellProductList from './UpSellProductsList';
 import { Link } from 'react-router-dom';
@@ -9,18 +8,20 @@ import { Link } from 'react-router-dom';
 type CartListProps = {
     items: CartItem[];
     products: Product[];
+    itemList: CartItem[];
+    setItemList: React.Dispatch<React.SetStateAction<CartItem[]>>;
 };
 
 
 
-const CartList: React.FC<CartListProps> = ({ items }, {products}) => {
-  const [itemList, setItemList] = useState(items);
+const CartList: React.FC<CartListProps> = ( {items ,  products, itemList, setItemList } ) => {
+//  const [itemList, setItemList] = useState(items);
+//setItemList(itemList);
  
-  
 
-  console.log("CartList: ", items);
+//  console.log("CartList: ", items);
 
-  console.log("CartList itemList: ", itemList);
+ // console.log("CartList itemList: ", itemList);
 
   function delteItem(id: string) : void {
     setItemList(itemList.filter(item => item.product.name != id));

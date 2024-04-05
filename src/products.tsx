@@ -1,5 +1,4 @@
 // products.ts
-import productsData from './data/products.json';
 import { Product } from './types';
 import { CartItem } from './types';
 
