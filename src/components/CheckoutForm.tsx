@@ -1,5 +1,4 @@
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
-
 import { useNavigate } from 'react-router-dom';
 
 
@@ -15,9 +14,15 @@ interface FormData {
   city: string;
   zipCode: string;
   country: string;
+  newsLetter: boolean;
 }
 
-const CheckoutForm: React.FC = () => {
+type ZipCode = {
+  nr: string;
+  navn: string;
+};
+
+const CheckoutForm: React.FC<any> = (itemList) => {
   const [formData, setFormData] = useState<FormData>({
     addressLine1: '',
     addressLine2: '',
@@ -29,7 +34,8 @@ const CheckoutForm: React.FC = () => {
     vatNumber: '',
     city: '',
     zipCode: '',
-    country: 'Denmark'
+    country: 'Denmark',
+    newsLetter: false
   });
 
   const [errors, setErrors] = useState<Partial<FormData>>({});
@@ -44,11 +50,20 @@ const CheckoutForm: React.FC = () => {
       [name]: value,
     }));
   };
+
+  const handleNesLetterChange = () => {
+    setFormData((prevData) => ({
+      ...prevData,
+      ["newsLetter"]: !prevData.newsLetter,
+    }));
+  };
   
-  //NEW
+  
   const [zipCode, setZipCode] = useState("");
-    const [city, setCity] = useState("");
-    const [validZipCodes, setValidZipCodes] = useState<string[]>([]);
+  const [city, setCity] = useState("");
+  const [validZipCodes, setValidZipCodes] = useState<ZipCode[]>([]);
+  const [term, setTerm] = useState(false);
+  const [termError, setTermError ] = useState("")
 
     useEffect(() => {
         getValidZipCodes();
@@ -62,8 +77,9 @@ const CheckoutForm: React.FC = () => {
             errors.zipCode = "";
             setZipCode(value);
             if (value.length == 4){
-                if (validZipCodes.includes(value)){
-                    getCity(value)
+                var validZipCode = validZipCodes.find(z => z.nr == value)
+                if (validZipCode){
+                  setCity(validZipCode.navn);
                 }
                 else {
                     setCity("");
@@ -79,25 +95,33 @@ const CheckoutForm: React.FC = () => {
 
     async function getValidZipCodes(){
         const url = `https://api.dataforsyningen.dk/postnumre`;
-        
         const response = await fetch(url);
         const zipCodes = (await response.json()) as [{
             nr: string;
+            navn: string;
+
         }];
-        setValidZipCodes(zipCodes.map(({ nr }) => nr));
+        setValidZipCodes(zipCodes);
     }
 
-    async function getCity(zipCode: string){
-      const url = `https://api.dataforsyningen.dk/postnumre/${zipCode}`;
-      const response = await fetch(url);
-      const city = (await response.json()) as {
-          navn: string;
-      };
-      setCity(city.navn);
-    }
-      //NEW
-
-  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    
+  function sendData(){
+    let body = JSON.stringify({
+      formData: formData,
+      items: itemList,
+    });
+    console.log(body);
+    fetch('https://mywebsite.com/endpoint/', { // byttes med det rigtige end point
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: body
+    });
+  }
+  
+const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Simple validation
@@ -137,7 +161,7 @@ const CheckoutForm: React.FC = () => {
     if (!/^\d{4}$/.test(formData.zipCode)) {
       validationErrors.zipCode = 'Zip code must be 4 digits';
     }
-    if (!validZipCodes.includes(formData.zipCode)){
+    if (!validZipCodes.find(z => z.nr == formData.zipCode)){
       validationErrors.zipCode = "Not Valid Zip Code";
     }
 
@@ -145,11 +169,18 @@ const CheckoutForm: React.FC = () => {
     if (!formData.city.trim()) {
       validationErrors.city = 'City is required';
     }
-    //NEW
 
-    // if (formData.vatNumber && !/^\d{8}$/.test(formData.vatNumber)) {
-    //   validationErrors.vatNumber = 'VAT Number must be 8 digits';
-    // }
+    
+    if (term) {
+      setTermError("");
+    }
+    else {
+      setTermError("Feltet skal udfyldes.");
+    }
+   
+    
+
+
 
     setErrors(validationErrors);
 
@@ -158,11 +189,15 @@ const CheckoutForm: React.FC = () => {
 
     // Perform actions if the form is valid
     if (isValid) {
+      sendData();
       console.log('Form submitted successfully:', formData);
       // Redirect to the payment page
+
       navigate('/payment');
     }
   };
+  
+
 
   return (
     
@@ -367,8 +402,21 @@ const CheckoutForm: React.FC = () => {
             </div>
           </div> 
         </div>
+
+
+      <div>
+        <input id="newsLetter" type="checkbox" checked={formData.newsLetter} onChange={handleNesLetterChange} ></input>
+        <label htmlFor="newsLetter">Tilmeld mig nyhedsbrevet</label>
+      </div>
       
       
+      <div>
+        <input id="term" type="checkbox" checked={term} onChange={() => setTerm(!term)}></input>
+        <label htmlFor="term">Jeg accepterer købs og forretningsbetingelser</label>
+        <div>
+          {termError && <span>{termError}</span>}
+        </div>
+      </div>
 
       
       <button type="submit">

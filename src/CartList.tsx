@@ -119,10 +119,10 @@ const CartList: React.FC<CartListProps> = ( {items ,  products, itemList, setIte
       </div>
       <ShowTotalPrice totalPrice={getTotalPrice()} /> 
       
-      <Link to="/checkout">
+      <Link to="/checkout" state={itemList}>
                     <button>Proceed to Checkout</button>
                 </Link>
-
+      
       <UpSellProductList cartItems={itemList} products={products} onAddToCart={addItemToCart} onReplaceInCart={replaceItem}   />
       
       
