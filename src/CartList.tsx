@@ -61,7 +61,7 @@ const CartList: React.FC<CartListProps> = ( {items ,  products, itemList, setIte
 
       }
     }
-    setItemList(newItemList);
+    setItemList(newItemList);//he
   }
 
   function addItemToCart(product: Product) : void {

@@ -7,7 +7,8 @@ import { products } from '../products';
 import userEvent from '@testing-library/user-event';
 
 describe('UpSellProductList', () => {
-    let cartItems: CartItem[];
+    let cartItems: CartItem[];//2
+    //printme
     let user: ReturnType<typeof userEvent.setup>;
     let mockOnAddToCart: Mock<[Product], void>;
     let mockOnReplaceInCart: Mock<[Product, Product], void>;
