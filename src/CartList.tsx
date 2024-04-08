@@ -14,14 +14,8 @@ type CartListProps = {
 
 
 
-const CartList: React.FC<CartListProps> = ( {items ,  products, itemList, setItemList } ) => {
-//  const [itemList, setItemList] = useState(items);
-//setItemList(itemList);
- 
+const CartList: React.FC<CartListProps> = ( {  products, itemList, setItemList } ) => {
 
-//  console.log("CartList: ", items);
-
- // console.log("CartList itemList: ", itemList);
 
   function delteItem(id: string) : void {
     setItemList(itemList.filter(item => item.product.name != id));
