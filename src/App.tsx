@@ -23,7 +23,9 @@ function App() {
     useEffect(() => {
       async function fetchApi() {
         try {
-          const response = await fetch('http://dtu62597.eduhost.dk:10331/api');
+          //remember to revert to real ip
+          //const response = await fetch('http://dtu62597.eduhost.dk:10331/api');
+          const response = await fetch('totally real api');
           if (!response.ok) {
             setProducts(productsData);
             throw new Error(`HTTP error: status ${response.status}`);

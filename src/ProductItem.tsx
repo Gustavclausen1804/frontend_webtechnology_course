@@ -4,12 +4,13 @@ interface ProductItemProps {
  // image: string; TODO: tilføj billeder senere. 
   name: string;
   price: number;
+  imageUrl: string;
   onClickDelete: (name: string) => void;
-  onChangeAmount: (name : string, amount: string) => void;
+  onChangeAmount: (name : string, amount: number) => void;
   productQuantity: number;
 }
 
-const ProductItem: React.FC<ProductItemProps> = ({  name, price, onClickDelete, productQuantity, onChangeAmount }) => {
+const ProductItem: React.FC<ProductItemProps> = ({  name, price, imageUrl, onClickDelete, productQuantity, onChangeAmount }) => {
 
   // TODO: Behøves ikke her, da vi har state i CartList. 
 
@@ -24,10 +25,7 @@ const ProductItem: React.FC<ProductItemProps> = ({  name, price, onClickDelete, 
   } else if (newAmount > 99 ) {
     newAmount  = 99;
   }
-      //this is a string so we can effeciently change 0 to 1 without having to check the first digit.
-      //it simply just converts the int to a string where its the value so 001 is not possible to type
-      onChangeAmount(name, newAmount.toString());
-      
+      onChangeAmount(name, newAmount);
     }
 
     
@@ -47,7 +45,8 @@ const ProductItem: React.FC<ProductItemProps> = ({  name, price, onClickDelete, 
   
     <div className="product-item">
       <button className="delete-btn" onClick={() => onClickDelete(name)}>X</button>
-      {/* TODO: Tilføj billede her senere. <img src={image} alt={name} className="product-image" /> */}
+      {/* hvis img ikke får et billede vil den gøre sigselv gennemsnigtig for ikke at ødelægge vores tekst struktur*/}
+      <img src={imageUrl} alt={name} className="product-image" onError={e => e.currentTarget.style.opacity = '0'}/>
       <span className="product-name">{name}</span>
       <input 
         type="number"  
