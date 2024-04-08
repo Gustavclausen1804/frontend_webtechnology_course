@@ -23,7 +23,8 @@ function App() {
     useEffect(() => {
       async function fetchApi() {
         try {
-          //remember to revert to real ip
+          //since the database does not have the updated json file i choose to use the local data instead right now.
+          //update back when database is updated
           //const response = await fetch('http://dtu62597.eduhost.dk:10331/api');
           const response = await fetch('totally real api');
           if (!response.ok) {
