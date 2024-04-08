@@ -1,0 +1,4 @@
+Group: 1
+Deployed App url: https://dtufrontendwebtechnology.netlify.app
+Github Repo: https://github.com/Gustavclausen1804/frontend_webtechnology_course
+
