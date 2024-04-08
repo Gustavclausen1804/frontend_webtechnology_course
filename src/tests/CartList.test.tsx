@@ -1,18 +1,10 @@
 import { describe, beforeEach, it, expect } from 'vitest';
-import { CartItem, Product  } from '../types';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import CartList from '../CartList';
-import productsData from '../data/products.json';
+import products from '../data/products.json';
 
-type CartListProps = {
-  items: CartItem[];
-  products: Product[];
-  itemList: CartItem[];
-  setItemList: React.Dispatch<React.SetStateAction<CartItem[]>>;
-};
-CartItem[2]
-const products : Product[] = productsData;
+
 
 const initialCartItems = products.slice(0, 2).map((product) => ({
   product,
@@ -21,8 +13,9 @@ const initialCartItems = products.slice(0, 2).map((product) => ({
 }));
 
 describe('CartList Component Tests', () => {
+  const dummySetItemList = () => {}  ; // Mock setItemList function
   beforeEach(async () => {
-    render(<CartList products={products} items={initialCartItems} itemList={} setItemList={}/>);
+    render(<CartList products={products} items={initialCartItems} itemList={initialCartItems} setItemList={dummySetItemList}/>);
   });
 
   it('renders initial cart items and checks total price', async () => {
