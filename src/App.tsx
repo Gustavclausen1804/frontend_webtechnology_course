@@ -26,7 +26,8 @@ function App() {
           //since the database does not have the updated json file i choose to use the local data instead right now.
           //update back when database is updated
           //const response = await fetch('http://dtu62597.eduhost.dk:10331/api');
-          const response = await fetch('totally real api');
+          //const response = await fetch('totally real api');
+          const response = await fetch('https://raw.githubusercontent.com/larsthorup/checkout-data/main/product-v2.json');
           if (!response.ok) {
             setProducts(productsData);
             throw new Error(`HTTP error: status ${response.status}`);
