@@ -182,9 +182,12 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
       validationErrors.email = 'indtast en email';
     }
 
-    if (!formData.companyName.trim()) {
-      validationErrors.companyName = 'Foretningsnavn forventet';
-    }
+  /* 
+  if (!formData.companyName.trim()) {
+    validationErrors.companyName = 'Foretningsnavn forventet';
+  }
+  */
+
     if (!formData.country.trim()) {
       validationErrors.country = 'Land nødvendigt';
     }
