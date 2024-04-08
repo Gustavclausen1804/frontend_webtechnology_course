@@ -29,7 +29,7 @@ type CartProps = {
     return (
         <>
             <Header/>
-            <h2>Cart Page</h2>
+            <h2>Indkøbskurv</h2>
             <>
                 <CartList items={sampleCartItems} products={products} itemList={itemList} setItemList={setItemList}></CartList>
 
