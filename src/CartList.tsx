@@ -4,7 +4,6 @@ import ProductItem from './ProductItem';
 import ShowTotalPrice from './showTotalPrice';
 import UpSellProductList from './UpSellProductsList';
 import { Link } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 type CartListProps = {
     items: CartItem[];
@@ -80,8 +79,6 @@ const CartList: React.FC<CartListProps> = ( {items ,  products, itemList, setIte
 
  // CharGPT har givet forslag til vordan det detekteres at kurven er tom og angive hvordan man vises begge situationer. Er efterføgnede tilrettet  
  
- // CharGPT har givet forslag til vordan det detekteres at kurven er tom og angive hvordan man vises begge situationer. Er efterføgnede tilrettet  
-  
   return (
     
 <div> 
@@ -123,17 +120,11 @@ const CartList: React.FC<CartListProps> = ( {items ,  products, itemList, setIte
       <ShowTotalPrice totalPrice={getTotalPrice()} /> 
       
       <Link to="/checkout">
-                    <button>Proceed to Checkout</button>
+                    <button>Gå til registrering</button>
                 </Link>
 
       <UpSellProductList cartItems={itemList} products={products} onAddToCart={addItemToCart} onReplaceInCart={replaceItem}   />
       
-      <ShowTotalPrice totalPrice={getTotalPrice()} />
-        <Link to="/checkout">
-          <button>Gå til Registrering</button>
-        </Link>
-
-      <UpSellProductList cartItems={itemList} onAddToCart={addItemToCart} onReplaceInCart={replaceItem}   />
       
      
    
