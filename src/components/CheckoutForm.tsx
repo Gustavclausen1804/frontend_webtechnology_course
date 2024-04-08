@@ -6,6 +6,7 @@ import { useNavigate, Link } from 'react-router-dom';
 interface FormData {
   addressLine1: string;
   addressLine2: string;
+  optionalComment: string;
   firstName: string;
   lastName: string;
   phone: string;
@@ -25,12 +26,19 @@ interface FormData {
   deliveryCity: string;
   deliveryPhone: string;
   
+  newsLetter: boolean;
 }
 
-const CheckoutForm: React.FC = () => {
+type ZipCode = {
+  nr: string;
+  navn: string;
+};
+
+const CheckoutForm: React.FC<any> = (itemList) => {
   const [formData, setFormData] = useState<FormData>({
     addressLine1: '',
     addressLine2: '',
+    optionalComment: '',
     firstName: '',
     lastName: '',
     phone: '',
@@ -40,6 +48,7 @@ const CheckoutForm: React.FC = () => {
     city: '',
     zipCode: '',
     country: 'Denmark',
+    newsLetter: false,
 
     deliveryCountry: 'Denmark',
     deliveryFirstName: '',
@@ -64,11 +73,30 @@ const CheckoutForm: React.FC = () => {
       [name]: value,
     }));
   };
+
+  // handleCommentChange function is created by Copilot
+
+  const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleNesLetterChange = () => {
+    setFormData((prevData) => ({
+      ...prevData,
+      ["newsLetter"]: !prevData.newsLetter,
+    }));
+  };
   
-  //NEW
+  
   const [zipCode, setZipCode] = useState("");
-    const [city, setCity] = useState("");
-    const [validZipCodes, setValidZipCodes] = useState<string[]>([]);
+  const [city, setCity] = useState("");
+  const [validZipCodes, setValidZipCodes] = useState<ZipCode[]>([]);
+  const [term, setTerm] = useState(false);
+  const [termError, setTermError ] = useState("")
 
     useEffect(() => {
         getValidZipCodes();
@@ -82,8 +110,9 @@ const CheckoutForm: React.FC = () => {
             errors.zipCode = "";
             setZipCode(value);
             if (value.length == 4){
-                if (validZipCodes.includes(value)){
-                    getCity(value)
+                var validZipCode = validZipCodes.find(z => z.nr == value)
+                if (validZipCode){
+                  setCity(validZipCode.navn);
                 }
                 else {
                     setCity("");
@@ -99,25 +128,33 @@ const CheckoutForm: React.FC = () => {
 
     async function getValidZipCodes(){
         const url = `https://api.dataforsyningen.dk/postnumre`;
-        
         const response = await fetch(url);
         const zipCodes = (await response.json()) as [{
             nr: string;
+            navn: string;
+
         }];
-        setValidZipCodes(zipCodes.map(({ nr }) => nr));
+        setValidZipCodes(zipCodes);
     }
 
-    async function getCity(zipCode: string){
-      const url = `https://api.dataforsyningen.dk/postnumre/${zipCode}`;
-      const response = await fetch(url);
-      const city = (await response.json()) as {
-          navn: string;
-      };
-      setCity(city.navn);
-    }
-      //NEW
-
-  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    
+  function sendData(){
+    let body = JSON.stringify({
+      formData: formData,
+      items: itemList,
+    });
+    console.log(body);
+    fetch('https://mywebsite.com/endpoint/', { // byttes med det rigtige end point
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: body
+    });
+  }
+  
+const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Simple validation
@@ -157,7 +194,7 @@ const CheckoutForm: React.FC = () => {
     if (!/^\d{4}$/.test(formData.zipCode)) {
       validationErrors.zipCode = 'Postnummer skal være 4 cifre';
     }
-    if (!validZipCodes.includes(formData.zipCode)){
+    if (!validZipCodes.find(z => z.nr == formData.zipCode)){
       validationErrors.zipCode = "Ikke korrekt Postnummer";
     }
 
@@ -165,11 +202,18 @@ const CheckoutForm: React.FC = () => {
     if (!formData.city.trim()) {
       validationErrors.city = 'Postnummer forventet';
     }
-    //NEW
 
-    // if (formData.vatNumber && !/^\d{8}$/.test(formData.vatNumber)) {
-    //   validationErrors.vatNumber = 'VAT Number must be 8 digits';
-    // }
+    
+    if (term) {
+      setTermError("");
+    }
+    else {
+      setTermError("Feltet skal udfyldes.");
+    }
+   
+    
+
+
 
     setErrors(validationErrors);
 
@@ -178,21 +222,25 @@ const CheckoutForm: React.FC = () => {
 
     // Perform actions if the form is valid
     if (isValid) {
+      sendData();
       console.log('Form submitted successfully:', formData);
       // Redirect to the payment page
+
       navigate('/payment');
     }
   };
+  
+
 
   return (
     
-    <form onSubmit={handleFormSubmit}>
+    <form onSubmit={handleFormSubmit} className="formStyling">
 
 
       
       {/* Country */}
       <div>
-        <label htmlFor="country">Land</label>
+        <label htmlFor="country" style={{ marginBottom: '20px' }}>Land</label>
         <input
                 type="text"
                 id="country"
@@ -204,16 +252,18 @@ const CheckoutForm: React.FC = () => {
         </div>
 
       </div>
+
+     
     
       {/* ----------------------------- NAMES ----------------------------- */}
 
       <div className="name-fields">
     <div style={{ display: 'flex' }}>
-        <div style={{ width: '50%' }}>
+        <div style={{ width: '20%' }}>
             <label htmlFor="firstName">Fornavn</label>
         </div>
         
-        <div style={{ width: '50%' }}>
+        <div style={{ width: '100%' }}>
             <label htmlFor="lastName">Efternavn</label>
         </div>
     </div>
@@ -251,10 +301,10 @@ const CheckoutForm: React.FC = () => {
     {/* ----------------------------- ADDRESSES ----------------------------- */}
 
     <div style={{ display: 'flex' }}>
-      <div style={{ width: '50%' }}>
+      <div style={{ width: '25%' }}>
         <label>Adresse linje 1</label>
       </div>
-      <div style={{ width: '50%' }}>
+      <div style={{ width: '100%' }}>
         <label>Adresse linje 2</label>
       </div>
     </div>
@@ -281,15 +331,16 @@ const CheckoutForm: React.FC = () => {
           onChange={handleInputChange}
         />
         </div>
-      </div>
+        </div>
+
 
     {/* ----------------------------- Phone and Email ----------------------------- */}
 
     <div style={{ display: 'flex' }}>
-      <div style={{ width: '50%' }}>
+      <div style={{ width: '10%' }}>
           <label>Telefonnummer</label>
         </div>
-        <div style={{ width: '50%' }}>
+        <div style={{ width: '100%' }}>
           <label>Email</label>
         </div>
       </div>
@@ -307,7 +358,7 @@ const CheckoutForm: React.FC = () => {
         </div>
       </div>
 
-      <div style={{ width: '50%' }}>
+      <div style={{ width: '120%' }}>
         
         <input
           type="email"
@@ -324,10 +375,10 @@ const CheckoutForm: React.FC = () => {
     {/* ----------------------------- CompanyName and VAT ----------------------------- */}
 
     <div style={{ display: 'flex' }}>
-      <div style={{ width: '50%' }}>
+      <div style={{ width: '35%' }}>
         <label>Virksomheds Navn</label>
       </div>
-      <div style={{ width: '50%' }}>
+      <div style={{ width: '100%' }}>
         <label>CPR</label>
       </div>
     </div>
@@ -361,11 +412,11 @@ const CheckoutForm: React.FC = () => {
       </div>
 
       {/* ----------------------------- ZipCode and City ----------------------------- */}
-      <div style={{ display: 'flex' }}>
-              <div style={{ width: '50%' }}>
+      <div style={{ display: 'flex'}}>
+              <div style={{ width: '20%' }}>
                 <label>Postnummer</label>
               </div>
-              <div style={{ width: '50%' }}>
+              <div style={{ width: '100%' }}>
                 <label>By</label>
               </div>
             </div>
@@ -387,6 +438,42 @@ const CheckoutForm: React.FC = () => {
             </div>
           </div> 
         </div>
+      
+       {/* ----------------------------- Optionel comment ----------------------------- */}
+        <p>
+       <label htmlFor="optionalComment    ">Optional Comment</label>
+        <br />
+        <textarea
+          cols={35}
+          rows={5}  
+          name="optionalComment"
+          value={formData.optionalComment}
+          onChange={handleCommentChange}
+        />
+        </p>
+
+     
+      
+      
+      
+
+
+      <div>
+        <input id="newsLetter" type="checkbox" checked={formData.newsLetter} onChange={handleNesLetterChange} ></input>
+        <label htmlFor="newsLetter">Tilmeld mig nyhedsbrevet</label>
+      </div>
+      
+      
+      <div>
+        <input id="term" type="checkbox" checked={term} onChange={() => setTerm(!term)}></input>
+        <label htmlFor="term">Jeg accepterer købs og forretningsbetingelser</label>
+        <div>
+          {termError && <span>{termError}</span>}
+        </div>
+      </div>
+
+      
+      
 
 
 
@@ -553,6 +640,7 @@ const CheckoutForm: React.FC = () => {
       </div>
 
     </form>
+    
   );
 };
 

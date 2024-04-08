@@ -148,3 +148,13 @@ table{
     color: black; /* Tekstfarve */
     background-color: hwb(56 22% 4% / 0.808); /* Baggrundsfarve */
 }
+
+
+.formStyling {
+    background-color: rgb(238, 235, 235);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 10px;
+}
