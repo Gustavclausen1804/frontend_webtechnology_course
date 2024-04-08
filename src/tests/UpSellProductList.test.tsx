@@ -3,9 +3,11 @@ import { CartItem, Product } from '../types';
 import { describe, it, expect, beforeEach, vi, Mock } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import UpSellProductList from '../UpSellProductsList';
-import { products } from '../products';
+//import { products } from '../products';
+import productsData from '../data/products.json';
 import userEvent from '@testing-library/user-event';
 
+const products : Product[] = productsData;
 describe('UpSellProductList', () => {
     let cartItems: CartItem[];//2
     //printme
@@ -29,33 +31,33 @@ describe('UpSellProductList', () => {
     });
 
     it('calls onReplaceInCart when replace in cart button is clicked', async () => {
-        const { rerender } = render(<UpSellProductList cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
+        const { rerender } = render(<UpSellProductList products = {products} cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
         const replaceInCartButton = await screen.findByText('Erstat i indkøbskurv');
         await user.click(replaceInCartButton);
 
         expect(mockOnReplaceInCart).toHaveBeenCalled();
 
-        rerender(<UpSellProductList cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
+        rerender(<UpSellProductList products = {products} cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
 
         const previousProduct = screen.queryByText(upsellProduct.name);
         expect(previousProduct).toBeNull();
     });
 
     it('calls onAddToCart when add to cart button is clicked', async () => {
-        const { rerender } = render(<UpSellProductList cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
+        const { rerender } = render(<UpSellProductList products = {products} cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
         const addToCartButton = await screen.findByText('Tilføg til indkøbskurv');
         await user.click(addToCartButton);
 
         expect(mockOnAddToCart).toHaveBeenCalled();
 
-        rerender(<UpSellProductList cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
+        rerender(<UpSellProductList products = {products} cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
 
         const previousProduct = screen.queryByText(upsellProduct.name);
         expect(previousProduct).toBeNull();
     });
 
     it('renders the upsell product list', () => {
-        render(<UpSellProductList cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
+        render(<UpSellProductList products = {products} cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
         const upsellProductItem = screen.getByText(upsellProduct.name);
         expect(upsellProductItem).toBeInTheDocument();
     });

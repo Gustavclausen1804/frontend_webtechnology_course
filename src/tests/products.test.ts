@@ -1,6 +1,11 @@
 // products.test.ts
+import { Product } from '../types'; 
 import { describe, it, expect } from 'vitest';
-import { products, findProductById, isUpsellProductEligible } from '../products';
+import { findProductById, isUpsellProductEligible } from '../products';
+import productsData from '../data/products.json';
+
+const products : Product[] = productsData;
+
 
 describe('findProductById', () => {
   it('finds a product by its ID', () => {
