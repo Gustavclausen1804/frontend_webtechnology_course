@@ -5,7 +5,7 @@ interface ProductItemProps {
   name: string;
   price: number;
   onClickDelete: (name: string) => void;
-  onChangeAmount: (name : string, amount: number) => void;
+  onChangeAmount: (name : string, amount: string) => void;
   productQuantity: number;
 }
 
@@ -16,15 +16,17 @@ const ProductItem: React.FC<ProductItemProps> = ({  name, price, onClickDelete, 
   
   //simple lambda expression for if we have 3 or more products then we get a 10% discount
   const discount = productQuantity >= 3 ? 0.9 : 1;
- 
+  
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let newAmount = Number(event.target.value);
-    if (isNaN(newAmount) || newAmount < 1) {
-     newAmount = 1;
-  } else if (newAmount > 999 ) {
-    newAmount  = 999;
+    if (isNaN(newAmount) || newAmount < 0) {
+     newAmount = 0;
+  } else if (newAmount > 99 ) {
+    newAmount  = 99;
   }
-      onChangeAmount(name, newAmount);
+      //this is a string so we can effeciently change 0 to 1 without having to check the first digit.
+      //it simply just converts the int to a string where its the value so 001 is not possible to type
+      onChangeAmount(name, newAmount.toString());
       
     }
 
@@ -54,7 +56,7 @@ const ProductItem: React.FC<ProductItemProps> = ({  name, price, onClickDelete, 
         onChange={handleAmountChange}
       />
       <div id="discountNudge" style={{ display: displayPopup }}>
-        <p>Buy 3 of the same item to get a 10% discount!</p>
+        <p>Tilføj endnu en {name.split(",")[0]} til kurven for at spare 10%!</p>
       </div>
       <span className={discount === 1 ? "product-price" : "product-price-discount"}>{formatPrice(price * discount)}</span>
       
