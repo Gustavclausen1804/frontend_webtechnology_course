@@ -4,28 +4,28 @@ interface ProductItemProps {
  // image: string; TODO: tilføj billeder senere. 
   name: string;
   price: number;
+  imageUrl: string;
   onClickDelete: (name: string) => void;
   onChangeAmount: (name : string, amount: number) => void;
   productQuantity: number;
 }
 
-const ProductItem: React.FC<ProductItemProps> = ({  name, price, onClickDelete, productQuantity, onChangeAmount }) => {
+const ProductItem: React.FC<ProductItemProps> = ({  name, price, imageUrl, onClickDelete, productQuantity, onChangeAmount }) => {
 
   // TODO: Behøves ikke her, da vi har state i CartList. 
 
   
   //simple lambda expression for if we have 3 or more products then we get a 10% discount
   const discount = productQuantity >= 3 ? 0.9 : 1;
- 
+  
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let newAmount = Number(event.target.value);
-    if (isNaN(newAmount) || newAmount < 1) {
-     newAmount = 1;
-  } else if (newAmount > 999 ) {
-    newAmount  = 999;
+    if (isNaN(newAmount) || newAmount < 0) {
+     newAmount = 0;
+  } else if (newAmount > 99 ) {
+    newAmount  = 99;
   }
       onChangeAmount(name, newAmount);
-      
     }
 
     
@@ -45,7 +45,8 @@ const ProductItem: React.FC<ProductItemProps> = ({  name, price, onClickDelete, 
   
     <div className="product-item">
       <button className="delete-btn" onClick={() => onClickDelete(name)}>X</button>
-      {/* TODO: Tilføj billede her senere. <img src={image} alt={name} className="product-image" /> */}
+      {/* hvis img ikke får et billede vil den gøre sigselv gennemsnigtig for ikke at ødelægge vores tekst struktur*/}
+      <img src={imageUrl} alt={name} className="product-image" onError={e => e.currentTarget.style.opacity = '0'}/>
       <span className="product-name">{name}</span>
       <input 
         type="number"  
@@ -54,7 +55,7 @@ const ProductItem: React.FC<ProductItemProps> = ({  name, price, onClickDelete, 
         onChange={handleAmountChange}
       />
       <div id="discountNudge" style={{ display: displayPopup }}>
-        <p>Buy 3 of the same item to get a 10% discount!</p>
+        <p>Tilføj endnu en {name.split(",")[0]} til kurven for at spare 10%!</p>
       </div>
       <span className={discount === 1 ? "product-price" : "product-price-discount"}>{formatPrice(price * discount)}</span>
       
