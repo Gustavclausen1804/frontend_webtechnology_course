@@ -40,13 +40,7 @@ const CartList: React.FC<CartListProps> = ( {items ,  products, itemList, setIte
     const newItemList = [...itemList];
     for (let i = 0; i < itemList.length; i++) {
       if (itemList[i].product.name == name) {
-        //this is an abhorrent way to solve the issue but whatever i seem to do i cannot fix it in any other way
-        //the problem is whenever i have 0 as input and i manually type another number it becomes 02 for some reason
-        //any way of handling yields no result as it returns the proper number it just doesnt type it in correctly?
-        //but when the code is bugged it's forced to handle it properly and the code is modified
-        //what i've done is change the "number" to a string and return the string despite it needing a number.
-        //TODO: Fix this 💀
-          newItemList[i].quantity = amount.toString();
+          newItemList[i].quantity = amount;
       }
     }
     setItemList(newItemList);
