@@ -29,7 +29,7 @@ describe('UpSellProductList', () => {
 
     it('calls onReplaceInCart when replace in cart button is clicked', async () => {
         const { rerender } = render(<UpSellProductList cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
-        const replaceInCartButton = await screen.findByText('Replace in Cart');
+        const replaceInCartButton = await screen.findByText('Erstat i indkøbskurv');
         await user.click(replaceInCartButton);
 
         expect(mockOnReplaceInCart).toHaveBeenCalled();
@@ -42,7 +42,7 @@ describe('UpSellProductList', () => {
 
     it('calls onAddToCart when add to cart button is clicked', async () => {
         const { rerender } = render(<UpSellProductList cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
-        const addToCartButton = await screen.findByText('Add to Cart');
+        const addToCartButton = await screen.findByText('Tilføg til indkøbskurv');
         await user.click(addToCartButton);
 
         expect(mockOnAddToCart).toHaveBeenCalled();
