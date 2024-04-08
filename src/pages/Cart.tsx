@@ -13,25 +13,26 @@ type CartProps = {
   };
   
   const Cart: React.FC<CartProps> = ({ products , itemList, setItemList}) => {
-    var sampleCartItems : CartItem[]= [];
 
 //export default function Cart(products: Product[]) {
     useEffect(() => {
-     sampleCartItems  = products.slice(0, 11).map((product: Product) => ({
-        product: product,
-        quantity: 1,
-        giftWrap: false
-        }));
- //       console.log("products: ", products);
- //       console.log("sampleCartItems: ", sampleCartItems);
-        setItemList(sampleCartItems);
-    }, [products, setItemList]);
+        // Initialize cart items only if itemList is empty
+        if (itemList.length === 0 && products.length > 0) {
+          const initialCartItems = products.slice(0, 11).map(product => ({
+            product: product,
+            quantity: 1,
+            giftWrap: false
+          }));
+          console.log("Initializing cart with new items:", initialCartItems);
+          setItemList(initialCartItems);
+        }
+      }, [products, setItemList]);
     return (
         <>
             <Header/>
             <h2>Indkøbskurv</h2>
             <>
-                <CartList items={sampleCartItems} products={products} itemList={itemList} setItemList={setItemList}></CartList>
+                <CartList items={itemList} products={products} itemList={itemList} setItemList={setItemList}></CartList>
 
             </>
         </>
