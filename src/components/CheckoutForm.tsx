@@ -379,7 +379,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         <label>Virksomheds Navn</label>
       </div>
       <div style={{ width: '100%' }}>
-        <label>CPR</label>
+        <label>CVR</label>
       </div>
     </div>
 

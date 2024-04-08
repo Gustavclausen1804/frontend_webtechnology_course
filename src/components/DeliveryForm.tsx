@@ -308,7 +308,7 @@ const CheckoutForm: React.FC = () => {
         <label>Virksomheds Navn</label>
       </div>
       <div style={{ width: '50%' }}>
-        <label>CPR</label>
+        <label>CVR</label>
       </div>
     </div>
 
