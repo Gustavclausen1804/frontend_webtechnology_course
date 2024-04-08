@@ -24,7 +24,7 @@ function ZipCodeSearch({ zipCode }: { zipCode: string }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://api.dataforsyningen.dk/postnumre');
+        const response = await fetch('https://api.dataforsyningen.dk/postnumre/he');
         
         const data: Postnummer[] = await response.json();
 
@@ -124,7 +124,7 @@ function ZipCodeSearch() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://api.dataforsyningen.dk/postnumre');
+        const response = await fetch('htps://api.dataforsyningen.dk/postnumre');
         
         const data: Postnummer[] = await response.json();
         console.log(data[0] + " " + data[1] + " " + data[2]);

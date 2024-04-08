@@ -4,6 +4,7 @@ import ProductItem from './ProductItem';
 import { useState } from 'react';
 import ShowTotalPrice from './showTotalPrice';
 import UpSellProductList from './UpSellProductsList';
+import { Link } from 'react-router-dom';
 
 type CartListProps = {
     items: CartItem[];
@@ -68,7 +69,7 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
     return;
   }
 
-  
+ // CharGPT har givet forslag til vordan det detekteres at kurven er tom og angive hvordan man vises begge situationer. Er efterføgnede tilrettet  
   
   return (
     
@@ -107,6 +108,9 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
      
       </div>
       <ShowTotalPrice totalPrice={getTotalPrice()} />
+        <Link to="/checkout">
+          <button>Gå til Registrering</button>
+        </Link>
 
       <UpSellProductList cartItems={itemList} onAddToCart={addItemToCart} onReplaceInCart={replaceItem}   />
       

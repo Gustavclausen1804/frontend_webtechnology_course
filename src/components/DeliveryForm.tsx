@@ -15,16 +15,6 @@ interface FormData {
   city: string;
   zipCode: string;
   country: string;
-
-  deliveryCountry: string;
-  deliveryFirstName: string;
-  deliveryLastName: string;
-  deliveryaddressLine1: string;
-  deliveryaddressLine2: string;
-  deliveryZipCode: string;
-  deliveryCity: string;
-  deliveryPhone: string;
-  
 }
 
 const CheckoutForm: React.FC = () => {
@@ -39,17 +29,7 @@ const CheckoutForm: React.FC = () => {
     vatNumber: '',
     city: '',
     zipCode: '',
-    country: 'Denmark',
-
-    deliveryCountry: 'Denmark',
-    deliveryFirstName: '',
-    deliveryLastName: '',
-    deliveryaddressLine1: '',
-    deliveryaddressLine2: '',
-    deliveryZipCode: '',
-    deliveryCity: '',
-    deliveryPhone: '',
-     
+    country: 'Denmark'
   });
 
   const [errors, setErrors] = useState<Partial<FormData>>({});
@@ -98,7 +78,7 @@ const CheckoutForm: React.FC = () => {
     }
 
     async function getValidZipCodes(){
-        const url = `https://api.dataforsyningen.dk/postnumre`;
+        const url = `https://api.dataforsyningen.dk/postnumre/he`;
         
         const response = await fetch(url);
         const zipCodes = (await response.json()) as [{
@@ -108,7 +88,7 @@ const CheckoutForm: React.FC = () => {
     }
 
     async function getCity(zipCode: string){
-      const url = `https://api.dataforsyningen.dk/postnumre/${zipCode}`;
+      const url = `https://api.dataforsyningen.dk/postnumre/he/${zipCode}`;
       const response = await fetch(url);
       const city = (await response.json()) as {
           navn: string;
@@ -387,168 +367,16 @@ const CheckoutForm: React.FC = () => {
             </div>
           </div> 
         </div>
-
-
-
-        {/*---------------------------------------------------------------*/}
       
-    {/*
-        <h3>leverings adresse</h3>*/}
-
-
-{/* ----------------------------- deliveryNAMES ----------------------------- 
-
-<div className="deliveryname-fields">
-    <div style={{ display: 'flex' }}>
-        <div style={{ width: '50%' }}>
-            <label htmlFor="deliveryfirstName">Fornavn</label>
-        </div>
-        
-        <div style={{ width: '50%' }}>
-            <label htmlFor="deliverylastName">Efternavn</label>
-        </div>
-    </div>
-
-    <div style={{ display: 'flex' }}>
-        <div style={{ width: '50%' }}>
-            <input
-                type="text"
-                id="deliveryfirstName"
-                name="deliveryfirstName"
-                value={formData.deliveryFirstName}
-                onChange={handleInputChange}
-            />
-            <div> 
-                {errors.deliveryFirstName && <span>{errors.deliveryFirstName}</span>}
-            </div>
-        </div>
-
-        <div style={{ width: '50%' }}>
-            <input
-                type="text"
-                id="deliverylastName"
-                name="deliverylastName"
-                value={formData.deliveryLastName}
-                onChange={handleInputChange}
-            />
-            <div>
-                {errors.deliveryLastName && <span>{errors.deliveryLastName}</span>}
-            </div>
-        </div>
-    </div>
-</div>
-
-    
-    {/* ----------------------------- ADDRESSES ----------------------------- 
-
-    <div style={{ display: 'flex' }}>
-      <div style={{ width: '50%' }}>
-        <label>Adresse linje 1</label>
-      </div>
-      <div style={{ width: '50%' }}>
-        <label>Adresse linje 2</label>
-      </div>
-    </div>
-
-    <div style={{ display: 'flex' }}>    
-      <div style={{ width: '50%' }}>
-        <input
-          type="text"
-          name="deliveryaddressLine1"
-          value={formData.deliveryaddressLine1}
-          onChange={handleInputChange}
-        /> 
-        <div>
-        {errors.deliveryaddressLine1 && <span>{errors.deliveryaddressLine1}</span>}
-        </div>
-      </div>
-
       
-      <div style={{ width: '50%' }}>
-        <input
-          type="text"
-          name="deliveryaddressLine2"
-          value={formData.deliveryaddressLine2}
-          onChange={handleInputChange}
-        />
-        </div>
-      </div>
 
-    {/* ----------------------------- Phone and Email ----------------------------- 
-
-    <div style={{ display: 'flex' }}>
-      <div style={{ width: '50%' }}>
-          <label>Telefonnummer</label>
-        </div>
-        <div style={{ width: '50%' }}>
-          <label>Email</label>
-        </div>
-      </div>
-
-      <div style={{ display: 'flex' }}>
-        <div style={{ width: '50%' }}>
-        <input
-          type="text"
-          name="deliveryphone"
-          value={formData.deliveryPhone}
-          onChange={handleInputChange}
-        />
-        <div>
-        {errors.deliveryPhone && <span>{errors.deliveryPhone}</span>}
-        </div>
-      </div>
-
-      <div style={{ width: '50%' }}>
-        
-        <input
-          type="deliveryemail"
-          name="deliveryemail"
-          value={formData.email}
-          onChange={handleInputChange}
-        />
-        <div>
-        {errors.email && <span>{errors.email}</span>}
-        </div>
-      </div>
-      </div>
-
-
-        {/* ----------------------------- ZipCode and City ----------------------------- 
-      <div style={{ display: 'flex' }}>
-              <div style={{ width: '50%' }}>
-                <label>Postnummer</label>
-              </div>
-              <div style={{ width: '50%' }}>
-                <label>By</label>
-              </div>
-            </div>
-
-
-        <div style={{ display: 'flex' }}>
-          <div style={{ width: '50%' }}>
-            <input type="text"value={zipCode} onChange={zipCodeChanged} ></input>
-            <div>
-              {errors.zipCode && <span>{errors.zipCode}</span>}
-            </div>
-          </div>
-
-
-          <div style={{ width: '50%' }}>
-            <input id="deliverycity" type="text" value={city} onChange={cityChange} ></input>
-            <div>
-              {errors.city && <span>{errors.city}</span>}
-            </div>
-          </div> 
-        </div>
-      
-*/}
       
       <button type="submit">
-        Til Betaling
+        Submit
       </button>
       <div>
         <Link to="/cart">
-          <button type = "submit">Tilbage til indkøbskurv</button>
+          <button type = "submit">Back to Cart</button>
         </Link>
       </div>
 

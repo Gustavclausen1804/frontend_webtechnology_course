@@ -9,12 +9,8 @@ export default function Checkout() {
     return (
         <>
             <Header/>
-            <h2>Checkout Page</h2>
-            
+            <h2>Registrering</h2>
             <CheckoutForm/>
-            
-
-            
         </>
     )
 }

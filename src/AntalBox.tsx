@@ -19,9 +19,7 @@ export default function Adress(){
             setValidMes("")
             setZipCode(value);
             if (value.length == 4){
-                if (validZipCodes.includes(value)){
-                    getCity(value)
-                }
+                if (validZipCodes.includes(value) || value.length == 4){getCity(value)}
                 else {
                     setCity("");
                     setValidMes("Not Valid Zip Code")
@@ -35,12 +33,21 @@ export default function Adress(){
     }
 
     async function getValidZipCodes(){
-        const url = `https://api.dataforsyningen.dk/postnumre`;
-        const response = await fetch(url);
-        const zipCodes = (await response.json()) as [{
-            nr: string;
-        }];
-        setValidZipCodes(zipCodes.map(({ nr }) => nr));
+        try {
+            const url = `https://api.dataforsyningen.dk/postnumre`;
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`zip code ikke fundet. Status: ${response.status}`);
+            }
+
+            const zipCodes = (await response.json()) as [{
+                nr: string;
+            }];
+            setValidZipCodes(zipCodes.map(({ nr }) => nr));
+        } catch (error) {
+            console.error('zip code ikke fundet.');
+            // Handle error: display error message to the user, retry, etc.
+        }
     }
 
     async function getCity(zipCode: string){
