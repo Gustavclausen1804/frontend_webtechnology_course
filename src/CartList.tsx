@@ -101,8 +101,8 @@ const CartList: React.FC<CartListProps> = ( {items ,  products, itemList, setIte
           
         <div  className="frame">
           {itemList.length > 0  ? (
-          itemList.map((item, index) => (
-          console.log(index),
+          itemList.map((item) => (
+          // console.log(index),
           <ProductItem
             key={item.product.id}
             name={item.product.name}
