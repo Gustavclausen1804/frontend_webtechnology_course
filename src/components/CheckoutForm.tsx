@@ -436,7 +436,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
      
       
       
-      <button type="submit" style={{fontSize: 20}}>
+      
 
 
       <div>
@@ -454,7 +454,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
       </div>
 
       
-      <button type="submit">
+      <button type="submit" style={{fontSize: 20}}>
         Submit
       </button>
     </form>
