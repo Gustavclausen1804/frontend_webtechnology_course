@@ -1,10 +1,13 @@
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+//import formStyling from '../container.css';
+
 
 
 interface FormData {
   addressLine1: string;
   addressLine2: string;
+  optionalComment: string;
   firstName: string;
   lastName: string;
   phone: string;
@@ -26,6 +29,7 @@ const CheckoutForm: React.FC<any> = (itemList) => {
   const [formData, setFormData] = useState<FormData>({
     addressLine1: '',
     addressLine2: '',
+    optionalComment: '',
     firstName: '',
     lastName: '',
     phone: '',
@@ -44,6 +48,16 @@ const CheckoutForm: React.FC<any> = (itemList) => {
   const navigate = useNavigate();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  // handleCommentChange function is created by Copilot
+
+  const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -201,13 +215,13 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 
   return (
     
-    <form onSubmit={handleFormSubmit}>
+    <form onSubmit={handleFormSubmit} className="formStyling">
 
 
       
       {/* Country */}
       <div>
-        <label htmlFor="country">Country</label>
+        <label htmlFor="country" style={{ marginBottom: '20px' }}>Country</label>
         <input
                 type="text"
                 id="country"
@@ -219,16 +233,18 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         </div>
 
       </div>
+
+     
     
       {/* ----------------------------- NAMES ----------------------------- */}
 
       <div className="name-fields">
     <div style={{ display: 'flex' }}>
-        <div style={{ width: '50%' }}>
+        <div style={{ width: '20%' }}>
             <label htmlFor="firstName">First Name</label>
         </div>
         
-        <div style={{ width: '50%' }}>
+        <div style={{ width: '100%' }}>
             <label htmlFor="lastName">Last Name</label>
         </div>
     </div>
@@ -266,10 +282,10 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     {/* ----------------------------- ADDRESSES ----------------------------- */}
 
     <div style={{ display: 'flex' }}>
-      <div style={{ width: '50%' }}>
+      <div style={{ width: '25%' }}>
         <label>Address Line 1</label>
       </div>
-      <div style={{ width: '50%' }}>
+      <div style={{ width: '100%' }}>
         <label>Address Line 2</label>
       </div>
     </div>
@@ -296,15 +312,16 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
           onChange={handleInputChange}
         />
         </div>
-      </div>
+        </div>
+
 
     {/* ----------------------------- Phone and Email ----------------------------- */}
 
     <div style={{ display: 'flex' }}>
-      <div style={{ width: '50%' }}>
+      <div style={{ width: '10%' }}>
           <label>Phone</label>
         </div>
-        <div style={{ width: '50%' }}>
+        <div style={{ width: '100%' }}>
           <label>Email</label>
         </div>
       </div>
@@ -322,7 +339,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         </div>
       </div>
 
-      <div style={{ width: '50%' }}>
+      <div style={{ width: '120%' }}>
         
         <input
           type="email"
@@ -339,10 +356,10 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     {/* ----------------------------- CompanyName and VAT ----------------------------- */}
 
     <div style={{ display: 'flex' }}>
-      <div style={{ width: '50%' }}>
+      <div style={{ width: '35%' }}>
         <label>Company Name</label>
       </div>
-      <div style={{ width: '50%' }}>
+      <div style={{ width: '100%' }}>
         <label>VAT Number</label>
       </div>
     </div>
@@ -376,11 +393,11 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
       </div>
 
       {/* ----------------------------- ZipCode and City ----------------------------- */}
-      <div style={{ display: 'flex' }}>
-              <div style={{ width: '50%' }}>
+      <div style={{ display: 'flex'}}>
+              <div style={{ width: '20%' }}>
                 <label>ZipCode</label>
               </div>
-              <div style={{ width: '50%' }}>
+              <div style={{ width: '100%' }}>
                 <label>City</label>
               </div>
             </div>
@@ -402,6 +419,24 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
             </div>
           </div> 
         </div>
+      
+       {/* ----------------------------- Optionel comment ----------------------------- */}
+        <p>
+       <label htmlFor="optionalComment    ">Optional Comment</label>
+        <br />
+        <textarea
+          cols={35}
+          rows={5}  
+          name="optionalComment"
+          value={formData.optionalComment}
+          onChange={handleCommentChange}
+        />
+        </p>
+
+     
+      
+      
+      <button type="submit" style={{fontSize: 20}}>
 
 
       <div>
@@ -423,6 +458,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         Submit
       </button>
     </form>
+    
   );
 };
 
