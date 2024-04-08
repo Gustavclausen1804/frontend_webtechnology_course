@@ -61,7 +61,7 @@ const CartList: React.FC<CartListProps> = ( {items ,  products, itemList, setIte
 
       }
     }
-    setItemList(newItemList);
+    setItemList(newItemList);//he
   }
 
   function addItemToCart(product: Product) : void {
@@ -125,8 +125,9 @@ const CartList: React.FC<CartListProps> = ( {items ,  products, itemList, setIte
       </div>
       <ShowTotalPrice totalPrice={getTotalPrice()} /> 
       
+      
       <Link to="/checkout" state={itemList}>
-                    <button>Proceed to Checkout</button>
+                    <button>Gå til registrering</button>
                 </Link>
       
       <UpSellProductList cartItems={itemList} products={products} onAddToCart={addItemToCart} onReplaceInCart={replaceItem}   />

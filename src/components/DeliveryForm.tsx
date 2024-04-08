@@ -1,12 +1,11 @@
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 
-import { useNavigate, Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 interface FormData {
   addressLine1: string;
   addressLine2: string;
-  optionalComment: string;
   firstName: string;
   lastName: string;
   phone: string;
@@ -16,29 +15,12 @@ interface FormData {
   city: string;
   zipCode: string;
   country: string;
-
-  deliveryCountry: string;
-  deliveryFirstName: string;
-  deliveryLastName: string;
-  deliveryaddressLine1: string;
-  deliveryaddressLine2: string;
-  deliveryZipCode: string;
-  deliveryCity: string;
-  deliveryPhone: string;
-  
-  newsLetter: boolean;
 }
 
-type ZipCode = {
-  nr: string;
-  navn: string;
-};
-
-const CheckoutForm: React.FC<any> = (itemList) => {
+const CheckoutForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     addressLine1: '',
     addressLine2: '',
-    optionalComment: '',
     firstName: '',
     lastName: '',
     phone: '',
@@ -47,18 +29,7 @@ const CheckoutForm: React.FC<any> = (itemList) => {
     vatNumber: '',
     city: '',
     zipCode: '',
-    country: 'Denmark',
-    newsLetter: false,
-
-    deliveryCountry: 'Denmark',
-    deliveryFirstName: '',
-    deliveryLastName: '',
-    deliveryaddressLine1: '',
-    deliveryaddressLine2: '',
-    deliveryZipCode: '',
-    deliveryCity: '',
-    deliveryPhone: '',
-     
+    country: 'Denmark'
   });
 
   const [errors, setErrors] = useState<Partial<FormData>>({});
@@ -73,30 +44,11 @@ const CheckoutForm: React.FC<any> = (itemList) => {
       [name]: value,
     }));
   };
-
-  // handleCommentChange function is created by Copilot
-
-  const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleNesLetterChange = () => {
-    setFormData((prevData) => ({
-      ...prevData,
-      ["newsLetter"]: !prevData.newsLetter,
-    }));
-  };
   
-  
+  //NEW
   const [zipCode, setZipCode] = useState("");
-  const [city, setCity] = useState("");
-  const [validZipCodes, setValidZipCodes] = useState<ZipCode[]>([]);
-  const [term, setTerm] = useState(false);
-  const [termError, setTermError ] = useState("")
+    const [city, setCity] = useState("");
+    const [validZipCodes, setValidZipCodes] = useState<string[]>([]);
 
     useEffect(() => {
         getValidZipCodes();
@@ -110,9 +62,8 @@ const CheckoutForm: React.FC<any> = (itemList) => {
             errors.zipCode = "";
             setZipCode(value);
             if (value.length == 4){
-                var validZipCode = validZipCodes.find(z => z.nr == value)
-                if (validZipCode){
-                  setCity(validZipCode.navn);
+                if (validZipCodes.includes(value)){
+                    getCity(value)
                 }
                 else {
                     setCity("");
@@ -127,34 +78,26 @@ const CheckoutForm: React.FC<any> = (itemList) => {
     }
 
     async function getValidZipCodes(){
-        const url = `https://api.dataforsyningen.dk/postnumre`;
+        const url = `https://api.dataforsyningen.dk/postnumre/he`;
+        
         const response = await fetch(url);
         const zipCodes = (await response.json()) as [{
             nr: string;
-            navn: string;
-
         }];
-        setValidZipCodes(zipCodes);
+        setValidZipCodes(zipCodes.map(({ nr }) => nr));
     }
 
-    
-  function sendData(){
-    let body = JSON.stringify({
-      formData: formData,
-      items: itemList,
-    });
-    console.log(body);
-    fetch('https://eo333lwf2yoxfwu.m.pipedream.net', { // midlertidligt endpoint.
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: body
-    });
-  }
-  
-const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    async function getCity(zipCode: string){
+      const url = `https://api.dataforsyningen.dk/postnumre/he/${zipCode}`;
+      const response = await fetch(url);
+      const city = (await response.json()) as {
+          navn: string;
+      };
+      setCity(city.navn);
+    }
+      //NEW
+
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Simple validation
@@ -182,12 +125,9 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
       validationErrors.email = 'indtast en email';
     }
 
-  /* 
-  if (!formData.companyName.trim()) {
-    validationErrors.companyName = 'Foretningsnavn forventet';
-  }
-  */
-
+    if (!formData.companyName.trim()) {
+      validationErrors.companyName = 'Foretningsnavn forventet';
+    }
     if (!formData.country.trim()) {
       validationErrors.country = 'Land nødvendigt';
     }
@@ -197,7 +137,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     if (!/^\d{4}$/.test(formData.zipCode)) {
       validationErrors.zipCode = 'Postnummer skal være 4 cifre';
     }
-    if (!validZipCodes.find(z => z.nr == formData.zipCode)){
+    if (!validZipCodes.includes(formData.zipCode)){
       validationErrors.zipCode = "Ikke korrekt Postnummer";
     }
 
@@ -205,18 +145,11 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     if (!formData.city.trim()) {
       validationErrors.city = 'Postnummer forventet';
     }
+    //NEW
 
-    
-    if (term) {
-      setTermError("");
-    }
-    else {
-      setTermError("Feltet skal udfyldes.");
-    }
-   
-    
-
-
+    // if (formData.vatNumber && !/^\d{8}$/.test(formData.vatNumber)) {
+    //   validationErrors.vatNumber = 'VAT Number must be 8 digits';
+    // }
 
     setErrors(validationErrors);
 
@@ -225,25 +158,21 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 
     // Perform actions if the form is valid
     if (isValid) {
-      sendData();
       console.log('Form submitted successfully:', formData);
       // Redirect to the payment page
-
       navigate('/payment');
     }
   };
-  
-
 
   return (
     
-    <form onSubmit={handleFormSubmit} className="formStyling">
+    <form onSubmit={handleFormSubmit}>
 
 
       
       {/* Country */}
       <div>
-        <label htmlFor="country" style={{ marginBottom: '20px' }}>Land</label>
+        <label htmlFor="country">Land</label>
         <input
                 type="text"
                 id="country"
@@ -255,18 +184,16 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         </div>
 
       </div>
-
-     
     
       {/* ----------------------------- NAMES ----------------------------- */}
 
       <div className="name-fields">
     <div style={{ display: 'flex' }}>
-        <div style={{ width: '20%' }}>
+        <div style={{ width: '50%' }}>
             <label htmlFor="firstName">Fornavn</label>
         </div>
         
-        <div style={{ width: '100%' }}>
+        <div style={{ width: '50%' }}>
             <label htmlFor="lastName">Efternavn</label>
         </div>
     </div>
@@ -304,10 +231,10 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     {/* ----------------------------- ADDRESSES ----------------------------- */}
 
     <div style={{ display: 'flex' }}>
-      <div style={{ width: '25%' }}>
+      <div style={{ width: '50%' }}>
         <label>Adresse linje 1</label>
       </div>
-      <div style={{ width: '100%' }}>
+      <div style={{ width: '50%' }}>
         <label>Adresse linje 2</label>
       </div>
     </div>
@@ -334,16 +261,15 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
           onChange={handleInputChange}
         />
         </div>
-        </div>
-
+      </div>
 
     {/* ----------------------------- Phone and Email ----------------------------- */}
 
     <div style={{ display: 'flex' }}>
-      <div style={{ width: '10%' }}>
+      <div style={{ width: '50%' }}>
           <label>Telefonnummer</label>
         </div>
-        <div style={{ width: '100%' }}>
+        <div style={{ width: '50%' }}>
           <label>Email</label>
         </div>
       </div>
@@ -361,7 +287,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         </div>
       </div>
 
-      <div style={{ width: '120%' }}>
+      <div style={{ width: '50%' }}>
         
         <input
           type="email"
@@ -378,10 +304,10 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     {/* ----------------------------- CompanyName and VAT ----------------------------- */}
 
     <div style={{ display: 'flex' }}>
-      <div style={{ width: '35%' }}>
+      <div style={{ width: '50%' }}>
         <label>Virksomheds Navn</label>
       </div>
-      <div style={{ width: '100%' }}>
+      <div style={{ width: '50%' }}>
         <label>CVR</label>
       </div>
     </div>
@@ -415,11 +341,11 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
       </div>
 
       {/* ----------------------------- ZipCode and City ----------------------------- */}
-      <div style={{ display: 'flex'}}>
-              <div style={{ width: '20%' }}>
+      <div style={{ display: 'flex' }}>
+              <div style={{ width: '50%' }}>
                 <label>Postnummer</label>
               </div>
-              <div style={{ width: '100%' }}>
+              <div style={{ width: '50%' }}>
                 <label>By</label>
               </div>
             </div>
@@ -442,202 +368,19 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
           </div> 
         </div>
       
-       {/* ----------------------------- Optionel comment ----------------------------- */}
-        <p>
-       <label htmlFor="optionalComment    ">Optional Comment</label>
-        <br />
-        <textarea
-          cols={35}
-          rows={5}  
-          name="optionalComment"
-          value={formData.optionalComment}
-          onChange={handleCommentChange}
-        />
-        </p>
-
-      <div>
-        <input id="newsLetter" type="checkbox" checked={formData.newsLetter} onChange={handleNesLetterChange} ></input>
-        <label htmlFor="newsLetter">Tilmeld mig nyhedsbrevet</label>
-      </div>
-      
-      
-      <div>
-        <input id="term" type="checkbox" checked={term} onChange={() => setTerm(!term)}></input>
-        <label htmlFor="term">Jeg accepterer købs og forretningsbetingelser</label>
-        <div>
-          {termError && <span>{termError}</span>}
-        </div>
-      </div>
-
-      
       
 
-
-
-        {/*---------------------------------------------------------------*/}
-      
-    {/*
-        <h3>leverings adresse</h3>*/}
-
-
-{/* ----------------------------- deliveryNAMES ----------------------------- 
-
-<div className="deliveryname-fields">
-    <div style={{ display: 'flex' }}>
-        <div style={{ width: '50%' }}>
-            <label htmlFor="deliveryfirstName">Fornavn</label>
-        </div>
-        
-        <div style={{ width: '50%' }}>
-            <label htmlFor="deliverylastName">Efternavn</label>
-        </div>
-    </div>
-
-    <div style={{ display: 'flex' }}>
-        <div style={{ width: '50%' }}>
-            <input
-                type="text"
-                id="deliveryfirstName"
-                name="deliveryfirstName"
-                value={formData.deliveryFirstName}
-                onChange={handleInputChange}
-            />
-            <div> 
-                {errors.deliveryFirstName && <span>{errors.deliveryFirstName}</span>}
-            </div>
-        </div>
-
-        <div style={{ width: '50%' }}>
-            <input
-                type="text"
-                id="deliverylastName"
-                name="deliverylastName"
-                value={formData.deliveryLastName}
-                onChange={handleInputChange}
-            />
-            <div>
-                {errors.deliveryLastName && <span>{errors.deliveryLastName}</span>}
-            </div>
-        </div>
-    </div>
-</div>
-
-    
-    {/* ----------------------------- ADDRESSES ----------------------------- 
-
-    <div style={{ display: 'flex' }}>
-      <div style={{ width: '50%' }}>
-        <label>Adresse linje 1</label>
-      </div>
-      <div style={{ width: '50%' }}>
-        <label>Adresse linje 2</label>
-      </div>
-    </div>
-
-    <div style={{ display: 'flex' }}>    
-      <div style={{ width: '50%' }}>
-        <input
-          type="text"
-          name="deliveryaddressLine1"
-          value={formData.deliveryaddressLine1}
-          onChange={handleInputChange}
-        /> 
-        <div>
-        {errors.deliveryaddressLine1 && <span>{errors.deliveryaddressLine1}</span>}
-        </div>
-      </div>
-
-      
-      <div style={{ width: '50%' }}>
-        <input
-          type="text"
-          name="deliveryaddressLine2"
-          value={formData.deliveryaddressLine2}
-          onChange={handleInputChange}
-        />
-        </div>
-      </div>
-
-    {/* ----------------------------- Phone and Email ----------------------------- 
-
-    <div style={{ display: 'flex' }}>
-      <div style={{ width: '50%' }}>
-          <label>Telefonnummer</label>
-        </div>
-        <div style={{ width: '50%' }}>
-          <label>Email</label>
-        </div>
-      </div>
-
-      <div style={{ display: 'flex' }}>
-        <div style={{ width: '50%' }}>
-        <input
-          type="text"
-          name="deliveryphone"
-          value={formData.deliveryPhone}
-          onChange={handleInputChange}
-        />
-        <div>
-        {errors.deliveryPhone && <span>{errors.deliveryPhone}</span>}
-        </div>
-      </div>
-
-      <div style={{ width: '50%' }}>
-        
-        <input
-          type="deliveryemail"
-          name="deliveryemail"
-          value={formData.email}
-          onChange={handleInputChange}
-        />
-        <div>
-        {errors.email && <span>{errors.email}</span>}
-        </div>
-      </div>
-      </div>
-
-
-        {/* ----------------------------- ZipCode and City ----------------------------- 
-      <div style={{ display: 'flex' }}>
-              <div style={{ width: '50%' }}>
-                <label>Postnummer</label>
-              </div>
-              <div style={{ width: '50%' }}>
-                <label>By</label>
-              </div>
-            </div>
-
-
-        <div style={{ display: 'flex' }}>
-          <div style={{ width: '50%' }}>
-            <input type="text"value={zipCode} onChange={zipCodeChanged} ></input>
-            <div>
-              {errors.zipCode && <span>{errors.zipCode}</span>}
-            </div>
-          </div>
-
-
-          <div style={{ width: '50%' }}>
-            <input id="deliverycity" type="text" value={city} onChange={cityChange} ></input>
-            <div>
-              {errors.city && <span>{errors.city}</span>}
-            </div>
-          </div> 
-        </div>
-      
-*/}
       
       <button type="submit">
-        Til Betaling
+        Submit
       </button>
       <div>
         <Link to="/cart">
-          <button type = "submit">Tilbage til indkøbskurv</button>
+          <button type = "submit">Back to Cart</button>
         </Link>
       </div>
 
     </form>
-    
   );
 };
 

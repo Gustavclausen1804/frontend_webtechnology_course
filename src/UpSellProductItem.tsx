@@ -29,7 +29,7 @@ const UpSellProductItem: React.FC<UpSellProductItemProps> = ({ product, onAddToC
       </div>
       <div className="product-actions">
         { 
-          <><button onClick={handleReplaceInCart}>Replace in Cart</button><button onClick={handleAddToCart}>Add to Cart</button></>
+          <><button onClick={handleReplaceInCart}>Erstat i indkøbskurv</button><button onClick={handleAddToCart}>Tilføg til indkøbskurv</button></>
         }
       </div>
     </div>

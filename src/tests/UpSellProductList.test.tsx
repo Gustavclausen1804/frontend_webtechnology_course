@@ -7,7 +7,8 @@ import { products } from '../products';
 import userEvent from '@testing-library/user-event';
 
 describe('UpSellProductList', () => {
-    let cartItems: CartItem[];
+    let cartItems: CartItem[];//2
+    //printme
     let user: ReturnType<typeof userEvent.setup>;
     let mockOnAddToCart: Mock<[Product], void>;
     let mockOnReplaceInCart: Mock<[Product, Product], void>;
@@ -29,7 +30,7 @@ describe('UpSellProductList', () => {
 
     it('calls onReplaceInCart when replace in cart button is clicked', async () => {
         const { rerender } = render(<UpSellProductList cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
-        const replaceInCartButton = await screen.findByText('Replace in Cart');
+        const replaceInCartButton = await screen.findByText('Erstat i indkøbskurv');
         await user.click(replaceInCartButton);
 
         expect(mockOnReplaceInCart).toHaveBeenCalled();
@@ -42,7 +43,7 @@ describe('UpSellProductList', () => {
 
     it('calls onAddToCart when add to cart button is clicked', async () => {
         const { rerender } = render(<UpSellProductList cartItems={cartItems} onAddToCart={mockOnAddToCart} onReplaceInCart={mockOnReplaceInCart} />);
-        const addToCartButton = await screen.findByText('Add to Cart');
+        const addToCartButton = await screen.findByText('Tilføg til indkøbskurv');
         await user.click(addToCartButton);
 
         expect(mockOnAddToCart).toHaveBeenCalled();
