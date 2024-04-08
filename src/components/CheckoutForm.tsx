@@ -144,7 +144,7 @@ const CheckoutForm: React.FC<any> = (itemList) => {
       items: itemList,
     });
     console.log(body);
-    fetch('https://mywebsite.com/endpoint/', { // byttes med det rigtige end point
+    fetch('https://eo333lwf2yoxfwu.m.pipedream.net', { // midlertidligt endpoint.
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -182,9 +182,12 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
       validationErrors.email = 'indtast en email';
     }
 
-    if (!formData.companyName.trim()) {
-      validationErrors.companyName = 'Foretningsnavn forventet';
-    }
+  /* 
+  if (!formData.companyName.trim()) {
+    validationErrors.companyName = 'Foretningsnavn forventet';
+  }
+  */
+
     if (!formData.country.trim()) {
       validationErrors.country = 'Land nødvendigt';
     }
@@ -451,12 +454,6 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
           onChange={handleCommentChange}
         />
         </p>
-
-     
-      
-      
-      
-
 
       <div>
         <input id="newsLetter" type="checkbox" checked={formData.newsLetter} onChange={handleNesLetterChange} ></input>
