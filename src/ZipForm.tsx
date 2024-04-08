@@ -85,8 +85,6 @@ export function MyForm() {
 
 // Parent component that manages the state
 export function App() {
-  const [zipCode, setZipCode] = useState("");
-
   return (
     <div>
       <MyForm />
