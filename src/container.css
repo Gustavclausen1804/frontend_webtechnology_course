@@ -34,9 +34,22 @@
     min-width: 100px;
     text-align: right;
 }
+
+.product-price-discount {
+    min-width: 100px;
+    text-align: right;
+    color: rgb(36, 207, 59);
+}
+
+
 .product-total {
     min-width: 100px;
     text-align: right;
+}
+.product-total-discount {
+    min-width: 100px;
+    text-align: right;
+    color:rgb(36, 207, 59);
 }
 .frame{
      width: auto; /* eller en bredde efter dit valg */
@@ -48,10 +61,10 @@
 }
 
 .frameTot{
-    background-color: dark gray;/*white; */
-    width: 30vh; /* eller en bredde efter dit valg */
-   height: 12vh; /* eller en højde efter dit valg */
-   border: 1px solid #000; /* tilføj en ramme til boxen */
+
+    width: 35vh; /*  bredde  */
+   height: 12vh; /*  højde  */
+   border: 1px solid #000; /*  ramme  */
    margin: 10px;
    padding: 5px;
 }
@@ -90,3 +103,48 @@ table{
     box-shadow: 0 2px 4px rgba(0,0,0,.2);
     z-index: 1000; /* So the popup is above all other content */
   }
+
+  
+.frameTotprice {
+    display: right;
+    align-items: center;
+    color: black; /* Tekstfarve */
+    background-color: rgb(217, 228, 230); /* Baggrundsfarve */
+}
+
+
+.total-sum {
+    color: white; /* Tekstfarve */
+    background-color: dad7cd; /* Baggrundsfarve */
+}
+
+
+.total-rabat {
+    color: rgb(0, 0, 0); /* Tekstfarve */
+    background-color: hwb(56 22% 4% / 0.808); /* Baggrundsfarve */
+}
+
+.total-sum-med-rabat {
+    color: white; /* Tekstfarve */
+    background-color: rgb(36, 207, 59); /* Baggrundsfarve */
+}
+
+.ingen-rabat {
+    color: white; /* Tekstfarve */
+    background-color: red; /* Baggrundsfarve */
+}
+
+.total-sum-uden-rabat {
+    color: black; /* Tekstfarve */
+    background-color: rgb(217, 228, 230); /* Baggrundsfarve */
+}
+
+ 
+.frameDiscountInfo {
+    display: right;
+    align-items: right;
+    width: 350px;
+    height: 20px;
+    color: black; /* Tekstfarve */
+    background-color: hwb(56 22% 4% / 0.808); /* Baggrundsfarve */
+}

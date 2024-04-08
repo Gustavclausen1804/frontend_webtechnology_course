@@ -1,19 +1,28 @@
 import React from 'react';
 import { CartItem, Product  } from './types';
 import ProductItem from './ProductItem';
-import { useState } from 'react';
 import ShowTotalPrice from './showTotalPrice';
 import UpSellProductList from './UpSellProductsList';
+import { Link } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 type CartListProps = {
     items: CartItem[];
+    products: Product[];
+    itemList: CartItem[];
+    setItemList: React.Dispatch<React.SetStateAction<CartItem[]>>;
 };
 
 
 
-const CartList: React.FC<CartListProps> = ({ items }) => {
-  const [itemList, setItemList] = useState(items);
+const CartList: React.FC<CartListProps> = ( {items ,  products, itemList, setItemList } ) => {
+//  const [itemList, setItemList] = useState(items);
+//setItemList(itemList);
+ 
+
+//  console.log("CartList: ", items);
+
+ // console.log("CartList itemList: ", itemList);
 
   function delteItem(id: string) : void {
     setItemList(itemList.filter(item => item.product.name != id));
@@ -70,6 +79,8 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
   }
 
  // CharGPT har givet forslag til vordan det detekteres at kurven er tom og angive hvordan man vises begge situationer. Er efterføgnede tilrettet  
+ 
+ // CharGPT har givet forslag til vordan det detekteres at kurven er tom og angive hvordan man vises begge situationer. Er efterføgnede tilrettet  
   
   return (
     
@@ -97,16 +108,26 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
             onClickDelete={delteItem}
             productQuantity={item.quantity}
             onChangeAmount={setAmountOfProduct}
-
-
-            // Placeholder functions for now, you will replace them with actual implementations later
           />
         ))
         ) : (
         <p> Der er ingen varer i kurven</p>
         )}
+        
      
       </div>
+      <div style={{ textAlign: 'right' }}>
+      <h6> Når du har fået 10% mængderabat
+        er farven på prisen er <span style={{ color: 'rgb(36, 207, 59)' }}>grøn</span></h6>
+      </div>
+      <ShowTotalPrice totalPrice={getTotalPrice()} /> 
+      
+      <Link to="/checkout">
+                    <button>Proceed to Checkout</button>
+                </Link>
+
+      <UpSellProductList cartItems={itemList} products={products} onAddToCart={addItemToCart} onReplaceInCart={replaceItem}   />
+      
       <ShowTotalPrice totalPrice={getTotalPrice()} />
         <Link to="/checkout">
           <button>Gå til Registrering</button>
@@ -114,12 +135,14 @@ const CartList: React.FC<CartListProps> = ({ items }) => {
 
       <UpSellProductList cartItems={itemList} onAddToCart={addItemToCart} onReplaceInCart={replaceItem}   />
       
-
+     
    
       </div>
 
       </div> 
+      
    );
+   
   };
             
     

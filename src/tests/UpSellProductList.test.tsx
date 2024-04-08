@@ -1,6 +1,6 @@
 // Assuming CartItem, Product types are defined in your types file.
 import { CartItem, Product } from '../types'; 
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, vi, Mock } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import UpSellProductList from '../UpSellProductsList';
 import { products } from '../products';
@@ -9,8 +9,8 @@ import userEvent from '@testing-library/user-event';
 describe('UpSellProductList', () => {
     let cartItems: CartItem[];
     let user: ReturnType<typeof userEvent.setup>;
-    let mockOnAddToCart: vi.Mock<(product: Product) => void>;
-    let mockOnReplaceInCart: vi.Mock<(currentProduct: Product, newProduct: Product) => void>;
+    let mockOnAddToCart: Mock<[Product], void>;
+    let mockOnReplaceInCart: Mock<[Product, Product], void>;
 
     const upsellProduct: Product = products[products.length - 1];
 

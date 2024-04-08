@@ -34,6 +34,8 @@ const ProductItem: React.FC<ProductItemProps> = ({  name, price, onClickDelete, 
     return new Intl.NumberFormat('da-DK', { style: 'currency', currency: 'DKK' }).format(value);
   }
 
+  
+
   const displayPopup = productQuantity == 2 ? 'block' : 'none';
 
   
@@ -54,9 +56,14 @@ const ProductItem: React.FC<ProductItemProps> = ({  name, price, onClickDelete, 
       <div id="discountNudge" style={{ display: displayPopup }}>
         <p>Buy 3 of the same item to get a 10% discount!</p>
       </div>
-
-      <span className="product-price">{formatPrice(price * discount)}</span>
-      <span className="product-total">{formatPrice(price * productQuantity * discount)}</span>
+      <span className={discount === 1 ? "product-price" : "product-price-discount"}>{formatPrice(price * discount)}</span>
+      
+      <span className={discount === 1 ? "product-total" : "product-total-discount"}>
+  {formatPrice(price * productQuantity * discount)}
+</span>
+     
+  )
+      
     </div>
   );
 };
