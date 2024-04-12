@@ -15,7 +15,7 @@ interface ProductItemProps {
 const ProductItem: React.FC<ProductItemProps> = ({  name, price, imageUrl, rebateQuantity, rebatePercent, onClickDelete, productQuantity, onChangeAmount }) => {
   // TODO: Behøves ikke her, da vi har state i CartList. 
   
-  //simple lambda expression for if we have 3 or more products then we get a 10% discount
+  //simple lambda expression for if we have rebateQuantity or more products then we get a rebatePercent% discount
   const discount = productQuantity >= rebateQuantity ? 1-(rebatePercent/100) : 1;
   
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,7 +56,7 @@ const ProductItem: React.FC<ProductItemProps> = ({  name, price, imageUrl, rebat
         onChange={handleAmountChange}
       />
       <div id="discountNudge" style={{ display: displayPopup }}>
-        <p>Tilføj endnu en {name.split(",")[0]} til kurven for at spare 10%!</p>
+        <p>Tilføj endnu en {name.split(",")[0]} til kurven for at spare {rebatePercent}%!</p>
       </div>
       <span className={discount === 1 ? "product-price" : "product-price-discount"}>{formatPrice(price * discount)}</span>
       
