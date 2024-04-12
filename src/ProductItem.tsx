@@ -5,18 +5,18 @@ interface ProductItemProps {
   name: string;
   price: number;
   imageUrl: string;
+  rebatePercent: number;
+  rebateQuantity: number;
   onClickDelete: (name: string) => void;
   onChangeAmount: (name : string, amount: number) => void;
   productQuantity: number;
 }
 
-const ProductItem: React.FC<ProductItemProps> = ({  name, price, imageUrl, onClickDelete, productQuantity, onChangeAmount }) => {
-
+const ProductItem: React.FC<ProductItemProps> = ({  name, price, imageUrl, rebateQuantity, rebatePercent, onClickDelete, productQuantity, onChangeAmount }) => {
   // TODO: Behøves ikke her, da vi har state i CartList. 
-
   
   //simple lambda expression for if we have 3 or more products then we get a 10% discount
-  const discount = productQuantity >= 3 ? 0.9 : 1;
+  const discount = productQuantity >= rebateQuantity ? 1-(rebatePercent/100) : 1;
   
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let newAmount = Number(event.target.value);
@@ -26,6 +26,7 @@ const ProductItem: React.FC<ProductItemProps> = ({  name, price, imageUrl, onCli
     newAmount  = 99;
   }
       onChangeAmount(name, newAmount);
+      console.log(discount + ": "+ rebateQuantity);
     }
 
     
@@ -36,7 +37,7 @@ const ProductItem: React.FC<ProductItemProps> = ({  name, price, imageUrl, onCli
 
   
 
-  const displayPopup = productQuantity == 2 ? 'block' : 'none';
+  const displayPopup = (productQuantity == rebateQuantity-1 && rebateQuantity > 0 && productQuantity > 1) ? 'block' : 'none';
 
   
 
