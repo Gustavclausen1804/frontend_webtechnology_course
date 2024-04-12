@@ -4,8 +4,8 @@ export interface Product {
     price: number;
     imageUrl: string;
     currency: string;
-    rebateQuantity: number;
     rebatePercent: number;
+    rebateQuantity: number;
   //  quantityInStock: number;
     upsellProductId: string | null;
   }
