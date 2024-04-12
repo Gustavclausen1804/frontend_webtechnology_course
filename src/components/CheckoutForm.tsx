@@ -144,7 +144,7 @@ const CheckoutForm: React.FC<any> = (itemList) => {
       items: itemList,
     });
     console.log(body);
-    fetch('https://eo333lwf2yoxfwu.m.pipedream.net', { // midlertidligt endpoint.
+    fetch('http://dtu62597.eduhost.dk:10331/api', { // midlertidligt endpoint.
       method: 'POST',
       headers: {
         Accept: 'application/json',
