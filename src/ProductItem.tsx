@@ -15,9 +15,6 @@ interface ProductItemProps {
 const ProductItem: React.FC<ProductItemProps> = ({  name, price, imageUrl, rebateQuantity, rebatePercent, onClickDelete, productQuantity, onChangeAmount }) => {
   // TODO: Behøves ikke her, da vi har state i CartList. 
   
-
-  console.log(rebatePercent)
-
   //simple lambda expression for if we have 3 or more products then we get a 10% discount
   const discount = productQuantity >= rebateQuantity ? 1-(rebatePercent/100) : 1;
   
