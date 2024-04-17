@@ -39,7 +39,7 @@ function App() {
           //   console.log("Data fetched from Backend: ", data);
           // } else {
      //       const GithubProductData = await fetch('https://raw.githubusercontent.com/larsthorup/checkout-data/main/product-v2.json');
-     const GithubProductData = await fetch('http://dtu62597.eduhost.dk:10331/api2');
+     const GithubProductData = await fetch('http://dtu62597.eduhost.dk:10331/api');
             if (GithubProductData.ok) {
               const data = await GithubProductData.json();
               setProducts(data); // Update the state with data fetched from the API
