@@ -1,7 +1,7 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
   
-
+import FrontPage from './pages/FrontPage';
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import Payment from './pages/Payment'
@@ -63,8 +63,9 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-        
-        <Route index element={<Cart products={products} itemList={itemList} setItemList={setItemList} />} />       
+        <Route index element={<Cart products={products} itemList={itemList} setItemList={setItemList} />} /> 
+        <Route path="/" element={<FrontPage />} /> {/* add this line */}
+              
           <Route path="/cart" element = {<Cart products={products} itemList={itemList} setItemList={setItemList} />} />
           <Route path="/checkout" element = {<Checkout/>} />
           <Route path="/payment" element = {<Payment/>} />
