@@ -2,7 +2,7 @@ import Header from '../components/Header'
 import { useLocation } from 'react-router-dom';
 
 //import PostcodeInput from '../components/PostCodeInput';
-import CheckoutForm from '../components/CheckoutForm';
+import CheckoutForm from '../components/CheckOutComponents/CheckoutForm';
 
 
 

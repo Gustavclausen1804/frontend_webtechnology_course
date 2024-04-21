@@ -1,8 +1,8 @@
 // Assuming CartItem, Product types are defined in your types file.
-import { CartItem, Product } from '../types'; 
+import { CartItem, Product } from '../types/types'; 
 import { describe, it, expect, beforeEach, vi, Mock } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import UpSellProductList from '../UpSellProductsList';
+import UpSellProductList from '../components/UpsellProductComponents/UpSellProductsList';
 //import { products } from '../products';
 import productsData from '../data/products.json';
 import userEvent from '@testing-library/user-event';

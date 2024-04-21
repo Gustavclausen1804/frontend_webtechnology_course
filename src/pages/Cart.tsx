@@ -1,42 +1,32 @@
-import Header from '../components/Header'
+import React, { useEffect } from 'react';
+import Header from '../components/Header';
+import CartList from '../components/CartComponents/CartList';
+import { useAppDispatch } from '../hooks/useAppDispatch';
+import { useAppState } from '../hooks/useAppState';
 
-//import { products } from '../products'
-import { Product, CartItem } from '../types'
-import CartList from '../CartList'
-import { useEffect } from 'react';
+const Cart: React.FC = () => {
+    const { products, cartItems } = useAppState();
+    const dispatch = useAppDispatch();
 
-
-type CartProps = {
-    products: Product[];
-    itemList: CartItem[];
-    setItemList: React.Dispatch<React.SetStateAction<CartItem[]>>;
-  };
-  
-  const Cart: React.FC<CartProps> = ({ products , itemList, setItemList}) => {
-
-//export default function Cart(products: Product[]) {
     useEffect(() => {
-        // Initialize cart items only if itemList is empty
-        if (itemList.length === 0 && products.length > 0) {
-          const initialCartItems = products.slice(0, 11).map(product => ({
-            product: product,
-            quantity: 1,
-            giftWrap: false
-          }));
-          console.log("Initializing cart with new items:", initialCartItems);
-          setItemList(initialCartItems);
+        // Initialize cart items only if cart is empty and products are loaded
+        if (cartItems.length === 0 && products.length > 0) {
+            const initialCartItems = products.slice(0, 11).map(product => ({
+                product: product,
+                quantity: 1,
+                giftWrap: false
+            }));
+            dispatch({ type: 'INITIALIZE_CART', payload: initialCartItems });
         }
-      }, [products, setItemList]);
+    }, [products, dispatch, cartItems.length]); // Ensure useEffect has all dependencies it needs
+
     return (
         <>
-            <Header/>
+            <Header />
             <h2>Indkøbskurv</h2>
-            <>
-                <CartList items={itemList} products={products} itemList={itemList} setItemList={setItemList}></CartList>
-
-            </>
+            <CartList />
         </>
-    )
-}
+    );
+};
 
 export default Cart;

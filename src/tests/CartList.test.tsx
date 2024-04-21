@@ -1,7 +1,7 @@
 import { describe, beforeEach, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import CartList from '../CartList';
+import CartList from '../components/CartComponents/CartList';
 import products from '../data/products.json';
 
 

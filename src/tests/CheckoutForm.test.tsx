@@ -1,7 +1,7 @@
 import { describe, beforeEach, it, expect } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom'; // Import MemoryRouter
-import CheckoutForm from '../components/CheckoutForm';
+import CheckoutForm from '../components/CheckOutComponents/CheckoutForm';
 
 describe('CheckoutForm Component Tests', () => {
   beforeEach(async () => {

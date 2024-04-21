@@ -1,6 +1,6 @@
 // products.ts
-import { Product } from './types';
-import { CartItem } from './types';
+import { Product } from '../types/types';
+import { CartItem } from '../types/types';
 
 
 export function findProductById(productId: string, products: Product[]) : Product | undefined {

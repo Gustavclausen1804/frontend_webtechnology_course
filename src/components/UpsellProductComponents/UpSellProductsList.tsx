@@ -1,18 +1,14 @@
 import React from 'react';
-import UpSellProductItem from './UpSellProductItem'; // Adjust the import path as necessary
-import { CartItem, Product } from './types'; // Assuming the types are in a file named types.ts
-import {  findProductById } from './products'
-import './UpSell.css';
+import "../../styles/UpSell.css";
+import { useAppDispatch } from '../../hooks/useAppDispatch'; // Assuming this is the correct path
+import { Product } from '../../types/types';
+import { handleAddToCart, handleReplaceInCart } from '../../utils/cartService';
+import { useAppState } from '../../hooks/useAppState';
+import UpSellProductItem from './UpSellProductItem';
 
-
-interface UpSellProductListProps {
-  cartItems: CartItem[];
-  products: Product[];
-  onAddToCart: (product: Product) => void;
-  onReplaceInCart: (currentProduct: Product, newProduct : Product) => void;
-}
-
-const UpSellProductList: React.FC<UpSellProductListProps> = ({ cartItems, products, onAddToCart, onReplaceInCart }) => {
+const UpSellProductList: React.FC = () => {
+  const { cartItems, products } = useAppState();
+  const dispatch = useAppDispatch();
 
   const renderProductRows = (): JSX.Element[] => {
     const rows: JSX.Element[] = [];
@@ -20,10 +16,9 @@ const UpSellProductList: React.FC<UpSellProductListProps> = ({ cartItems, produc
     const eligibleUpsellProducts: Product[] = [];
 
     cartItems.forEach(cartItem => {
-
       const product = cartItem.product;
       if (product.upsellProductId) {
-        const upsellProduct = findProductById(product.upsellProductId, products);
+        const upsellProduct = products.find(p => p.id === product.upsellProductId);
         const isInCart = cartItems.some(item => item.product.id === upsellProduct?.id);
         const isAlreadyListed = eligibleUpsellProducts.some(item => item.id === upsellProduct?.id);
 
@@ -34,19 +29,18 @@ const UpSellProductList: React.FC<UpSellProductListProps> = ({ cartItems, produc
     });
 
     eligibleUpsellProducts.forEach((upsellProduct, index) => {
-        const originalCartItem = cartItems.find(item => item.product.upsellProductId === upsellProduct.id)?.product ?? upsellProduct;
+      const originalCartItem = cartItems.find(item => item.product.upsellProductId === upsellProduct.id)?.product ?? upsellProduct;
 
       rowItems.push(
         <UpSellProductItem
           key={upsellProduct.id}
           product={upsellProduct}
-          onAddToCart={() => onAddToCart(upsellProduct)}
-          onReplaceInCart={() => onReplaceInCart(originalCartItem, upsellProduct)}
+          onAddToCart={() => handleAddToCart(dispatch, upsellProduct)}
+          onReplaceInCart={(newProduct) => handleReplaceInCart(dispatch, originalCartItem, newProduct)}
           isInCart={false}
         />
       );
 
-      // If rowItems length reaches 5 or it's the last item, create a new row
       if (rowItems.length === 5 || index === eligibleUpsellProducts.length - 1) {
         rows.push(
           <div key={`row-${index}`} className="upsell-product-row">
@@ -62,15 +56,10 @@ const UpSellProductList: React.FC<UpSellProductListProps> = ({ cartItems, produc
 
   return (
     <div className="upsell-product-list">
-      <h2> Anbefalet Upgrades </h2>
+      <h2>Anbefalet Upgrades</h2>
       {renderProductRows()}
     </div>
   );
 };
 
-
 export default UpSellProductList;
-
-
-
-

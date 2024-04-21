@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
-import ShowTotalPrice from '../showTotalPrice.tsx'; 
+import ShowTotalPrice from '../components/CartComponents/showTotalPrice.tsx'; 
 
 // Foreslået af ChatGPT og derefter modificeret af Torben
 

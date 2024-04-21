@@ -1,6 +1,6 @@
 import React from 'react';
-import { Product } from './types'; // Assuming the types are in a file named types.ts
-import './UpSell.css';
+import "../../styles/UpSell.css";
+import { Product } from '../../types/types';
 
 
 interface UpSellProductItemProps {

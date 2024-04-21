@@ -1,7 +1,7 @@
 // products.test.ts
-import { Product } from '../types'; 
+import { Product } from '../types/types'; 
 import { describe, it, expect } from 'vitest';
-import { findProductById, isUpsellProductEligible } from '../products';
+import { findProductById, isUpsellProductEligible } from '../utils/products';
 import productsData from '../data/products.json';
 
 const products : Product[] = productsData;
