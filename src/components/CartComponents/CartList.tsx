@@ -27,13 +27,20 @@ const CartList: React.FC = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {cartItems.map((item) => (
+                {cartItems.length > 0  ? ( (cartItems.map((item) => (
                         <ProductItem
                             item={item}  
                         />
-                    ))}
+                    ))) ) : (
+                        <p> Der er ingen varer i kurven</p>
+                        )}
                 </tbody>
             </table>
+
+            <div style={{ textAlign: 'right' }}>
+            <h6> Når du har fået 10% mængderabat
+                er farven på prisen er <span style={{ color: 'rgb(36, 207, 59)' }}>grøn</span></h6>
+            </div>
             <ShowTotalPrice totalPrice={getTotalPrice( cartItems)} />
             <Link to="/checkout">
                 <button>Gå til registrering</button>
