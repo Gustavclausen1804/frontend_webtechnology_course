@@ -1,14 +1,14 @@
 import React from 'react';
 import "../../styles/UpSell.css";
-import { useAppDispatch } from '../../hooks/useAppDispatch'; // Assuming this is the correct path
+import { useCartDispatch } from '../../hooks/useAppDispatch'; // Assuming this is the correct path
 import { Product } from '../../types/types';
 import { handleAddToCart, handleReplaceInCart } from '../../utils/cartService';
-import { useAppState } from '../../hooks/useAppState';
+import { useCartState } from '../../hooks/useAppState';
 import UpSellProductItem from './UpSellProductItem';
 
 const UpSellProductList: React.FC = () => {
-  const { cartItems, products } = useAppState();
-  const dispatch = useAppDispatch();
+  const { cartItems, products } = useCartState();
+  const dispatch = useCartDispatch();
 
   const renderProductRows = (): JSX.Element[] => {
     const rows: JSX.Element[] = [];

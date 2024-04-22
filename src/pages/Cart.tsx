@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import CartList from '../components/CartComponents/CartList';
-import { useAppDispatch } from '../hooks/useAppDispatch';
-import { useAppState } from '../hooks/useAppState';
+import { useCartDispatch } from '../hooks/useAppDispatch';
+import { useCartState } from '../hooks/useAppState';
 
 const Cart: React.FC = () => {
-    const { products, cartItems } = useAppState();
-    const dispatch = useAppDispatch();
+    const { products, cartItems } = useCartState();
+    const dispatch = useCartDispatch();
 
     useEffect(() => {
         // Initialize cart items only if cart is empty and products are loaded

@@ -21,7 +21,6 @@ export const handleAddToCart = (dispatch: Dispatch<CartActions>, product: Produc
     });
 };
 
-
 export const handleReplaceInCart = (dispatch: Dispatch<CartActions>, currentProduct: Product, newProduct: Product) => {
     // First, remove the current product
     dispatch({

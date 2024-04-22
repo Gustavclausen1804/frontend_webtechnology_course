@@ -7,7 +7,7 @@ import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import Payment from './pages/Payment'
 import Receipt from './pages/Receipt'
-import { AppProvider } from './Context/appContext'
+import { CartProvider } from './Context/appContext'
 
 
 
@@ -17,7 +17,7 @@ import { AppProvider } from './Context/appContext'
 function App() { 
   return (
     <>
-      <AppProvider>
+      <CartProvider>
       <BrowserRouter>
         <Routes>
         
@@ -28,7 +28,7 @@ function App() {
           <Route path="/receipt" element = {<Receipt/>} />
         </Routes>
       </BrowserRouter>
-      </AppProvider>
+      </CartProvider>
     </> 
 
   )
