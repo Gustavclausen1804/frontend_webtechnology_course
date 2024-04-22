@@ -1,6 +1,9 @@
 import './App.css'
 import { useState, useEffect } from 'react';
 
+// npm run dev -- --port 5173
+// npm run dev -- --port 5174
+
 export default function Adress(){
     const [zipCode, setZipCode] = useState("");
     const [city, setCity] = useState("");
@@ -32,6 +35,7 @@ export default function Adress(){
         setCity(e.target.value);
     }
 
+    /*
     async function getValidZipCodes(){
         try {
             const url = `https://api.dataforsyningen.dk/postnumre`;
@@ -48,7 +52,67 @@ export default function Adress(){
             console.error('zip code ikke fundet.');
             // Handle error: display error message to the user, retry, etc.
         }
+    }*/
+    //
+    async function getValidZipCodes() {
+        try {
+            // Display loading icon
+            showLoadingIcon();
+
+            // Simulate error by using a non-existent URL
+            const url = `https://example.com/nonexistent`;
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`Zip code not found. Status: ${response.status}`);
+            }
+    
+            /*const url = `https://api.dataforsyningen.dk/postnumre`;
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`Zip code not found. Status: ${response.status}`);
+            }*/
+    
+            const zipCodes = await response.json() as [{
+                nr: string;
+            }];
+            // Assuming setValidZipCodes function exists and sets the zip codes
+            setValidZipCodes(zipCodes.map(({ nr }) => nr));
+    
+            // Hide loading icon after successful fetch
+            hideLoadingIcon();
+        } catch (error) {
+            console.error('Error fetching zip codes:', error);
+            // Display error message to the user
+            displayErrorMessage('Error fetching zip codes. Please try again later.');
+            // Hide loading icon on error
+            hideLoadingIcon();
+        }
     }
+    
+    function showLoadingIcon() {
+        const loadingIcon = document.getElementById('loading-icon');
+        if (loadingIcon) {
+            loadingIcon.style.display = 'block';
+        } else {
+            console.error('Loading icon not found.');
+        }
+    }
+    
+    function hideLoadingIcon() {
+        const loadingIcon = document.getElementById('loading-icon');
+        if (loadingIcon) {
+            loadingIcon.style.display = 'none';
+        } else {
+            console.error('Loading icon not found.');
+        }
+    }
+    
+    
+    function displayErrorMessage(message: string) {
+        // Implement logic to display error message to the user, e.g., show an alert
+        alert(message);
+    }
+//    
 
     async function getCity(zipCode: string){
         const url = `https://api.dataforsyningen.dk/postnumre/${zipCode}`;

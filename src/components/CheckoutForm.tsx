@@ -17,6 +17,7 @@ interface FormData {
   zipCode: string;
   country: string;
 
+  //delivery form
   deliveryCountry: string;
   deliveryFirstName: string;
   deliveryLastName: string;
@@ -24,12 +25,17 @@ interface FormData {
   deliveryaddressLine2: string;
   deliveryZipCode: string;
   deliveryCity: string;
+  deliveryEmail: string;
   deliveryPhone: string;
   
   newsLetter: boolean;
 }
 
 type ZipCode = {
+  nr: string;
+  navn: string;
+};
+type DeliveryZipCode = {
   nr: string;
   navn: string;
 };
@@ -58,6 +64,7 @@ const CheckoutForm: React.FC<any> = (itemList) => {
     deliveryZipCode: '',
     deliveryCity: '',
     deliveryPhone: '',
+    deliveryEmail: '',
      
   });
 
@@ -93,13 +100,20 @@ const CheckoutForm: React.FC<any> = (itemList) => {
   
   
   const [zipCode, setZipCode] = useState("");
+  const [deliveryZipCode, setDeliveryZipCode] = useState("");
+
   const [city, setCity] = useState("");
+  const [deliveryCity, setDeliveryCity] = useState("");
+
   const [validZipCodes, setValidZipCodes] = useState<ZipCode[]>([]);
+  const [validDeliveryZipCodes, setValidDeliveryZipCodes] = useState<DeliveryZipCode[]>([]);
+
   const [term, setTerm] = useState(false);
   const [termError, setTermError ] = useState("")
 
     useEffect(() => {
         getValidZipCodes();
+        getValidDeliveryZipCodes();
     }, []);
 
       // Used ai in the first if, to find the 
@@ -121,13 +135,33 @@ const CheckoutForm: React.FC<any> = (itemList) => {
             }
         }
     }
+    function deliveryZipCodeChanged(e : any){
+      var value = e.target.value;
+      if( /^\d{0,4}$/.test(value)){
+          errors.deliveryZipCode = "";
+          setDeliveryZipCode(value);
+          if (value.length == 4){
+              var validDeliveryZipCode = validDeliveryZipCodes.find(z => z.nr == value)
+              if (validDeliveryZipCode){
+                setDeliveryCity(validDeliveryZipCode.navn);
+              }
+              else {
+                  setDeliveryCity("");
+                  errors.deliveryZipCode = "Forkert Post Nummer";
+              }
+          }
+      }
+  }
 
     function cityChange(e : any){
         setCity(e.target.value);
     }
+    function deliveryCityChange(e : any){
+      setDeliveryCity(e.target.value);
+  }
 
     async function getValidZipCodes(){
-        const url = `https://api.dataforsyningen.dk/postnumre`;
+        const url = `https://api.dataforsyningen.dk/postnumr`;
         const response = await fetch(url);
         const zipCodes = (await response.json()) as [{
             nr: string;
@@ -136,6 +170,23 @@ const CheckoutForm: React.FC<any> = (itemList) => {
         }];
         setValidZipCodes(zipCodes);
     }
+
+    //
+
+    //
+
+
+
+    async function getValidDeliveryZipCodes(){
+      const url = `https://api.dataforsyningen.dk/postnumr`;
+      const response = await fetch(url);
+      const deliveryZipCodes = (await response.json()) as [{
+          nr: string;
+          navn: string;
+
+      }];
+      setValidDeliveryZipCodes(deliveryZipCodes);
+  }
 
     
   function sendData(){
@@ -202,6 +253,10 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     if (!formData.city.trim()) {
       validationErrors.city = 'Postnummer forventet';
     }
+    formData.deliveryCity = deliveryCity;
+    if (!formData.deliveryCity.trim()) {
+      validationErrors.deliveryCity = 'Postnummer forventet';
+    }
 
     
     if (term) {
@@ -231,6 +286,37 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
   };
   
 
+
+  // NEW
+  const InputField: React.FC<{
+    label: string;
+    name: keyof FormData;
+    value: string;
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    error: string | undefined;
+  }> = ({ label, name, value, onChange, error }) => (
+    <div style={{ display: 'flex', marginBottom: '10px' }}>
+      <div style={{ width: '20%', marginRight: '10px' }}>
+        <label htmlFor={name}>{label}</label>
+      </div>
+      <div style={{ flex: '1' }}>
+        <input type="text" id={name} name={name} value={value} onChange={onChange} />
+        <div>{error && <span>{error}</span>}</div>
+      </div>
+    </div>
+  );
+  
+  // Usage:
+  
+  
+  
+  
+  
+  
+  
+  // Repeat this for other fields like last name, address line 1, address line 2, phone, email, company name, and VAT.
+  
+  // NEW
 
   return (
     
@@ -330,8 +416,8 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
           value={formData.addressLine2}
           onChange={handleInputChange}
         />
-        </div>
-        </div>
+      </div>
+    </div>
 
 
     {/* ----------------------------- Phone and Email ----------------------------- */}
@@ -479,20 +565,20 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 
         {/*---------------------------------------------------------------*/}
       
-    {/*
-        <h3>leverings adresse</h3>*/}
+    {
+        <h3>leverings adresse</h3>}
 
 
-{/* ----------------------------- deliveryNAMES ----------------------------- 
+{/* ----------------------------- deliveryNAMES -----------------------------*/}
 
 <div className="deliveryname-fields">
     <div style={{ display: 'flex' }}>
         <div style={{ width: '50%' }}>
-            <label htmlFor="deliveryfirstName">Fornavn</label>
+            <label htmlFor="deliveryFirstName">Fornavn</label>
         </div>
         
         <div style={{ width: '50%' }}>
-            <label htmlFor="deliverylastName">Efternavn</label>
+            <label htmlFor="deliveryLastName">Efternavn</label>
         </div>
     </div>
 
@@ -500,8 +586,8 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         <div style={{ width: '50%' }}>
             <input
                 type="text"
-                id="deliveryfirstName"
-                name="deliveryfirstName"
+                id="deliveryFirstName"
+                name="deliveryFirstName"
                 value={formData.deliveryFirstName}
                 onChange={handleInputChange}
             />
@@ -513,8 +599,8 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         <div style={{ width: '50%' }}>
             <input
                 type="text"
-                id="deliverylastName"
-                name="deliverylastName"
+                id="deliveryLastName"
+                name="deliveryLastName"
                 value={formData.deliveryLastName}
                 onChange={handleInputChange}
             />
@@ -526,7 +612,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 </div>
 
     
-    {/* ----------------------------- ADDRESSES ----------------------------- 
+    {/* ----------------------------- ADDRESSES -----------------------------*/}
 
     <div style={{ display: 'flex' }}>
       <div style={{ width: '50%' }}>
@@ -561,7 +647,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         </div>
       </div>
 
-    {/* ----------------------------- Phone and Email ----------------------------- 
+    {/* ----------------------------- Phone and Email -----------------------------*/}
 
     <div style={{ display: 'flex' }}>
       <div style={{ width: '50%' }}>
@@ -575,8 +661,8 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
       <div style={{ display: 'flex' }}>
         <div style={{ width: '50%' }}>
         <input
-          type="text"
-          name="deliveryphone"
+          type="deliveryPhone"
+          name="deliveryPhone"
           value={formData.deliveryPhone}
           onChange={handleInputChange}
         />
@@ -588,19 +674,19 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
       <div style={{ width: '50%' }}>
         
         <input
-          type="deliveryemail"
-          name="deliveryemail"
-          value={formData.email}
+          type="deliveryEmail"
+          name="deliveryEmail"
+          value={formData.deliveryEmail}
           onChange={handleInputChange}
         />
         <div>
-        {errors.email && <span>{errors.email}</span>}
+        {errors.deliveryEmail && <span>{errors.deliveryEmail}</span>}
         </div>
       </div>
       </div>
 
 
-        {/* ----------------------------- ZipCode and City ----------------------------- 
+        {/* ----------------------------- ZipCode and City -----------------------------*/}
       <div style={{ display: 'flex' }}>
               <div style={{ width: '50%' }}>
                 <label>Postnummer</label>
@@ -613,22 +699,22 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 
         <div style={{ display: 'flex' }}>
           <div style={{ width: '50%' }}>
-            <input type="text"value={zipCode} onChange={zipCodeChanged} ></input>
+            <input type="text"value={deliveryZipCode} onChange={deliveryZipCodeChanged} ></input>
             <div>
-              {errors.zipCode && <span>{errors.zipCode}</span>}
+              {errors.deliveryZipCode && <span>{errors.deliveryZipCode}</span>}
             </div>
           </div>
 
 
           <div style={{ width: '50%' }}>
-            <input id="deliverycity" type="text" value={city} onChange={cityChange} ></input>
+            <input id="deliveryCity" type="text" value={deliveryCity} onChange={deliveryCityChange} ></input>
             <div>
-              {errors.city && <span>{errors.city}</span>}
+              {errors.deliveryCity && <span>{errors.deliveryCity}</span>}
             </div>
           </div> 
         </div>
       
-*/}
+
       
       <button type="submit">
         Til Betaling

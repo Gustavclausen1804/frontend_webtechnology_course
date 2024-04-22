@@ -87,6 +87,10 @@ const CheckoutForm: React.FC = () => {
         setValidZipCodes(zipCodes.map(({ nr }) => nr));
     }
 
+    //
+
+    //
+
     async function getCity(zipCode: string){
       const url = `https://api.dataforsyningen.dk/postnumre/he/${zipCode}`;
       const response = await fetch(url);
