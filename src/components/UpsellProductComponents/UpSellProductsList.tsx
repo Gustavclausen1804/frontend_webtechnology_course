@@ -56,7 +56,7 @@ const UpSellProductList: React.FC = () => {
 
   return (
     <div className="upsell-product-list">
-      <h2>Anbefalet Upgrades</h2>
+      <h2>Anbefalede opgraderinger</h2>
       {renderProductRows()}
     </div>
   );
