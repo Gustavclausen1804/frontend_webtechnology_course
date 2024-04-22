@@ -31,9 +31,12 @@ const CartList: React.FC = () => {
                 {cartItems.length > 0  ? ( (cartItems.map((item) => (
                         <ProductItem
                             item={item}  
+                            key={item.product.id}
                         />
                     ))) ) : (
-                        <p> Der er ingen varer i kurven</p>
+                        <tr>
+                        <td colSpan={6}>Der er ingen varer i kurven</td>
+                      </tr>
                         )}
                 </tbody>
             </table>
