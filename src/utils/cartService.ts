@@ -11,6 +11,7 @@ export const handleRemove = (dispatch: Dispatch<CartActions>, productId: string)
 };
 
 export const handleQuantityChange = (dispatch: Dispatch<CartActions>, productId: string, quantity: number) => {
+
     dispatch({ type: ActionTypes.UPDATE_ITEM_QUANTITY, payload: { productId, quantity } });
 };
 

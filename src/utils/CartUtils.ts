@@ -50,6 +50,17 @@ export function addItemToCart(cartItems: CartItem[], product: Product): CartItem
 }
 
 
+export function formatNumber (newAmount : number ): number { 
+    if (isNaN(newAmount) || newAmount < 0) {
+     newAmount = 0;
+  } else if (newAmount > 99 ) {
+    newAmount  = 99;
+  }
+
+  return newAmount;
+}
+
+
 export const formatPrice = (value: number, locale: string = 'da-DK', currency: string = 'DKK'): string => {
     return new Intl.NumberFormat(locale, { style: 'currency', currency }).format(value);
   };

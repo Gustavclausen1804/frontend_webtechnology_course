@@ -3,7 +3,7 @@ import '../../styles/container.css';
 import { CartItem } from '../../types/types';
 import { useCartDispatch } from '../../hooks/useAppDispatch';
 import { handleQuantityChange, handleRemove } from '../../utils/cartService';
-import { calculateDiscountedPrice, formatPrice, shouldShowDiscountNudge } from '../../utils/CartUtils';
+import { calculateDiscountedPrice, formatNumber, formatPrice, shouldShowDiscountNudge } from '../../utils/CartUtils';
 
 
 interface ProductItemProps {
@@ -19,6 +19,10 @@ const ProductItem: React.FC<ProductItemProps> = ({ item }) => {
   const displayPopup = shouldShowDiscountNudge(quantity, product.rebateQuantity) ? 'block' : 'none';
 
 
+
+  
+
+
   return (
  
   
@@ -31,7 +35,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ item }) => {
         type="number"  
         className="product-amount" 
         value={quantity} 
-        onChange={(e) => handleQuantityChange(dispatch, product.id, parseInt(e.target.value, 10))}
+        onChange={(e) => handleQuantityChange(dispatch, product.id, formatNumber(parseInt(e.target.value)))}
       />
       <div id="discountNudge" style={{ display: displayPopup }}>
       <p>Tilføj endnu en {product.name.split(",")[0]} til kurven for at spare {product.rebatePercent}%!</p>
