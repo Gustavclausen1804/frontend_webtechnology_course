@@ -20,7 +20,8 @@ const CartList: React.FC = () => {
                 <thead>
                     <tr>
                         <th className="slet">Slet</th>
-                        <th className="produkt">Produkt:</th>
+                        <th className='produktBillede'></th>
+                        <th className="produkt">Produkt Navn:</th>
                         <th className="antal">Antal:</th>
                         <th className="prispr">Pris pr. stk.:</th>
                         <th className="prisalt">Pris i alt:</th>

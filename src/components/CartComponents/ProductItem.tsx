@@ -26,27 +26,36 @@ const ProductItem: React.FC<ProductItemProps> = ({ item }) => {
   return (
  
   
-    <div className="product-item">
+    <tr className="product-item">
+    <td className="slet">
       <button className="delete-btn" onClick={() => handleRemove(dispatch, product.id)}>X</button>
-      {/* hvis img ikke får et billede vil den gøre sigselv gennemsnigtig for ikke at ødelægge vores tekst struktur*/}
-      <img src={product.imageUrl} alt={product.name} className="product-image" onError={e => e.currentTarget.style.opacity = '0'}/>
+    </td>
+    <td className='produktBillede'> <img src={product.imageUrl} alt={product.name} className="product-image" onError={(e) => e.currentTarget.style.opacity = '0'} /></td>
+    <td className="produkt">
       <span className="product-name">{product.name}</span>
-      <input 
-        type="number"  
-        className="product-amount" 
-        value={quantity} 
+    </td>
+    <td className="antal">
+      <input
+        type="number"
+        className="product-amount"
+        value={quantity}
         onChange={(e) => handleQuantityChange(dispatch, product.id, formatNumber(parseInt(e.target.value)))}
       />
-      <div id="discountNudge" style={{ display: displayPopup }}>
-      <p>Tilføj endnu en {product.name.split(",")[0]} til kurven for at spare {product.rebatePercent}%!</p>
-      </div>
+    </td>
+    <td className="prispr">
       <span className={quantity >= product.rebateQuantity ? "product-price-discount" : "product-price"}>
         {formatPrice(calculateDiscountedPrice(product.price, quantity, product.rebateQuantity, product.rebatePercent))}
       </span>
+    </td>
+    <td className="prisalt">
       <span className={quantity >= product.rebateQuantity ? "product-total-discount" : "product-total"}>
         {formatPrice(calculateDiscountedPrice(product.price, quantity, product.rebateQuantity, product.rebatePercent) * quantity)}
       </span>
-    </div>
+      <div id="discountNudge" style={{ display: displayPopup }}>
+        <p>Tilføj endnu en {product.name.split(",")[0]} til kurven for at spare {product.rebatePercent}%!</p>
+      </div>
+    </td>
+  </tr>
   );
 };
 
