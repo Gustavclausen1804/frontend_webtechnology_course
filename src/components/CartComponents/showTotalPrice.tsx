@@ -26,78 +26,37 @@ type ShowTotalPriceProps = {
       return rabat;
     }
 
-    if (totalPrice >= 300) {
       
-    return (
-
-          
-
-          <div className="frameTot">
-         
-        
-        <table>
-        <tbody>
-        <div className="frameTotprice">
-        
-                  <span>Ialt købes for: {totalPrice.toFixed(2)} DKK. </span> 
-              </div>
-              </tbody>
-              </table>
-              
-        <table>
-        <tbody>
-        <div className="total-rabat">
-        
-                  <span> 10% rabat. Sparet: {Rabat().toFixed(2)} DKK.</span> 
-              </div>
-              </tbody>
-              </table>
-              <table>
-        <tbody>
-        <div className="total-sum-med-rabat">
-        
-                  <span> Afregningspris: {totalPrisMedRabat().toFixed(2)} DKK.</span> 
-              </div>
-              </tbody>
-              </table>
-        </div>
-      
- 
-    );
-    }
-    else {
       return (
         <div className="frameTot">
-         
-        
-        <table>
-        <tbody>
-        <div className="frameTotprice">
-        
-                  <span>Ialt købes for: {totalPrice.toFixed(2)} DKK. </span> 
-              </div>
-              </tbody>
-              </table>
-              
-        <table>
-        <tbody>
-        <div className="ingen-rabat">
-        
-                  <span> Køb mindre end 300 kr. Ingen rabat</span> 
-              </div>
-              </tbody>
-              </table>
-              <table>
-        <tbody>
-        <div className="total-sum-uden-rabat">
-        
-                  <span> Afregningspris: {totalPrisMedRabat().toFixed(2)} DKK.</span> 
-              </div>
-              </tbody>
-              </table>
+          <table>
+            <tbody>
+              <tr className="frameTotprice">
+                <td>Total købes for:</td>
+                <td>{totalPrice.toFixed(2)} DKK</td>
+              </tr>
+              {totalPrice >= 300 && (
+                <>
+                  <tr className="total-rabat">
+                    <td>10% rabat. Sparet:</td>
+                    <td>{Rabat().toFixed(2)} DKK</td>
+                  </tr>
+                  <tr className="total-sum-med-rabat">
+                    <td>Afregningspris:</td>
+                    <td>{totalPrisMedRabat().toFixed(2)} DKK</td>
+                  </tr>
+                </>
+              )}
+              {totalPrice < 300 && (
+                <tr className="ingen-rabat">
+                  <td>Køb mindre end 300 kr. Ingen rabat</td>
+                  <td>Afregningspris: {totalPrisMedRabat().toFixed(2)} DKK</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
       );
-    } 
     
   };
             
@@ -105,4 +64,3 @@ type ShowTotalPriceProps = {
   export default ShowTotalPrice;
   
   
-
