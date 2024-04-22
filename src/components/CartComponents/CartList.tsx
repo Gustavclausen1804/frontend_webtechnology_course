@@ -42,8 +42,8 @@ const CartList: React.FC = () => {
             </table>
 
             <div style={{ textAlign: 'right' }}>
-            <h6> Når du har fået 10% mængderabat
-                er farven på prisen er <span style={{ color: 'rgb(36, 207, 59)' }}>grøn</span></h6>
+            <h6> Når du har fået mængderabat
+                er farven på prisen <span style={{ color: 'rgb(36, 207, 59)' }}>grøn</span></h6>
             </div>
             <ShowTotalPrice totalPrice={getTotalPrice( cartItems)} />
             <Link to="/checkout">
