@@ -64,8 +64,7 @@ function App() {
       <BrowserRouter>
         <Routes>
         <Route index element={<Cart products={products} itemList={itemList} setItemList={setItemList} />} /> 
-        <Route path="/" element={<FrontPage />} /> {/* add this line */}
-              
+                      
           <Route path="/cart" element = {<Cart products={products} itemList={itemList} setItemList={setItemList} />} />
           <Route path="/checkout" element = {<Checkout/>} />
           <Route path="/payment" element = {<Payment/>} />
