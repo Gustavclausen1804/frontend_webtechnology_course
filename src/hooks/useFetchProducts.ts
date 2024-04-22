@@ -1,7 +1,9 @@
 // src/hooks/useFetchProducts.js
 import { useEffect, useContext } from 'react';
-import { ActionTypes } from '../types/types';
+import { ActionTypes, Product } from '../types/types';
 import { CartDispatchContext } from '../Context/appContext';
+import productsJson from "../data/products.json"
+
 
 export const useFetchProducts = () => {
     const dispatch = useContext(CartDispatchContext);
@@ -12,14 +14,22 @@ export const useFetchProducts = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('http://dtu62597.eduhost.dk:10331/api');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                let products : Product[];
+                const backendData = await fetch('http://dtu62597.eduhost.dk:10331/api');
+                if (backendData.ok) {
+                    products = await backendData.json();
+                } else {
+                    const GithubProductData = await fetch('https://raw.githubusercontent.com/larsthorup/checkout-data/main/product-v2.json');
+                    if (GithubProductData.ok) {
+                        products = await GithubProductData.json();
+                        } else {
+                            throw new Error('Failed to fetch products from the backend server and Github.');
+                        }
                 }
-                const products = await response.json();
                 dispatch({ type: ActionTypes.SET_PRODUCTS, payload: products });
             } catch (error) {
-                console.error('Failed to fetch products:', error);
+                console.error('Failed to fetch products from the server. Using local data instead.', error);
+                dispatch({ type: ActionTypes.SET_PRODUCTS, payload: productsJson });
             }
         };
 
