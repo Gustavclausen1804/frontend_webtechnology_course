@@ -11,7 +11,7 @@ interface UpSellProductItemProps {
 }
 
 const UpSellProductItem: React.FC<UpSellProductItemProps> = ({ product, onAddToCart, onReplaceInCart }) => {
-  const { name, price, currency } = product;
+  const { name, price, currency, imageUrl } = product;
 
   const handleAddToCart = () => {
     onAddToCart(product);
@@ -24,6 +24,7 @@ const UpSellProductItem: React.FC<UpSellProductItemProps> = ({ product, onAddToC
   return (
     <div className="upsell-product-item">
       <div className="product-details">
+        <img className="upsell-product-item-image" src={imageUrl}  alt={name} />
         <span className="product-name">{name + " "}</span>
         <span className="product-price">{`${price} ${currency}`}</span>
       </div>
