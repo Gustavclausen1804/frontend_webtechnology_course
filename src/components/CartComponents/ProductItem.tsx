@@ -3,7 +3,7 @@ import '../../styles/container.css';
 import { CartItem } from '../../types/types';
 import { useCartDispatch } from '../../hooks/useAppDispatch';
 import { handleQuantityChange, handleRemove } from '../../utils/cartService';
-import { calculateDiscountedPrice, formatNumber, formatPrice, shouldShowDiscountNudge } from '../../utils/CartUtils';
+import { calculateDiscountedPrice, formatNumber, formatPrice, shouldShowDiscountNudge, shuoldProductBeDiscounted } from '../../utils/CartUtils';
 
 
 interface ProductItemProps {
@@ -43,12 +43,12 @@ const ProductItem: React.FC<ProductItemProps> = ({ item }) => {
       />
     </td>
     <td className="prispr">
-      <span className={quantity >= product.rebateQuantity ? "product-price-discount" : "product-price"}>
+      <span className={shuoldProductBeDiscounted(quantity, product.rebateQuantity) ? "product-price-discount" : "product-price"}>
         {formatPrice(calculateDiscountedPrice(product.price, quantity, product.rebateQuantity, product.rebatePercent))}
       </span>
     </td>
     <td className="prisalt">
-      <span className={quantity >= product.rebateQuantity ? "product-total-discount" : "product-total"}>
+      <span className={shuoldProductBeDiscounted(quantity, product.rebateQuantity) ? "product-total-discount" : "product-total"}>
         {formatPrice(calculateDiscountedPrice(product.price, quantity, product.rebateQuantity, product.rebatePercent) * quantity)}
       </span>
       <div id="discountNudge" style={{ display: displayPopup }}>

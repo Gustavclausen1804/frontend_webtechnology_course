@@ -68,6 +68,11 @@ export const formatPrice = (value: number, locale: string = 'da-DK', currency: s
   export const calculateDiscountedPrice = (price: number, quantity: number, rebateQuantity: number, rebatePercent: number): number => {
     return quantity >= rebateQuantity ? price * (1 - rebatePercent / 100) : price;
   };
+
+  export const shuoldProductBeDiscounted = (quantity: number, rebateQuantity: number): boolean => {
+    return quantity >= rebateQuantity && rebateQuantity > 1;
+  
+  }
   
   export const shouldShowDiscountNudge = (quantity: number, rebateQuantity: number): boolean => {
     return quantity === rebateQuantity - 1 && rebateQuantity > 0;
