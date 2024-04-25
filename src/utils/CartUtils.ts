@@ -9,7 +9,7 @@ export function deleteItem(cartItems: CartItem[], productId: string): CartItem[]
 export function getTotalPrice(cartItems: CartItem[]): number {
     let totalPrice = 0;
     cartItems.forEach(item => {
-        totalPrice += item.product.price * item.quantity;
+         totalPrice +=  calculateDiscountedTotalPrice(item.product.price, item.quantity, item.product.rebateQuantity, item.product.rebatePercent)
     });
     return totalPrice;
 }
@@ -67,6 +67,11 @@ export const formatPrice = (value: number, locale: string = 'da-DK', currency: s
   
   export const calculateDiscountedPrice = (price: number, quantity: number, rebateQuantity: number, rebatePercent: number): number => {
     return quantity >= rebateQuantity ? price * (1 - rebatePercent / 100) : price;
+  };
+
+   
+  export const calculateDiscountedTotalPrice = (price: number, quantity: number, rebateQuantity: number, rebatePercent: number): number => {
+    return quantity >= rebateQuantity ? quantity * price * (1 - rebatePercent / 100) : price;
   };
 
   export const shuoldProductBeDiscounted = (quantity: number, rebateQuantity: number): boolean => {
