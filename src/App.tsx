@@ -8,13 +8,20 @@ import Checkout from './pages/Checkout'
 import Payment from './pages/Payment'
 import Receipt from './pages/Receipt'
 import { CartProvider } from './Context/appContext'
-
+import { useEffect } from 'react';
 
 
 
   
 
 function App() { 
+  useEffect(() => {
+    const loadingElement = document.querySelector('p');
+    if (loadingElement) {
+      loadingElement.style.display = 'none';
+    }
+  }, []); 
+
   return (
     <>
       <CartProvider>
