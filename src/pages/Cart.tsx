@@ -3,7 +3,6 @@ import Header from '../components/Header';
 import CartList from '../components/CartComponents/CartList';
 import { useCartDispatch } from '../hooks/useAppDispatch';
 import { useCartState } from '../hooks/useAppState';
-import CheckoutForm from '../components/CheckoutForm';
 
 const Cart: React.FC = () => {
     const { products, cartItems } = useCartState();
@@ -26,7 +25,6 @@ const Cart: React.FC = () => {
             <Header />
             <h2>Indkøbskurv</h2>
             <CartList />
-            <CheckoutForm itemList={cartItems} />
         </>
     );
 };

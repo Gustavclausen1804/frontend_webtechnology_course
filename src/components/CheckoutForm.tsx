@@ -1,5 +1,4 @@
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
-//import { useCartState } from '../hooks/useAppState';
 
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -43,12 +42,8 @@ type DeliveryZipCode = {
   navn: string;
 };
 
-//const CheckoutForm: React.FC<{ itemList: CartItem[] }> = ({ itemList }) => {
-  const CheckoutForm: React.FC<any> = (itemList) => {
-//   const CheckoutForm: React.FC<any> = ()=>{ 
- //   const  { cartItems } = useCartState();
- //   const itemListSelected = cartItems;
-   const [formData, setFormData] = useState<FormData>({
+const CheckoutForm: React.FC<any> = (itemList) => {
+  const [formData, setFormData] = useState<FormData>({
     addressLine1: '',
     addressLine2: '',
     optionalComment: '',
