@@ -17,7 +17,7 @@ interface FormData {
   zipCode: string;
   country: string;
 
-  //delivery form
+  //delivery form//
   activateDeliveryAddress: boolean;
 
   deliveryCountry: string;
