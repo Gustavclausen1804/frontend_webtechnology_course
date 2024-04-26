@@ -148,16 +148,35 @@ const CheckoutForm: React.FC<any> = (itemList) => {
       items: itemList,
     });
     console.log(body);
-   // fetch('https://eo333lwf2yoxfwu.m.pipedream.net', { // midlertidligt endpoint.
-    fetch('http://dtu62597.eduhost.dk:10331/api', { // Back End.
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: body
-    });
-  }
+    const sendOrder = async () => {
+      try {
+       // fetch('https://eo333lwf2yoxfwu.m.pipedream.net', { // midlertidligt endpoint.
+       const response = await fetch('http://dtu62597.eduhost.dk:10331/api', { // Back End.
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: body
+       });
+
+       if (response.ok) {
+        console.log('Order sent to the server.');
+       } else {
+         console.error('Failed to send order to the the server.');
+       }
+       
+     } catch (error) {
+       console.error('Failed to send order to the the server.', error);
+//        dispatch({ type: ActionTypes.SET_PRODUCTS, payload: productsJson });
+
+      }
+  
+    }
+    
+    sendOrder();
+  };
+
 
   const handleActivateDeliveryAddressChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { checked } = event.target;
