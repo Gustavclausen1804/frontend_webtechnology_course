@@ -18,6 +18,8 @@ interface FormData {
   country: string;
 
   //delivery form
+  activateDeliveryAddress: boolean;
+
   deliveryCountry: string;
   deliveryFirstName: string;
   deliveryLastName: string;
@@ -55,6 +57,9 @@ const CheckoutForm: React.FC<any> = (itemList) => {
     zipCode: '',
     country: 'Denmark',
     newsLetter: false,
+
+    activateDeliveryAddress: false, // Add this line
+
 
     deliveryCountry: 'Denmark',
     deliveryFirstName: '',
@@ -172,7 +177,14 @@ const CheckoutForm: React.FC<any> = (itemList) => {
     }
 
     //
-
+    const handleActivateDeliveryAddressChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { checked } = event.target;
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        activateDeliveryAddress: checked,
+      }));
+    };
+    
     //
 
 
@@ -565,12 +577,22 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 
         {/*---------------------------------------------------------------*/}
       
-    {
-        <h3>leverings adresse</h3>}
+    {<h3>leverings adresse</h3>}
+
+    <div>
+      <input
+        id="activateDeliveryAddress"
+        type="checkbox"
+        checked={formData.activateDeliveryAddress}
+        onChange={handleActivateDeliveryAddressChange}
+      />
+      <label htmlFor="activateDeliveryAddress">Use different delivery address</label>
+    </div>
 
 
 {/* ----------------------------- deliveryNAMES -----------------------------*/}
-
+{formData.activateDeliveryAddress && (
+  <div>
 <div className="deliveryname-fields">
     <div style={{ display: 'flex' }}>
         <div style={{ width: '50%' }}>
@@ -724,8 +746,11 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
           <button type = "submit">Tilbage til indkøbskurv</button>
         </Link>
       </div>
+    </div>
+)}
 
     </form>
+    
     
   );
 };
