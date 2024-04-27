@@ -5,12 +5,10 @@ import UpSellProductList from '../UpsellProductComponents/UpSellProductsList';
 import { Link } from 'react-router-dom';
 import { getTotalPrice } from '../../utils/CartUtils';
 import { useCartState } from '../../hooks/useAppState';
-import { useFetchProducts } from '../../hooks/useFetchProducts';
 
 const CartList: React.FC = () => {
     const { cartItems } = useCartState();
 
-    useFetchProducts();
 
 
 
