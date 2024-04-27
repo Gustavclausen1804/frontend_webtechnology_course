@@ -51,8 +51,8 @@ export function addItemToCart(cartItems: CartItem[], product: Product): CartItem
 
 
 export function formatNumber (newAmount : number ): number { 
-    if (isNaN(newAmount) || newAmount < 0) {
-     newAmount = 0;
+    if (isNaN(newAmount) || newAmount <= 0) {
+     newAmount = 1;
   } else if (newAmount > 99 ) {
     newAmount  = 99;
   }
@@ -80,5 +80,5 @@ export const formatPrice = (value: number, locale: string = 'da-DK', currency: s
   }
   
   export const shouldShowDiscountNudge = (quantity: number, rebateQuantity: number): boolean => {
-    return quantity === rebateQuantity - 1 && rebateQuantity > 0;
+    return quantity === rebateQuantity - 1 && rebateQuantity > 0 && quantity > 1;
   };
