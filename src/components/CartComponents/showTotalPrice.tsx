@@ -33,7 +33,7 @@ type ShowTotalPriceProps = {
             <tbody>
               <tr className="frameTotprice">
                 <td>Total købes for:</td>
-                <td>{totalPrice.toFixed(2)} DKK</td>
+                <td id="total-price-before-discount">{totalPrice.toFixed(2)} DKK</td>
               </tr>
               {totalPrice >= 300 && (
                 <>

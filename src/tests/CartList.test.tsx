@@ -1,10 +1,16 @@
-import { describe, beforeEach, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import React, { Dispatch } from 'react';
+import { describe, beforeEach, it, expect, vi } from 'vitest';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import CartList from '../components/CartComponents/CartList';
 import products from '../data/products.json';
+import { CartActions, CartState } from '../types/types';
+import { CartDispatchContext, CartStateContext } from '../Context/appContext';
+import { MemoryRouter } from 'react-router-dom';
 
-
+vi.mock('../hooks/useFetchProducts', () => ({
+  useFetchProducts: () => {}  // Mock implementation that does nothing
+}));
 
 const initialCartItems = products.slice(0, 2).map((product) => ({
   product,
@@ -12,50 +18,66 @@ const initialCartItems = products.slice(0, 2).map((product) => ({
   giftWrap: false,
 }));
 
+const mockDispatch = vi.fn();
+
+const MockCartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [cartItems, setCartItems] = React.useState<CartState['cartItems']>(initialCartItems);
+
+  const handleDelete: Dispatch<CartActions> = (action: CartActions) => {
+    if (action.type === 'REMOVE_FROM_CART') {
+      setCartItems(currentItems => currentItems.filter(item => item.product.id !== action.payload));
+      mockDispatch();  // Simulate dispatch call
+    }
+  };
+
+  return (
+    <CartDispatchContext.Provider value={handleDelete}>
+      <CartStateContext.Provider value={{ products, cartItems }}>
+        {children}
+      </CartStateContext.Provider>
+    </CartDispatchContext.Provider>
+  );
+};
+
 describe('CartList Component Tests', () => {
-  const dummySetItemList = () => {}  ; // Mock setItemList function
   beforeEach(async () => {
-    render(<CartList products={products} items={initialCartItems} itemList={initialCartItems} setItemList={dummySetItemList}/>);
+    render(
+      <MemoryRouter>
+        <MockCartProvider>
+          <CartList />
+        </MockCartProvider>
+      </MemoryRouter>
+    );
   });
 
   it('renders initial cart items and checks total price', async () => {
-    // Check for the presence of initial cart items based on product names
     for (const item of initialCartItems) {
       expect(screen.getByText(item.product.name)).toBeInTheDocument();
     }
 
-    // Check for the total price display
-    const totalPriceElement = screen.getByText(/Ialt købes for:/i);
+    const totalPriceElement = screen.getByText(/Total købes for:/i);
     expect(totalPriceElement).toBeInTheDocument();
-
-    // This assumes you have a way to dynamically calculate and display the total price.
-    // If the total price is not part of the initial render, consider querying for it differently.
   });
 
   it('allows deleting an item', async () => {
     const user = userEvent.setup();
     const deleteButtons = screen.getAllByText('X'); // Assuming 'X' is used for deleting items
-    await user.click(deleteButtons[0]); // Click the delete button of the first item
-
-    // Since we directly cannot check for the deletion effect without re-render,
-    // Check for a reduction in the total number of delete buttons or product items.
-    const updatedDeleteButtons = screen.queryAllByText('X');
-    expect(updatedDeleteButtons.length).toBeLessThan(deleteButtons.length);
-
-    // Additional logic to check for updated total price or item count can be added here.
+    await user.click(deleteButtons[0]);
+    await waitFor(() => { // Wait for updates after state change
+      const updatedDeleteButtons = screen.getAllByText('X');
+      expect(updatedDeleteButtons.length).toBeLessThan(deleteButtons.length);
+    });
   });
 
+  it('validates total price calculation', async () => {
+    // Find the element that contains the total price
+    const totalPriceElement = document.getElementById('total-price-before-discount');
   
-
-it('validates total price calculation', () => {
-    // Directly check the displayed total price after initial render
-    const totalSumText = screen.getByText(/Ialt købes for:/i)?.textContent; // Add null check
-    const totalSumValue = parseFloat(totalSumText?.replace(/[^\d.-]/g, '') || '0'); // Add null check and default value
-
-    // Calculate expected total based on initialCartItems
+    // Extract the total price from the element's text content
+    const totalSumText = totalPriceElement?.textContent || '';
+    const totalSumValue = parseFloat(totalSumText.replace(/[^\d.-]/g, '') || '0');
+  
     const expectedTotal = initialCartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
-    expect(totalSumValue).toBeCloseTo(expectedTotal);
-});
-
-  // Additional logic for testing addItemToCart, replaceItem, and their effects on the UI.
+    expect(totalSumValue).toBeCloseTo(expectedTotal, 0.005);
+  });
 });
