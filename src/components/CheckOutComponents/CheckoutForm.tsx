@@ -229,10 +229,6 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
       setTermError("Feltet skal udfyldes.");
     }
    
-    
-
-
-
     setErrors(validationErrors);
 
     // Check if there are no validation errors
