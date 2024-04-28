@@ -21,6 +21,7 @@
     gap: 10px; /* Space between items */
     padding-left: 10px; /* Ensures content aligns to the left, including single items */
     width: 100%; /* Ensures row takes full width of its container */
+    max-width: 1000px;
   }
   
   /* Styles for each upsell product item */
@@ -32,9 +33,9 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start; /* Aligns item content to the left */
-    width: calc(25% - 10px); /* Adjust width to fit 4 items per row */
+    flex: 0 1 calc(33% - 30px); /* Adjust width to fit 3 items per row, taking into account the gap */
     min-height: 150px;
-    min-width: 350px; /* Ensures items don't become too narrow */
+    min-width: 325px; /* Ensures items don't become too narrow */
     margin-bottom: 10px; /* Space below each item */
   }
   
