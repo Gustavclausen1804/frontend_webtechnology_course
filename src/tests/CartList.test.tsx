@@ -51,8 +51,17 @@ describe('CartList Component Tests', () => {
   });
 
   it('renders initial cart items and checks total price', async () => {
+    const productCells = document.querySelectorAll('td.produkt');
+
     for (const item of initialCartItems) {
-      expect(screen.getByText(item.product.name)).toBeInTheDocument();
+      // Find product name within each cell using Array.from to iterate over NodeList
+      let found = false;
+      Array.from(productCells).forEach(cell => {
+        if (cell.textContent && cell.textContent.includes(item.product.name)) {
+          found = true;
+        }
+      });
+      expect(found).toBeTruthy(); // Ensure that each product name is indeed found within some 'produkt' classed td
     }
 
     const totalPriceElement = screen.getByText(/Total købes for:/i);

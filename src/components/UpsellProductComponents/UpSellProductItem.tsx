@@ -5,14 +5,15 @@ import { Product } from '../../types/types';
 
 interface UpSellProductItemProps {
   product: Product;
+  replacementProduct: Product;
   onAddToCart: (product: Product) => void;
   onReplaceInCart: (currentProduct: Product) => void;
   isInCart: boolean; // Indicates if the product is already in the cart
 }
 
-const UpSellProductItem: React.FC<UpSellProductItemProps> = ({ product, onAddToCart, onReplaceInCart }) => {
+const UpSellProductItem: React.FC<UpSellProductItemProps> = ({ product, replacementProduct, onAddToCart, onReplaceInCart }) => {
   const { name, price, currency, imageUrl } = product;
-
+ 
   const handleAddToCart = () => {
     onAddToCart(product);
   };
@@ -30,7 +31,7 @@ const UpSellProductItem: React.FC<UpSellProductItemProps> = ({ product, onAddToC
       </div>
       <div className="product-actions">
         { 
-          <><button onClick={handleReplaceInCart}>Erstat i indkøbskurv</button><button onClick={handleAddToCart}>Tilføg til indkøbskurv</button></>
+          <><button onClick={handleReplaceInCart}>Erstat <em>{replacementProduct.name}</em> i indkøbskurven</button><button onClick={handleAddToCart}>Tilføg til indkøbskurv</button></>
         }
       </div>
     </div>

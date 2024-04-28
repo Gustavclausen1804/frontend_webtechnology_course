@@ -34,6 +34,7 @@ const UpSellProductList: React.FC = () => {
       rowItems.push(
         <UpSellProductItem
           key={upsellProduct.id}
+          replacementProduct={originalCartItem}
           product={upsellProduct}
           onAddToCart={() => handleAddToCart(dispatch, upsellProduct)}
           onReplaceInCart={(newProduct) => handleReplaceInCart(dispatch, originalCartItem, newProduct)}

@@ -16,7 +16,7 @@ const Cart: React.FC = () => {
 
         // Initialize cart items only if cart is empty and products are loaded
         if (cartItems.length === 0 && products.length > 0 && !isCartInitalized) {
-            const initialCartItems = products.slice(0, 11).map(product => ({
+            const initialCartItems = products.slice(0, 12).map(product => ({
                 product: product,
                 quantity: 1,
                 giftWrap: false
