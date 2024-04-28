@@ -54,11 +54,16 @@ const UpSellProductList: React.FC = () => {
 
     return rows;
   };
+  const upsellProductRows = renderProductRows();
 
   return (
     <div className="upsell-product-list">
-      <h2>Anbefalede opgraderinger</h2>
-      {renderProductRows()}
+      {upsellProductRows.length > 0 && (
+        <>
+          <h2>Anbefalede opgraderinger</h2>
+          {upsellProductRows}
+        </>
+      )}
     </div>
   );
 };
