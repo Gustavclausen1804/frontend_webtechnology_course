@@ -355,46 +355,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     
       {/* ----------------------------- NAMES ----------------------------- */}
 
-      <div className="name-fields">
-    <div style={{ display: 'flex' }}>
-        <div style={{ width: '20%' }}>
-            <label htmlFor="firstName">Fornavn</label>
-        </div>
-        
-        <div style={{ width: '100%' }}>
-            <label htmlFor="lastName">Efternavn</label>
-        </div>
-    </div>
-
-    <div style={{ display: 'flex' }}>
-        <div style={{ width: '50%' }}>
-            <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleInputChange}
-            />
-            <div> 
-                {errors.firstName && <span>{errors.firstName}</span>}
-            </div>
-        </div>
-
-        <div style={{ width: '50%' }}>
-            <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleInputChange}
-            />
-            <div>
-                {errors.lastName && <span>{errors.lastName}</span>}
-            </div>
-        </div>
-    </div>
-</div>
-
+    
     
     {/* ----------------------------- ADDRESSES ----------------------------- */}
 

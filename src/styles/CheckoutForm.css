@@ -1,0 +1,22 @@
+.checkoutinformation-fields {
+    display: flex;
+    flex-direction: row; 
+}
+
+.checkoutinformation-fields > div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.checkoutinformation-fields > div > div {
+    width: 50%;
+}
+
+.checkoutinformation-fields label {
+    margin-right: 10px; /* Adjust margin as needed */
+}
+
+.checkboxes > div {
+    align-items: end;
+}
