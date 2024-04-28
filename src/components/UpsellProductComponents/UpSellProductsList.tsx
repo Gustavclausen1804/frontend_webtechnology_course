@@ -42,7 +42,7 @@ const UpSellProductList: React.FC = () => {
         />
       );
 
-      if (rowItems.length === 5 || index === eligibleUpsellProducts.length - 1) {
+      if (index === eligibleUpsellProducts.length - 1) {
         rows.push(
           <div key={`row-${index}`} className="upsell-product-row">
             {rowItems}
