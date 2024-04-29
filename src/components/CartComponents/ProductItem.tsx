@@ -30,7 +30,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ item }) => {
     <td className="slet">
       <button className="delete-btn" onClick={() => handleRemove(dispatch, product.id)}>X</button>
     </td>
-    <td className='produktBillede'> <img src={product.imageUrl} alt={product.name} className="product-image" onError={(e) => e.currentTarget.style.opacity = '0'} /></td>
+    <td className='produktBillede'> <img src={product.imageUrl} alt={product.name} className="product-image" onError={(e) => e.currentTarget.style.opacity = '0'} width={50} height={50} /></td>
     <td className="produkt">
       <span className="product-name">{product.name}</span>
     </td>

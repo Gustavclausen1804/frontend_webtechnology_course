@@ -27,7 +27,7 @@ const UpSellProductItem: React.FC<UpSellProductItemProps> = ({ product, replacem
   return (
     <div className="upsell-product-item">
       <div className="product-details">
-        <img className="upsell-product-item-image" src={imageUrl}  alt={name} />
+        <img loading="lazy" className="upsell-product-item-image" src={imageUrl}  alt={name} />
         <span className="product-name">{name + " "}</span>
         <span className="product-price">{`${price} ${currency}`}</span>
       </div>

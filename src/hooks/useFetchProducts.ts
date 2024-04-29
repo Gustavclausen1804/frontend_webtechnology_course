@@ -6,7 +6,7 @@ import { shoppingReducer } from '../assets/Reducer/shoppingReducer';
 const initialState: ShoppingState = {
     products: [],
     cartItems: [],
-    loading: false,
+    loading: true,
     error: null
 };
 
