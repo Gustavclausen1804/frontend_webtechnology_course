@@ -114,7 +114,7 @@ const CheckoutForm: React.FC<any> = () => {
 
       // Used ai in the first if, to find the 
       // right regex to the zip code formular for danish zip codes
-    function zipCodeChanged(e : any){
+    function zipCodeChanged(e : React.ChangeEvent<HTMLInputElement>){
         var value = e.target.value;
         if( /^\d{0,4}$/.test(value)){
             errors.zipCode = "";
@@ -132,7 +132,7 @@ const CheckoutForm: React.FC<any> = () => {
         }
     }
 
-    function cityChange(e : any){
+    function cityChange(e : React.ChangeEvent<HTMLInputElement>){
         setCity(e.target.value);
     }
 
