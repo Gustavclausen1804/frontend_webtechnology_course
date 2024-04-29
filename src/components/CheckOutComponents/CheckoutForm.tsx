@@ -421,21 +421,21 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     <div>
       <div className="checkoutinformation-fields">
          <div>
-            <label htmlFor="deliveryfirstName">Fornavn</label>
-            <input type="text"id="deliveryfirstName"name="deliveryfirstName"value={formData.deliveryFirstName} onChange={handleInputChange}/>
+            <label htmlFor="deliveryFirstName">Fornavn</label>
+            <input type="text"id="deliveryFirstName"name="deliveryFirstName"value={formData.deliveryFirstName} onChange={handleInputChange}/>
            <div> 
              {errors.deliveryFirstName && <span>{errors.deliveryFirstName}</span>}
             </div>
          </div>
 
          <div>
-           <label htmlFor="deliverylastName">Efternavn</label>
-           <input type="text"id="deliverylastName" name="deliverylastName"value={formData.deliveryLastName}onChange={handleInputChange}/>
+           <label htmlFor="deliveryLastName">Efternavn</label>
+           <input type="text"id="deliverylastName" name="deliveryLastName"value={formData.deliveryLastName}onChange={handleInputChange}/>
            <div>
              {errors.deliveryLastName && <span>{errors.deliveryLastName}</span>}
             </div>
           </div>
-      </div>
+      </div> 
 
       {/* ----------------------------- ADDRESSES -----------------------------*/} 
 
@@ -462,18 +462,18 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
       <div className="checkoutinformation-fields">
         <div>
           <label htmlFor="deliveryphone">Telefonnummer</label>
-          <input type="text"name="deliveryphone"value={formData.deliveryPhone}onChange={handleInputChange}/>
+          <input type="text"name="deliveryPhone"value={formData.deliveryPhone}onChange={handleInputChange}/>
           <div>
             {errors.deliveryPhone && <span>{errors.deliveryPhone}</span>}
           </div>
         </div>
 
         <div>
-          <label htmlFor="deliveryemail">Email</label>
-          <input type="email"name="deliveryemail"value={formData.email}onChange={handleInputChange}/>
+          <label htmlFor="email">Email</label>
+          <input type="email"name="email"value={formData.email}onChange={handleInputChange}/>
           <div>
             {errors.email && <span>{errors.email}</span>}
-          </div>
+          </div>s
         </div>
       </div>
 
