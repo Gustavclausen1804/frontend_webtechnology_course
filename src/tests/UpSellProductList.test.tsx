@@ -3,7 +3,6 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render as rtlRender, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {  CartState, CartItem, CartActions } from '../types/types';
-
 import productsData from '../data/products.json';
 import UpSellProductList from '../components/UpsellProductComponents/UpSellProductsList';
 import { CartStateContext, CartDispatchContext } from '../Context/appContext';

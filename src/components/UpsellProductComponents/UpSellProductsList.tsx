@@ -4,7 +4,7 @@ import { useCartState } from '../../hooks/useAppState';
 import UpSellProductItem from './UpSellProductItem';
 
 import { Product } from '../../types/types';
-import { findEligibleUpsellProducts, findOriginalCartItem } from '../../utils/products';
+import { findEligibleUpsellProducts, findOriginalCartItem } from '../../utils/ProductsUtils';
 
 const UpSellProductList: React.FC = () => {
   const { cartItems, products } = useCartState();
