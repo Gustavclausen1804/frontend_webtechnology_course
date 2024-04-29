@@ -17,11 +17,10 @@
   .upsell-product-row {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start; /* Align items to the start (left) */
-    gap: 10px; /* Space between items */
-    padding-left: 10px; /* Ensures content aligns to the left, including single items */
+    justify-content: center; /* Align items to the start (left) */
+    gap: 40px; /* Space between items */
     width: 100%; /* Ensures row takes full width of its container */
-    max-width: 1000px;
+    max-width: 1100px;
   }
   
   /* Styles for each upsell product item */
