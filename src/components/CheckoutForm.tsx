@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
+/*import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -297,7 +297,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
       // Redirect to the payment page
 
       navigate('/payment');
-    }*/
+    }*//*
   };
   
 
@@ -339,7 +339,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 
 
       
-      {/* Country */}
+      {/* Country *//*}
       <div>
         <label htmlFor="country" style={{ marginBottom: '20px' }}>Land</label>
         <input
@@ -356,7 +356,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 
      
     
-      {/* ----------------------------- NAMES ----------------------------- */}
+      {/* ----------------------------- NAMES ----------------------------- *//*}
 
       <div className="name-fields">
     <div style={{ display: 'flex' }}>
@@ -399,7 +399,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 </div>
 
     
-    {/* ----------------------------- ADDRESSES ----------------------------- */}
+    {/* ----------------------------- ADDRESSES ----------------------------- *//*}
 
     <div style={{ display: 'flex' }}>
       <div style={{ width: '25%' }}>
@@ -435,7 +435,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     </div>
 
 
-    {/* ----------------------------- Phone and Email ----------------------------- */}
+    {/* ----------------------------- Phone and Email ----------------------------- *//*}
 
     <div style={{ display: 'flex' }}>
       <div style={{ width: '10%' }}>
@@ -473,7 +473,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
       </div>
       </div>
 
-    {/* ----------------------------- CompanyName and VAT ----------------------------- */}
+    {/* ----------------------------- CompanyName and VAT ----------------------------- *//*}
 
     <div style={{ display: 'flex' }}>
       <div style={{ width: '35%' }}>
@@ -512,7 +512,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
       </div>
       </div>
 
-      {/* ----------------------------- ZipCode and City ----------------------------- */}
+      {/* ----------------------------- ZipCode and City ----------------------------- *//*}
       <div style={{ display: 'flex'}}>
               <div style={{ width: '20%' }}>
                 <label>Postnummer</label>
@@ -540,7 +540,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
           </div> 
         </div>
       
-       {/* ----------------------------- Optionel comment ----------------------------- */}
+       {/* ----------------------------- Optionel comment ----------------------------- *//*}
         <p>
        <label htmlFor="optionalComment    ">Optional Comment</label>
         <br />
@@ -578,7 +578,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 
 
 
-        {/*---------------------------------------------------------------*/}
+        {/*---------------------------------------------------------------*//*}
       
     {<h3>leverings adresse</h3>}
 
@@ -593,7 +593,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     </div>
 
 
-{/* ----------------------------- deliveryNAMES -----------------------------*/}
+{/* ----------------------------- deliveryNAMES -----------------------------*//*}
 {formData.activateDeliveryAddress && (
   <div>
 <div className="deliveryname-fields">
@@ -637,7 +637,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 </div>
 
     
-    {/* ----------------------------- ADDRESSES -----------------------------*/}
+    {/* ----------------------------- ADDRESSES -----------------------------*//*}
 
     <div style={{ display: 'flex' }}>
       <div style={{ width: '50%' }}>
@@ -672,7 +672,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         </div>
       </div>
 
-    {/* ----------------------------- Phone and Email -----------------------------*/}
+    {/* ----------------------------- Phone and Email -----------------------------*//*}
 
     <div style={{ display: 'flex' }}>
       <div style={{ width: '50%' }}>
@@ -711,7 +711,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
       </div>
 
 
-        {/* ----------------------------- ZipCode and City -----------------------------*/}
+        {/* ----------------------------- ZipCode and City -----------------------------*//*}
       <div style={{ display: 'flex' }}>
               <div style={{ width: '50%' }}>
                 <label>Postnummer</label>
@@ -759,3 +759,4 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 };
 
 export default CheckoutForm;
+*/
