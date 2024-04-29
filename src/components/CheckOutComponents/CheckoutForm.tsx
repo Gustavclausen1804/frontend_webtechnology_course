@@ -36,7 +36,7 @@ type ZipCode = {
   navn: string;
 };
 
-const CheckoutForm: React.FC<any> = (itemList) => {
+const CheckoutForm: React.FC<any> = () => {
   
     const  { cartItems } = useCartState();
     const itemListSelected = cartItems;

@@ -8,7 +8,7 @@ export default function Payment() {
     return (
         <>
             <Header/>
-            <h2>Betalingsside ikke fundet 404</h2>
+            <h2>Din bestilling er modtaget</h2>
             <Link to="/cart">
               <button type="submit">Tilbage til indkøbskurv</button>
             </Link>
