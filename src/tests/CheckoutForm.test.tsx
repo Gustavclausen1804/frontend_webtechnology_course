@@ -5,7 +5,7 @@ import CheckoutForm from '../components/CheckOutComponents/CheckoutForm';
 
 
 //import { useCartState } from '../hooks/useAppState'; // Import CartStateProvider
-import { CartStateContext } from '../Context/appContext';
+import { ShoppingStateContext } from '../Context/appContext';
 import { CartItem, Product } from '../types/types';
 
 /*
@@ -55,9 +55,9 @@ describe('CheckoutForm Component Tests', () => {
     // Wrap the component in MemoryRouter during testing
     render(
       <MemoryRouter>
-        <CartStateContext.Provider value={mockContextValue}>
+        <ShoppingStateContext.Provider value={mockContextValue}>
           <CheckoutForm />
-        </CartStateContext.Provider>
+        </ShoppingStateContext.Provider>
       </MemoryRouter>
     );
   });

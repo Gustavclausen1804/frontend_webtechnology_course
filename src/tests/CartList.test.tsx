@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import CartList from '../components/CartComponents/CartList';
 import products from '../data/products.json';
 import { ShoppingActions, ShoppingState } from '../types/types';
-import { CartDispatchContext, CartStateContext } from '../Context/appContext';
+import { ShoppingDispatchContext, ShoppingStateContext } from '../Context/appContext';
 import { MemoryRouter } from 'react-router-dom';
 
 vi.mock('../hooks/useFetchProducts', () => ({
@@ -33,11 +33,11 @@ const MockCartProvider: React.FC<{ children: React.ReactNode }> = ({ children })
   };
 
   return (
-    <CartDispatchContext.Provider value={handleDelete}>
-      <CartStateContext.Provider value={{ products, cartItems, loading, error }}>
+    <ShoppingDispatchContext.Provider value={handleDelete}>
+      <ShoppingStateContext.Provider value={{ products, cartItems, loading, error }}>
         {children}
-      </CartStateContext.Provider>
-    </CartDispatchContext.Provider>
+      </ShoppingStateContext.Provider>
+    </ShoppingDispatchContext.Provider>
   );
 };
 

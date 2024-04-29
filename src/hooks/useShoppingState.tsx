@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { ShoppingState } from "../types/types";
-import { CartStateContext } from "../Context/appContext";
+import { ShoppingStateContext } from "../Context/appContext";
 
 export const useShoppingState = (): ShoppingState => {
-  const context = useContext(CartStateContext);
+  const context = useContext(ShoppingStateContext);
   if (context === undefined) {
     throw new Error('useCartState must be used within the CartStateProvider');
   }

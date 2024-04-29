@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import {  ShoppingState, CartItem, ShoppingActions } from '../types/types';
 import productsData from '../data/products.json';
 import UpSellProductList from '../components/UpsellProductComponents/UpSellProductsList';
-import { CartStateContext, CartDispatchContext } from '../Context/appContext';
+import { ShoppingStateContext, ShoppingDispatchContext } from '../Context/appContext';
 
 interface CustomRenderOptions {
     initialState?: ShoppingState;
@@ -28,11 +28,11 @@ function render(
 
     function Wrapper({ children }: { children: React.ReactNode }) {
         return (
-            <CartStateContext.Provider value={defaultState}>
-                <CartDispatchContext.Provider value={defaultDispatch}>
+            <ShoppingStateContext.Provider value={defaultState}>
+                <ShoppingDispatchContext.Provider value={defaultDispatch}>
                     {children}
-                </CartDispatchContext.Provider>
-            </CartStateContext.Provider>
+                </ShoppingDispatchContext.Provider>
+            </ShoppingStateContext.Provider>
         );
     }
     return rtlRender(ui, { wrapper: Wrapper });
