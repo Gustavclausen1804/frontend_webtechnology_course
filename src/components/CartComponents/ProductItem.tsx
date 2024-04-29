@@ -1,7 +1,7 @@
 import '../../styles/container.css';
 
 import { CartItem } from '../../types/types';
-import { useCartDispatch } from '../../hooks/useAppDispatch';
+import { useShoppingDispatch } from '../../hooks/useShoppingDispatch';
 import { handleQuantityChange, handleRemove } from '../../utils/cartService';
 import { calculateDiscountedPrice, formatNumber, formatPrice, shouldShowDiscountNudge, shuoldProductBeDiscounted } from '../../utils/CartUtils';
 
@@ -13,7 +13,7 @@ interface ProductItemProps {
 
 const ProductItem: React.FC<ProductItemProps> = ({ item }) => {
   const { product, quantity } = item;
-  const dispatch = useCartDispatch();
+  const dispatch = useShoppingDispatch();
   
 
   const displayPopup = shouldShowDiscountNudge(quantity, product.rebateQuantity) ? 'block' : 'none';

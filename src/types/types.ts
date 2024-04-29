@@ -15,14 +15,14 @@ export interface CartItem {
   giftWrap: boolean;
 }
 
-export interface CartState {
+export interface ShoppingState {
   products: Product[];
   cartItems: CartItem[];
   loading: boolean;
   error: string | null; 
 }
 
-export enum ActionTypes {
+export enum ShoppingActionTypes {
   SET_PRODUCTS = 'SET_PRODUCTS',
   ADD_TO_CART = 'ADD_TO_CART',
   REMOVE_FROM_CART = 'REMOVE_FROM_CART',
@@ -33,7 +33,7 @@ export enum ActionTypes {
 
 }
 
-export type CartActions =
+export type ShoppingActions =
     | { type: 'SET_PRODUCTS'; payload: Product[] }
     | { type: 'ADD_TO_CART'; payload: Product }
     | { type: 'REMOVE_FROM_CART'; payload: string }

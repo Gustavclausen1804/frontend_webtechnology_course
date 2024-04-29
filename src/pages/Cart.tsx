@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import CartList from '../components/CartComponents/CartList';
-import { useCartDispatch } from '../hooks/useAppDispatch';
-import { useCartState } from '../hooks/useAppState';
+import { useShoppingDispatch } from '../hooks/useShoppingDispatch';
+import { useShoppingState } from '../hooks/useShoppingState';
 
 let isCartInitalized = false;
 
 const Cart: React.FC = () => {
-    const { products, cartItems, loading, error } = useCartState();
-    const dispatch = useCartDispatch();
+    const { products, cartItems, loading, error } = useShoppingState();
+    const dispatch = useShoppingDispatch();
   
     useEffect(() => {
 

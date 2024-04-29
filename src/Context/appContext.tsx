@@ -1,10 +1,10 @@
 // AppContext.tsx
 import React, { createContext, ReactNode, Dispatch } from 'react';
-import { CartState, CartActions } from '../types/types';
+import { ShoppingState, ShoppingActions } from '../types/types';
 import { useFetchProducts } from '../hooks/useFetchProducts';
 
-export const CartStateContext = createContext<CartState | undefined>(undefined);
-export const CartDispatchContext = createContext<Dispatch<CartActions> | undefined>(undefined);
+export const CartStateContext = createContext<ShoppingState | undefined>(undefined);
+export const CartDispatchContext = createContext<Dispatch<ShoppingActions> | undefined>(undefined);
 
 interface AppProviderProps {
   children: ReactNode;

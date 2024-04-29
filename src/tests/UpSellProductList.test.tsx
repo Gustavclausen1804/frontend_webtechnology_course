@@ -2,13 +2,13 @@ import React, { Dispatch } from 'react';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render as rtlRender, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {  CartState, CartItem, CartActions } from '../types/types';
+import {  ShoppingState, CartItem, ShoppingActions } from '../types/types';
 import productsData from '../data/products.json';
 import UpSellProductList from '../components/UpsellProductComponents/UpSellProductsList';
 import { CartStateContext, CartDispatchContext } from '../Context/appContext';
 
 interface CustomRenderOptions {
-    initialState?: CartState;
+    initialState?: ShoppingState;
     dispatch?: typeof vi.fn;
 }
 
@@ -16,7 +16,7 @@ function render(
     ui: React.ReactElement,
     { initialState, dispatch }: CustomRenderOptions = {}
 ) {
-    const defaultState: CartState = {
+    const defaultState: ShoppingState = {
         products: productsData,
         cartItems: initialState?.cartItems || [],
         loading: false,
@@ -24,7 +24,7 @@ function render(
         ...initialState
     };
 
-    const defaultDispatch = dispatch || vi.fn() as Dispatch<CartActions>;
+    const defaultDispatch = dispatch || vi.fn() as Dispatch<ShoppingActions>;
 
     function Wrapper({ children }: { children: React.ReactNode }) {
         return (

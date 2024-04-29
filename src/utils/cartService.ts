@@ -2,36 +2,36 @@
 
 
 // cartService.ts
-import { CartActions, Product } from '../types/types';
-import { ActionTypes } from '../types/types';
+import { ShoppingActions, Product } from '../types/types';
+import { ShoppingActionTypes } from '../types/types';
 import { Dispatch } from 'react';
 
-export const handleRemove = (dispatch: Dispatch<CartActions>, productId: string) => {
-    dispatch({ type: ActionTypes.REMOVE_FROM_CART, payload: productId });
+export const handleRemove = (dispatch: Dispatch<ShoppingActions>, productId: string) => {
+    dispatch({ type: ShoppingActionTypes.REMOVE_FROM_CART, payload: productId });
 };
 
-export const handleQuantityChange = (dispatch: Dispatch<CartActions>, productId: string, quantity: number) => {
+export const handleQuantityChange = (dispatch: Dispatch<ShoppingActions>, productId: string, quantity: number) => {
 
-    dispatch({ type: ActionTypes.UPDATE_ITEM_QUANTITY, payload: { productId, quantity } });
+    dispatch({ type: ShoppingActionTypes.UPDATE_ITEM_QUANTITY, payload: { productId, quantity } });
 };
 
-export const handleAddToCart = (dispatch: Dispatch<CartActions>, product: Product) => {
+export const handleAddToCart = (dispatch: Dispatch<ShoppingActions>, product: Product) => {
     dispatch({
-        type: ActionTypes.ADD_TO_CART,
+        type: ShoppingActionTypes.ADD_TO_CART,
         payload: product
     });
 };
 
-export const handleReplaceInCart = (dispatch: Dispatch<CartActions>, currentProduct: Product, newProduct: Product) => {
+export const handleReplaceInCart = (dispatch: Dispatch<ShoppingActions>, currentProduct: Product, newProduct: Product) => {
     // First, remove the current product
     dispatch({
-        type: ActionTypes.REMOVE_FROM_CART,
+        type: ShoppingActionTypes.REMOVE_FROM_CART,
         payload: currentProduct.id
     });
 
     // Then, add the new product
     dispatch({
-        type: ActionTypes.ADD_TO_CART,
+        type: ShoppingActionTypes.ADD_TO_CART,
         payload: newProduct
     });
 };

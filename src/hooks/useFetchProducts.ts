@@ -1,9 +1,9 @@
 import { useEffect, useReducer } from 'react';
-import { ActionTypes, CartState, Product } from '../types/types';
+import { ShoppingActionTypes, ShoppingState, Product } from '../types/types';
 import productsJson from "../data/products.json";
-import { cartReducer } from '../assets/Reducer/appReducer';
+import { shoppingReducer } from '../assets/Reducer/shoppingReducer';
 
-const initialState: CartState = {
+const initialState: ShoppingState = {
     products: [],
     cartItems: [],
     loading: false,
@@ -13,7 +13,7 @@ const initialState: CartState = {
 
 export const useFetchProducts = () => {
 
-    const [state, dispatch] = useReducer(cartReducer, initialState);
+    const [state, dispatch] = useReducer(shoppingReducer, initialState);
 
 
     if (!dispatch) {
@@ -21,10 +21,10 @@ export const useFetchProducts = () => {
     }
     
     useEffect(() => {
-        dispatch({ type: ActionTypes.SET_LOADING, payload: true });
+        dispatch({ type: ShoppingActionTypes.SET_LOADING, payload: true });
         const fetchProducts = async () => {
             let tempProducts: Product[] = [];
-            dispatch({ type: ActionTypes.INITIALIZE_CART, payload: [] }); // Example: Clear current cart items or reset state
+            dispatch({ type: ShoppingActionTypes.INITIALIZE_CART, payload: [] }); // Example: Clear current cart items or reset state
 
             try {
                 const backendData = await fetch('http://dtu62597.eduhost.dk:10331/api');
@@ -35,16 +35,16 @@ export const useFetchProducts = () => {
                     if (GithubProductData.ok) {
                         tempProducts = await GithubProductData.json();
                     } else {
-                        dispatch({ type: ActionTypes.SET_ERROR, payload: 'Failed to fetch products from the server. Using local data instead, which may be outdated.' });
+                        dispatch({ type: ShoppingActionTypes.SET_ERROR, payload: 'Failed to fetch products from the server. Using local data instead, which may be outdated.' });
                     }
                 }
-                dispatch({ type: ActionTypes.SET_PRODUCTS, payload: tempProducts });
-                dispatch({ type: ActionTypes.SET_LOADING, payload: false });
+                dispatch({ type: ShoppingActionTypes.SET_PRODUCTS, payload: tempProducts });
+                dispatch({ type: ShoppingActionTypes.SET_LOADING, payload: false });
 
             } catch (error) {
                 console.error('Failed to fetch products from the server. Using local data instead.', error);
-                dispatch({ type: ActionTypes.SET_PRODUCTS, payload: productsJson }); // Fallback to local data
-                dispatch({ type: ActionTypes.SET_LOADING, payload: false });
+                dispatch({ type: ShoppingActionTypes.SET_PRODUCTS, payload: productsJson }); // Fallback to local data
+                dispatch({ type: ShoppingActionTypes.SET_LOADING, payload: false });
             } 
         };
 

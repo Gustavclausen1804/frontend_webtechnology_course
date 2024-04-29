@@ -1,13 +1,13 @@
 import React from 'react';
 import "../../styles/UpSell.css";
-import { useCartState } from '../../hooks/useAppState';
+import { useShoppingState } from '../../hooks/useShoppingState';
 import UpSellProductItem from './UpSellProductItem';
 
 import { Product } from '../../types/types';
 import { findEligibleUpsellProducts, findOriginalCartItem } from '../../utils/ProductsUtils';
 
 const UpSellProductList: React.FC = () => {
-  const { cartItems, products } = useCartState();
+  const { cartItems, products } = useShoppingState();
 
   const eligibleUpsellProducts = findEligibleUpsellProducts(cartItems, products);
 

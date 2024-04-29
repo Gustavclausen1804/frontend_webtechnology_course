@@ -1,42 +1,42 @@
-import { CartState, CartActions, ActionTypes } from '../../types/types';
+import { ShoppingState, ShoppingActions, ShoppingActionTypes } from '../../types/types';
 
 import * as cartUtils from '../../utils/CartUtils';
 
-export function cartReducer(state: CartState, action: CartActions): CartState {
+export function shoppingReducer(state: ShoppingState, action: ShoppingActions): ShoppingState {
     switch (action.type) {
-        case ActionTypes.SET_PRODUCTS:
+        case ShoppingActionTypes.SET_PRODUCTS:
             return { ...state, products: action.payload };
 
-        case ActionTypes.ADD_TO_CART:
+        case ShoppingActionTypes.ADD_TO_CART:
             return {
                 ...state,
                 cartItems: cartUtils.addItemToCart(state.cartItems, action.payload)
             };
 
-        case ActionTypes.REMOVE_FROM_CART:
+        case ShoppingActionTypes.REMOVE_FROM_CART:
             return {
                 ...state,
                 cartItems: cartUtils.deleteItem(state.cartItems, action.payload)
             };
 
-        case ActionTypes.UPDATE_ITEM_QUANTITY:
+        case ShoppingActionTypes.UPDATE_ITEM_QUANTITY:
             return {
                 ...state,
                 cartItems: cartUtils.updateItemQuantity(state.cartItems, action.payload.productId, action.payload.quantity)
             };
 
-        case ActionTypes.INITIALIZE_CART:
+        case ShoppingActionTypes.INITIALIZE_CART:
             return {
                 ...state,
                 cartItems: action.payload
             };
-        case ActionTypes.SET_LOADING:
+        case ShoppingActionTypes.SET_LOADING:
             return {
                 ...state,
                 loading: action.payload
             };
 
-        case ActionTypes.SET_ERROR:
+        case ShoppingActionTypes.SET_ERROR:
             return {
                 ...state,
                 error: action.payload

@@ -1,7 +1,7 @@
 import React from 'react';
 import "../../styles/UpSell.css";
 import { Product } from '../../types/types';
-import { useCartDispatch } from '../../hooks/useAppDispatch';
+import { useShoppingDispatch } from '../../hooks/useShoppingDispatch';
 import { handleAddToCart, handleReplaceInCart } from '../../utils/cartService';
 
 
@@ -11,7 +11,7 @@ interface UpSellProductItemProps {
 }
 
 const UpSellProductItem: React.FC<UpSellProductItemProps> = ({ product, replacementProduct,  }) => {
-  const dispatch = useCartDispatch();
+  const dispatch = useShoppingDispatch();
 
   const { name, price, currency, imageUrl } = product;
 

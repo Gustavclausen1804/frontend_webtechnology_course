@@ -4,7 +4,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import CartList from '../components/CartComponents/CartList';
 import products from '../data/products.json';
-import { CartActions, CartState } from '../types/types';
+import { ShoppingActions, ShoppingState } from '../types/types';
 import { CartDispatchContext, CartStateContext } from '../Context/appContext';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -21,11 +21,11 @@ const initialCartItems = products.slice(0, 2).map((product) => ({
 const mockDispatch = vi.fn();
 
 const MockCartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [cartItems, setCartItems] = React.useState<CartState['cartItems']>(initialCartItems);
+  const [cartItems, setCartItems] = React.useState<ShoppingState['cartItems']>(initialCartItems);
   const [loading, ] = React.useState<boolean>(false);
   const [error, ] = React.useState<string | null>(null);
 
-  const handleDelete: Dispatch<CartActions> = (action: CartActions) => {
+  const handleDelete: Dispatch<ShoppingActions> = (action: ShoppingActions) => {
     if (action.type === 'REMOVE_FROM_CART') {
       setCartItems(currentItems => currentItems.filter(item => item.product.id !== action.payload));
       mockDispatch();  // Simulate dispatch call
