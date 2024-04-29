@@ -473,7 +473,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
           <input type="email"name="email"value={formData.email}onChange={handleInputChange}/>
           <div>
             {errors.email && <span>{errors.email}</span>}
-          </div>s
+          </div>
         </div>
       </div>
 
