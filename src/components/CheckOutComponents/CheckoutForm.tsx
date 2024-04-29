@@ -1,3 +1,4 @@
+import './../../styles/CheckoutForm.css';
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { useCartState } from '../../hooks/useAppState';
 import { useNavigate, Link } from 'react-router-dom';
@@ -252,252 +253,153 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
       setTermError("Feltet skal udfyldes.");
     }
    
-    
-
-
-
     setErrors(validationErrors);
 
     // Check if there are no validation errors
     setIsValid(Object.keys(validationErrors).length === 0);
 
     // Perform actions if the form is valid
-    if (isValid) {
-      sendData();
-      console.log('Form submitted successfully:', formData);
-      // Redirect to the payment page
-
-      navigate('/payment');
+    if (isValid && term) {
+      
+        sendData();
+        console.log('Form submitted successfully:', formData);
+        // Redirect to the payment page
+  
+        navigate('/payment');
     }
   };
   
-
-
   return (
     
     <form onSubmit={handleFormSubmit} className="formStyling">
 
-
-      
       {/* Country */}
-      <div>
-        <label htmlFor="country" style={{ marginBottom: '20px' }}>Land</label>
-        <input
-                type="text"
-                id="country"
-                name="country"
-                value={formData.country}
-                onChange={handleInputChange}
-            /><div> 
+      <div className="country">
+        <div>
+          <label htmlFor="country" style={{ marginBottom: '20px' }}>Land</label>
+          <input type="text"id="country"name="country"value={formData.country} onChange={handleInputChange}/>
+          <div> 
             {errors.country && <span>{errors.country}</span>}
+          </div>
         </div>
-
       </div>
 
-     
-    
       {/* ----------------------------- NAMES ----------------------------- */}
 
-      <div className="name-fields">
-    <div style={{ display: 'flex' }}>
-        <div style={{ width: '20%' }}>
-            <label htmlFor="firstName">Fornavn</label>
-        </div>
-        
-        <div style={{ width: '100%' }}>
-            <label htmlFor="lastName">Efternavn</label>
-        </div>
-    </div>
-
-    <div style={{ display: 'flex' }}>
-        <div style={{ width: '50%' }}>
-            <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleInputChange}
-            />
-            <div> 
-                {errors.firstName && <span>{errors.firstName}</span>}
-            </div>
+      <div className="checkoutinformation-fields">
+        <div>
+          <label htmlFor="firstName">Fornavn</label>
+          <input type="text" id="firstName" name="firstName" value={formData.firstName} onChange={handleInputChange} />
+          <div>
+            {errors.firstName && <span>{errors.firstName}</span>}
+          </div>
         </div>
 
-        <div style={{ width: '50%' }}>
-            <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleInputChange}
-            />
-            <div>
-                {errors.lastName && <span>{errors.lastName}</span>}
-            </div>
+        <div>
+          <label htmlFor="lastName">Efternavn</label>
+          <input type="text" id="lastName" name="lastName"value={formData.lastName}onChange={handleInputChange} />
+          <div> 
+            {errors.lastName && <span>{errors.lastName}</span>}
+          </div>
         </div>
-    </div>
-</div>
+      </div>
 
     
-    {/* ----------------------------- ADDRESSES ----------------------------- */}
+      {/* ----------------------------- ADDRESSES ----------------------------- */}
 
-    <div style={{ display: 'flex' }}>
-      <div style={{ width: '25%' }}>
-        <label>Adresse linje 1</label>
-      </div>
-      <div style={{ width: '100%' }}>
-        <label>Adresse linje 2</label>
-      </div>
-    </div>
-
-    <div style={{ display: 'flex' }}>    
-      <div style={{ width: '50%' }}>
-        <input
-          type="text"
-          name="addressLine1"
-          value={formData.addressLine1}
-          onChange={handleInputChange}
-        /> 
+      <div className="checkoutinformation-fields">
         <div>
-        {errors.addressLine1 && <span>{errors.addressLine1}</span>}
+          <label htmlFor="addressLine1">Adresse linje 1</label>
+            <input type="text"name="addressLine1"value={formData.addressLine1}onChange={handleInputChange}/>
+            <div>
+              {errors.addressLine1 && <span>{errors.addressLine1}</span>}
+            </div>
+        </div>
+
+        <div>
+          <label htmlFor="addressLine2">Adresse linje 2</label>
+          <input type="text"name="addressLine2" value={formData.addressLine2} onChange={handleInputChange} />
+            <div>
+              {errors.addressLine2 && <span>{errors.addressLine2}</span>}
+            </div>
         </div>
       </div>
-
-      
-      <div style={{ width: '50%' }}>
-        <input
-          type="text"
-          name="addressLine2"
-          value={formData.addressLine2}
-          onChange={handleInputChange}
-        />
-        </div>
-        </div>
-
 
     {/* ----------------------------- Phone and Email ----------------------------- */}
 
-    <div style={{ display: 'flex' }}>
-      <div style={{ width: '10%' }}>
-          <label>Telefonnummer</label>
-        </div>
-        <div style={{ width: '100%' }}>
-          <label>Email</label>
-        </div>
-      </div>
-
-      <div style={{ display: 'flex' }}>
-        <div style={{ width: '50%' }}>
-        <input
-          type="text"
-          name="phone"
-          value={formData.phone}
-          onChange={handleInputChange}
-        />
+    <div className="checkoutinformation-fields">
+      <div>
+        <label htmlFor="phone">Telefonnummer</label>
+        <input type="text"name="phone"value={formData.phone}onChange={handleInputChange}/>
         <div>
-        {errors.phone && <span>{errors.phone}</span>}
+          {errors.phone && <span>{errors.phone}</span>}
         </div>
       </div>
 
-      <div style={{ width: '120%' }}>
-        
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleInputChange}
-        />
+      <div>
+        <label htmlFor="email">Email</label>
+        <input type="email"name="email"value={formData.email}onChange={handleInputChange}/>
         <div>
-        {errors.email && <span>{errors.email}</span>}
+          {errors.email && <span>{errors.email}</span>}
         </div>
-      </div>
-      </div>
-
-    {/* ----------------------------- CompanyName and VAT ----------------------------- */}
-
-    <div style={{ display: 'flex' }}>
-      <div style={{ width: '35%' }}>
-        <label>Virksomheds Navn</label>
-      </div>
-      <div style={{ width: '100%' }}>
-        <label>CVR</label>
       </div>
     </div>
 
+    {/* ----------------------------- CompanyName and VAT ----------------------------- */}
 
-        
-    <div style={{ display: 'flex' }}>
-      <div style={{ width: '50%' }}>
-        <input
-          type="text"
-          name="companyName"
-          value={formData.companyName}
-          onChange={handleInputChange}
-        />
+    <div className="checkoutinformation-fields">
+      <div>
+        <label htmlFor="companyName">Virksomheds Navn</label>
+        <input type="text"name="companyName"value={formData.companyName}onChange={handleInputChange}/>
         <div>
-        {errors.companyName && <span>{errors.companyName}</span>}
+          {errors.companyName && <span>{errors.companyName}</span>}
         </div>
       </div>
 
-      <div style={{ width: '50%' }}>
-        <input
-          type="text"
-          name="vatNumber"
-          value={formData.vatNumber}
-          onChange={handleInputChange}
-        />
+      <div>
+        <label htmlFor="vatNumber">CVR</label>
+        <input type="text"name="vatNumber"value={formData.vatNumber} onChange={handleInputChange}/>
         <div>
-            {errors.vatNumber && <span>{errors.vatNumber}</span>}
+          {errors.vatNumber && <span>{errors.vatNumber}</span>}
         </div>
       </div>
+    </div>
+
+    {/* ----------------------------- ZipCode and City ----------------------------- */}
+
+    <div className="checkoutinformation-fields">
+      <div>
+        <label htmlFor="zipCode">Postnummer</label>
+        <input type="text"value={zipCode}onChange={zipCodeChanged}/>
+        <div>
+          {errors.zipCode && <span>{errors.zipCode}</span>}
+        </div>
       </div>
 
-      {/* ----------------------------- ZipCode and City ----------------------------- */}
-      <div style={{ display: 'flex'}}>
-              <div style={{ width: '20%' }}>
-                <label>Postnummer</label>
-              </div>
-              <div style={{ width: '100%' }}>
-                <label>By</label>
-              </div>
-            </div>
-
-
-        <div style={{ display: 'flex' }}>
-          <div style={{ width: '50%' }}>
-            <input type="text"value={zipCode} onChange={zipCodeChanged} ></input>
-            <div>
-              {errors.zipCode && <span>{errors.zipCode}</span>}
-            </div>
-          </div>
-
-
-          <div style={{ width: '50%' }}>
-            <input id="city" type="text" value={city} onChange={cityChange} ></input>
-            <div>
-              {errors.city && <span>{errors.city}</span>}
-            </div>
-          </div> 
+      <div>
+        <label htmlFor="city">By</label>
+        <input id="city"type="text"value={city}onChange={cityChange}/>
+        <div>
+          {errors.city && <span>{errors.city}</span>}
         </div>
-      
-       {/* ----------------------------- Optionel comment ----------------------------- */}
-        <p>
-       <label htmlFor="optionalComment    ">Optional Comment</label>
-        <br />
-        <textarea
-          cols={35}
-          rows={5}  
-          name="optionalComment"
-          value={formData.optionalComment}
-          onChange={handleCommentChange}
-        />
-        </p>
+      </div>
+    </div>
 
+    {/* ----------------------------- Optionel comment ----------------------------- */}
+
+    <p>
+      <label htmlFor="optionalComment">Optional Comment</label>
+      <br />
+        <textarea cols={35}rows={5}name="optionalComment"value={formData.optionalComment}onChange={handleCommentChange}/>
+    </p>
+
+    {/*----------------Checkboxes--------------------*/}
+
+    <div className="checkboxes">  
       <div>
         <input id="newsLetter" type="checkbox" checked={formData.newsLetter} onChange={handleNesLetterChange} ></input>
         <label htmlFor="newsLetter">Tilmeld mig nyhedsbrevet</label>
       </div>
-      
       
       <div>
         <input id="term" type="checkbox" checked={term} onChange={() => setTerm(!term)}></input>
@@ -507,188 +409,107 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         </div>
       </div>
 
-      
-      
+      <div>
+        <input id="activateDeliveryAddress"type="checkbox"checked={formData.activateDeliveryAddress}onChange={handleActivateDeliveryAddressChange}/>
+        <label htmlFor="activateDeliveryAddress">Brug anden leverings adresse</label>
+      </div>
+    </div>
 
+  {/* ----------------------------- deliveryNAMES ----------------------------- */}
 
-
-        {/*---------------------------------------------------------------*/}
-      
-    {/*<h3>leverings adresse</h3>*/}
-
+  {formData.activateDeliveryAddress && (
     <div>
-      <input
-        id="activateDeliveryAddress"
-        type="checkbox"
-        checked={formData.activateDeliveryAddress}
-        onChange={handleActivateDeliveryAddressChange}
-      />
-      <label htmlFor="activateDeliveryAddress">Brug anden leverings adresse</label>
-    </div>
-
-
-{/* ----------------------------- deliveryNAMES ----------------------------- */}
-{formData.activateDeliveryAddress && (
-  <div>
-<div className="deliveryname-fields">
-    <div style={{ display: 'flex' }}>
-        <div style={{ width: '50%' }}>
-            <label htmlFor="deliveryfirstName">Fornavn</label>
-        </div>
-        
-        <div style={{ width: '50%' }}>
-            <label htmlFor="deliverylastName">Efternavn</label>
-        </div>
-    </div>
-
-    <div style={{ display: 'flex' }}>
-        <div style={{ width: '50%' }}>
-            <input
-                type="text"
-                id="deliveryfirstName"
-                name="deliveryfirstName"
-                value={formData.deliveryFirstName}
-                onChange={handleInputChange}
-            />
-            <div> 
-                {errors.deliveryFirstName && <span>{errors.deliveryFirstName}</span>}
+      <div className="checkoutinformation-fields">
+         <div>
+            <label htmlFor="deliveryFirstName">Fornavn</label>
+            <input type="text"id="deliveryFirstName"name="deliveryFirstName"value={formData.deliveryFirstName} onChange={handleInputChange}/>
+           <div> 
+             {errors.deliveryFirstName && <span>{errors.deliveryFirstName}</span>}
             </div>
-        </div>
+         </div>
 
-        <div style={{ width: '50%' }}>
-            <input
-                type="text"
-                id="deliverylastName"
-                name="deliverylastName"
-                value={formData.deliveryLastName}
-                onChange={handleInputChange}
-            />
-            <div>
-                {errors.deliveryLastName && <span>{errors.deliveryLastName}</span>}
-            </div>
-        </div>
-    </div>
-</div>
-
-    
-    {/* ----------------------------- ADDRESSES -----------------------------*/} 
-
-    <div style={{ display: 'flex' }}>
-      <div style={{ width: '50%' }}>
-        <label>Adresse linje 1</label>
-      </div>
-      <div style={{ width: '50%' }}>
-        <label>Adresse linje 2</label>
-      </div>
-    </div>
-
-    <div style={{ display: 'flex' }}>    
-      <div style={{ width: '50%' }}>
-        <input
-          type="text"
-          name="deliveryaddressLine1"
-          value={formData.deliveryaddressLine1}
-          onChange={handleInputChange}
-        /> 
-        <div>
-        {errors.deliveryaddressLine1 && <span>{errors.deliveryaddressLine1}</span>}
-        </div>
-      </div>
-
-      
-      <div style={{ width: '50%' }}>
-        <input
-          type="text"
-          name="deliveryaddressLine2"
-          value={formData.deliveryaddressLine2}
-          onChange={handleInputChange}
-        />
-        </div>
-      </div>
-
-    {/* ----------------------------- Phone and Email ----------------------------- */}
-
-    <div style={{ display: 'flex' }}>
-      <div style={{ width: '50%' }}>
-          <label>Telefonnummer</label>
-        </div>
-        <div style={{ width: '50%' }}>
-          <label>Email</label>
-        </div>
-      </div>
-
-      <div style={{ display: 'flex' }}>
-        <div style={{ width: '50%' }}>
-        <input
-          type="text"
-          name="deliveryphone"
-          value={formData.deliveryPhone}
-          onChange={handleInputChange}
-        />
-        <div>
-        {errors.deliveryPhone && <span>{errors.deliveryPhone}</span>}
-        </div>
-      </div>
-
-      <div style={{ width: '50%' }}>
-        
-        <input
-          type="deliveryemail"
-          name="deliveryemail"
-          value={formData.email}
-          onChange={handleInputChange}
-        />
-        <div>
-        {errors.email && <span>{errors.email}</span>}
-        </div>
-      </div>
-      </div>
-
-
-        {/* ----------------------------- ZipCode and City ----------------------------- */}
-      <div style={{ display: 'flex' }}>
-              <div style={{ width: '50%' }}>
-                <label>Postnummer</label>
-              </div>
-              <div style={{ width: '50%' }}>
-                <label>By</label>
-              </div>
-            </div>
-
-
-        <div style={{ display: 'flex' }}>
-          <div style={{ width: '50%' }}>
-            <input type="text"value={zipCode} onChange={zipCodeChanged} ></input>
-            <div>
-              {errors.zipCode && <span>{errors.zipCode}</span>}
+         <div>
+           <label htmlFor="deliveryLastName">Efternavn</label>
+           <input type="text"id="deliverylastName" name="deliveryLastName"value={formData.deliveryLastName}onChange={handleInputChange}/>
+           <div>
+             {errors.deliveryLastName && <span>{errors.deliveryLastName}</span>}
             </div>
           </div>
+      </div> 
 
+      {/* ----------------------------- ADDRESSES -----------------------------*/} 
 
-          <div style={{ width: '50%' }}>
-            <input id="deliverycity" type="text" value={city} onChange={cityChange} ></input>
-            <div>
-              {errors.city && <span>{errors.city}</span>}
-            </div>
-          </div> 
+      <div className="checkoutinformation-fields">
+        <div>
+          <label htmlFor="deliveryaddressLine1">Adresse linje 1</label>
+          <input type="text"name="deliveryaddressLine1"value={formData.deliveryaddressLine1}onChange={handleInputChange}/>
+          <div>
+           {errors.deliveryaddressLine1 && <span>{errors.deliveryaddressLine1}</span>}
+          </div>
         </div>
 
+        <div>
+          <label htmlFor="deliveryaddressLine2">Adresse linje 2</label>
+          <input type="text"name="deliveryaddressLine2"value={formData.deliveryaddressLine2}onChange={handleInputChange}/>
+          <div>
+            {errors.deliveryaddressLine2 && <span>{errors.deliveryaddressLine2}</span>}
+          </div>
         </div>
-    )}
-      
-      
-      <button type="submit">
-        Til Betaling
-      </button>
-      <div>
-        <Link to="/cart">
-          <button type = "submit">Tilbage til indkøbskurv</button>
-        </Link>
       </div>
 
-      
+      {/* ----------------------------- Phone and Email ----------------------------- */}
 
-    </form>
+      <div className="checkoutinformation-fields">
+        <div>
+          <label htmlFor="deliveryphone">Telefonnummer</label>
+          <input type="text"name="deliveryPhone"value={formData.deliveryPhone}onChange={handleInputChange}/>
+          <div>
+            {errors.deliveryPhone && <span>{errors.deliveryPhone}</span>}
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="email">Email</label>
+          <input type="email"name="email"value={formData.email}onChange={handleInputChange}/>
+          <div>
+            {errors.email && <span>{errors.email}</span>}
+          </div>s
+        </div>
+      </div>
+
+
+      {/* ----------------------------- ZipCode and City ----------------------------- */}
+      <div className="checkoutinformation-fields">
+        <div>
+          <label htmlFor="zipCode">Postnummer</label>
+          <input type="text"value={zipCode}onChange={zipCodeChanged}/>
+          <div>
+            {errors.zipCode && <span>{errors.zipCode}</span>}
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="deliverycity">By</label>
+          <input id="deliverycity"type="text"value={city}onChange={cityChange}/>
+          <div>
+            {errors.city && <span>{errors.city}</span>}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  )}
+
+  <button type="submit">
+    Til Betaling
+  </button>
+    <div>
+      <Link to="/cart">
+        <button type = "submit">Tilbage til indkøbskurv</button>
+      </Link>
+    </div>
+
+  </form>
     
   );
 };

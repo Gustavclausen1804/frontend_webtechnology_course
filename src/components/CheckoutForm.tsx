@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
+/*import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -288,13 +288,16 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     setIsValid(Object.keys(validationErrors).length === 0);
 
     // Perform actions if the form is valid
-    if (isValid) {
-      sendData();
+    /*
+    if (isValid && formData.newsLetter) {
+      //sendData();
+      console.log("hello buddy!")
+      console.log(formData.newsLetter)
       console.log('Form submitted successfully:', formData);
       // Redirect to the payment page
 
       navigate('/payment');
-    }
+    }*//*
   };
   
 
@@ -336,7 +339,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 
 
       
-      {/* Country */}
+      {/* Country *//*}
       <div>
         <label htmlFor="country" style={{ marginBottom: '20px' }}>Land</label>
         <input
@@ -353,50 +356,11 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 
      
     
-      {/* ----------------------------- NAMES ----------------------------- */}
-
-      <div className="name-fields">
-    <div style={{ display: 'flex' }}>
-        <div style={{ width: '20%' }}>
-            <label htmlFor="firstName">Fornavn</label>
-        </div>
-        
-        <div style={{ width: '100%' }}>
-            <label htmlFor="lastName">Efternavn</label>
-        </div>
-    </div>
-
-    <div style={{ display: 'flex' }}>
-        <div style={{ width: '50%' }}>
-            <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleInputChange}
-            />
-            <div> 
-                {errors.firstName && <span>{errors.firstName}</span>}
-            </div>
-        </div>
-
-        <div style={{ width: '50%' }}>
-            <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleInputChange}
-            />
-            <div>
-                {errors.lastName && <span>{errors.lastName}</span>}
-            </div>
-        </div>
-    </div>
-</div>
+      {/* ----------------------------- NAMES ----------------------------- *//*}
 
     
-    {/* ----------------------------- ADDRESSES ----------------------------- */}
+    
+    {/* ----------------------------- ADDRESSES ----------------------------- *//*}
 
     <div style={{ display: 'flex' }}>
       <div style={{ width: '25%' }}>
@@ -432,7 +396,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     </div>
 
 
-    {/* ----------------------------- Phone and Email ----------------------------- */}
+    {/* ----------------------------- Phone and Email ----------------------------- *//*}
 
     <div style={{ display: 'flex' }}>
       <div style={{ width: '10%' }}>
@@ -470,7 +434,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
       </div>
       </div>
 
-    {/* ----------------------------- CompanyName and VAT ----------------------------- */}
+    {/* ----------------------------- CompanyName and VAT ----------------------------- *//*}
 
     <div style={{ display: 'flex' }}>
       <div style={{ width: '35%' }}>
@@ -509,7 +473,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
       </div>
       </div>
 
-      {/* ----------------------------- ZipCode and City ----------------------------- */}
+      {/* ----------------------------- ZipCode and City ----------------------------- *//*}
       <div style={{ display: 'flex'}}>
               <div style={{ width: '20%' }}>
                 <label>Postnummer</label>
@@ -537,7 +501,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
           </div> 
         </div>
       
-       {/* ----------------------------- Optionel comment ----------------------------- */}
+       {/* ----------------------------- Optionel comment ----------------------------- *//*}
         <p>
        <label htmlFor="optionalComment    ">Optional Comment</label>
         <br />
@@ -575,7 +539,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 
 
 
-        {/*---------------------------------------------------------------*/}
+        {/*---------------------------------------------------------------*//*}
       
     {<h3>leverings adresse</h3>}
 
@@ -590,7 +554,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     </div>
 
 
-{/* ----------------------------- deliveryNAMES -----------------------------*/}
+{/* ----------------------------- deliveryNAMES -----------------------------*//*}
 {formData.activateDeliveryAddress && (
   <div>
 <div className="deliveryname-fields">
@@ -634,7 +598,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 </div>
 
     
-    {/* ----------------------------- ADDRESSES -----------------------------*/}
+    {/* ----------------------------- ADDRESSES -----------------------------*//*}
 
     <div style={{ display: 'flex' }}>
       <div style={{ width: '50%' }}>
@@ -669,7 +633,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         </div>
       </div>
 
-    {/* ----------------------------- Phone and Email -----------------------------*/}
+    {/* ----------------------------- Phone and Email -----------------------------*//*}
 
     <div style={{ display: 'flex' }}>
       <div style={{ width: '50%' }}>
@@ -708,7 +672,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
       </div>
 
 
-        {/* ----------------------------- ZipCode and City -----------------------------*/}
+        {/* ----------------------------- ZipCode and City -----------------------------*//*}
       <div style={{ display: 'flex' }}>
               <div style={{ width: '50%' }}>
                 <label>Postnummer</label>
@@ -756,3 +720,4 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 };
 
 export default CheckoutForm;
+*/

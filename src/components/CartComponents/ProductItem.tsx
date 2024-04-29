@@ -51,8 +51,10 @@ const ProductItem: React.FC<ProductItemProps> = ({ item }) => {
       <span className={shuoldProductBeDiscounted(quantity, product.rebateQuantity) ? "product-total-discount" : "product-total"}>
         {formatPrice(calculateDiscountedPrice(product.price, quantity, product.rebateQuantity, product.rebatePercent) * quantity)}
       </span>
-      <div id="discountNudge" style={{ display: displayPopup }}>
-        <p>Tilføj endnu en {product.name.split(",")[0]} til kurven for at spare {product.rebatePercent}%!</p>
+      <div className= "discountNudgeContainer">
+        <div id="discountNudge" style={{ display: displayPopup }}>
+          <p>Tilføj endnu en {product.name.split(",")[0]} til kurven for at spare {product.rebatePercent}%!</p>
+        </div>
       </div>
     </td>
   </tr>

@@ -23,6 +23,7 @@ a:hover {
 }
 
 body {
+  background-color: white;
   margin: 0;
   display: flex;
   place-items: center;
@@ -42,10 +43,12 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #f9f9f9;
+  color: black;
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
@@ -53,6 +56,15 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+input, select, textarea{  /* sørger for at text felter altid har hvis baggrund og sort text*/
+  background-color: white;
+  color: black;
+}
+
+input[type=checkbox]:checked {
+  accent-color: rgb(255, 255, 255);
+}
+
 
 @media (prefers-color-scheme: light) {
   :root {
