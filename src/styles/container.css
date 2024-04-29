@@ -42,13 +42,18 @@
     text-align: right;
     color: rgb(36, 207, 59);
 }
-.product-total {
-    min-width: 100px;
+
+.prisalt {
+    width: 6.5em;
     text-align: right;
+    background-color: grey;
 }
+
+.product-total, .product-total-discount {
+    text-overflow: hidden;
+}
+
 .product-total-discount {
-    min-width: 100px;
-    text-align: right;
     color:rgb(36, 207, 59);
 }
 .frame {
