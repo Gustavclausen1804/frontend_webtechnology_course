@@ -30,6 +30,19 @@ export function cartReducer(state: CartState, action: CartActions): CartState {
                 ...state,
                 cartItems: action.payload
             };
+        case ActionTypes.SET_LOADING:
+            return {
+                ...state,
+                loading: action.payload
+            };
+
+        case ActionTypes.SET_ERROR:
+            return {
+                ...state,
+                error: action.payload
+            };
+
+        
 
         default:
             return state;

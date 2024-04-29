@@ -3,14 +3,12 @@ import Header from '../components/Header';
 import CartList from '../components/CartComponents/CartList';
 import { useCartDispatch } from '../hooks/useAppDispatch';
 import { useCartState } from '../hooks/useAppState';
-import { useFetchProducts } from '../hooks/useFetchProducts';
 
 let isCartInitalized = false;
 
 const Cart: React.FC = () => {
-    const { products, cartItems } = useCartState();
+    const { products, cartItems, loading, error } = useCartState();
     const dispatch = useCartDispatch();
-    useFetchProducts();  
   
     useEffect(() => {
 
@@ -31,7 +29,16 @@ const Cart: React.FC = () => {
         <>
             <Header />
             <h2>Indkøbskurv</h2>
-            <CartList />
+            {
+                loading && <p>Loading...</p>
+            }
+            {
+                error && <p>{error}</p>
+
+            }
+            {
+                !loading && !error && <CartList/>
+            }
         </>
     );
 };
