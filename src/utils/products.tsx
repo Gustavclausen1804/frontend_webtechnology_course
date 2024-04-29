@@ -3,6 +3,8 @@ import { Product } from '../types/types';
 import { CartItem } from '../types/types';
 
 
+
+
 export function findProductById(productId: string, products: Product[]) : Product | undefined {
     const upsellProduct = products.find(product => product.id === productId);
     //console.log(upsellProduct);
@@ -20,4 +22,38 @@ export const isUpsellProductEligible = (upsellProduct: Product, cartItems: CartI
     const isUpsellForCartProduct = cartItems.some(cartItem => cartItem.product.upsellProductId == upsellProduct.id);
     return isUpsellForCartProduct;
   };
-  
+
+
+// Function to check if the product is already in the cart
+export const isProductInCart = (productId: string, cartItems: CartItem[]): boolean => {
+  return cartItems.some(item => item.product.id === productId);
+};
+
+// Function to check if the product is already listed as an eligible upsell product
+export const isProductAlreadyListed = (productId: string, eligibleProducts: Product[]): boolean => {
+  return eligibleProducts.some(product => product.id === productId);
+};
+
+// Main function to find eligible upsell products
+export const findEligibleUpsellProducts = (cartItems: CartItem[], products: Product[]): Product[] => {
+  const eligibleUpsellProducts: Product[] = [];
+
+  cartItems.forEach(cartItem => {
+    const product = cartItem.product;
+    if (product.upsellProductId) {
+      const upsellProduct = findProductById(product.upsellProductId, products);
+      if (upsellProduct && !isProductInCart(upsellProduct.id, cartItems) && !isProductAlreadyListed(upsellProduct.id, eligibleUpsellProducts)) {
+        eligibleUpsellProducts.push(upsellProduct);
+      }
+    }
+  });
+
+  return eligibleUpsellProducts;
+};
+
+// Finds the original cart item that has an upsell product
+export const findOriginalCartItem = (upsellProductId: string, cartItems: CartItem[]): Product | undefined => {
+  return cartItems.find(item => item.product.upsellProductId === upsellProductId)?.product;
+};
+
+

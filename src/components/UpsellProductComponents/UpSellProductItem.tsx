@@ -1,25 +1,27 @@
 import React from 'react';
 import "../../styles/UpSell.css";
 import { Product } from '../../types/types';
+import { useCartDispatch } from '../../hooks/useAppDispatch';
+import { handleAddToCart, handleReplaceInCart } from '../../utils/cartService';
 
 
 interface UpSellProductItemProps {
   product: Product;
   replacementProduct: Product;
-  onAddToCart: (product: Product) => void;
-  onReplaceInCart: (currentProduct: Product) => void;
-  isInCart: boolean; // Indicates if the product is already in the cart
 }
 
-const UpSellProductItem: React.FC<UpSellProductItemProps> = ({ product, replacementProduct, onAddToCart, onReplaceInCart }) => {
+const UpSellProductItem: React.FC<UpSellProductItemProps> = ({ product, replacementProduct,  }) => {
+  const dispatch = useCartDispatch();
+
   const { name, price, currency, imageUrl } = product;
+
  
-  const handleAddToCart = () => {
-    onAddToCart(product);
+  const onAddToCart = () => {
+    handleAddToCart(dispatch, product);
   };
 
-  const handleReplaceInCart = () => {
-    onReplaceInCart(product);
+  const onReplaceInCart = () => {
+    handleReplaceInCart(dispatch, replacementProduct, product);
   };
 
   return (
@@ -31,7 +33,7 @@ const UpSellProductItem: React.FC<UpSellProductItemProps> = ({ product, replacem
       </div>
       <div className="product-actions">
         { 
-          <><button onClick={handleReplaceInCart}>Erstat <em>{replacementProduct.name}</em> i indkøbskurven</button><button onClick={handleAddToCart}>Tilføj til indkøbskurv</button></>
+          <><button onClick={onReplaceInCart}>Erstat <em>{replacementProduct.name}</em> i indkøbskurven</button><button onClick={onAddToCart}>Tilføj til indkøbskurv</button></>
         }
       </div>
     </div>

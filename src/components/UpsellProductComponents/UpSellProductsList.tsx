@@ -1,68 +1,40 @@
 import React from 'react';
 import "../../styles/UpSell.css";
-import { useCartDispatch } from '../../hooks/useAppDispatch'; // Assuming this is the correct path
-import { Product } from '../../types/types';
-import { handleAddToCart, handleReplaceInCart } from '../../utils/cartService';
 import { useCartState } from '../../hooks/useAppState';
 import UpSellProductItem from './UpSellProductItem';
 
+import { Product } from '../../types/types';
+import { findEligibleUpsellProducts, findOriginalCartItem } from '../../utils/products';
+
 const UpSellProductList: React.FC = () => {
   const { cartItems, products } = useCartState();
-  const dispatch = useCartDispatch();
 
-  const renderProductRows = (): JSX.Element[] => {
-    const rows: JSX.Element[] = [];
-    let rowItems: JSX.Element[] = [];
-    const eligibleUpsellProducts: Product[] = [];
+  const eligibleUpsellProducts = findEligibleUpsellProducts(cartItems, products);
 
-    cartItems.forEach(cartItem => {
-      const product = cartItem.product;
-      if (product.upsellProductId) {
-        const upsellProduct = products.find(p => p.id === product.upsellProductId);
-        const isInCart = cartItems.some(item => item.product.id === upsellProduct?.id);
-        const isAlreadyListed = eligibleUpsellProducts.some(item => item.id === upsellProduct?.id);
-
-        if (upsellProduct && !isInCart && !isAlreadyListed) {
-          eligibleUpsellProducts.push(upsellProduct);
-        }
-      }
-    });
-
-    eligibleUpsellProducts.forEach((upsellProduct, index) => {
-      const originalCartItem = cartItems.find(item => item.product.upsellProductId === upsellProduct.id)?.product ?? upsellProduct;
-
-      rowItems.push(
+  const renderProductRow = (): JSX.Element => (
+    <div className="upsell-product-row">
+      {eligibleUpsellProducts.map((upsellProduct: Product) => (
         <UpSellProductItem
-          key={upsellProduct.id}
-          replacementProduct={originalCartItem}
+          key={`upsell-product-${upsellProduct.id}`}
           product={upsellProduct}
-          onAddToCart={() => handleAddToCart(dispatch, upsellProduct)}
-          onReplaceInCart={(newProduct) => handleReplaceInCart(dispatch, originalCartItem, newProduct)}
-          isInCart={false}
+          replacementProduct={findOriginalCartItem(upsellProduct.id, cartItems) ?? upsellProduct}
         />
-      );
+      ))}
+    </div>
+  );
+  
 
-      if (index === eligibleUpsellProducts.length - 1) {
-        rows.push(
-          <div key={`row-${index}`} className="upsell-product-row">
-            {rowItems}
-          </div>
-        );
-        rowItems = []; // Reset for the next row
-      }
-    });
-
-    return rows;
-  };
-  const upsellProductRows = renderProductRows();
+  const upsellProductRow = renderProductRow();
 
   return (
     <div className="upsell-product-list">
-      {upsellProductRows.length > 0 && (
+      {eligibleUpsellProducts.length > 0 ? (
         <>
           <h2>Anbefalede opgraderinger</h2>
-          {upsellProductRows}
+          {upsellProductRow}
         </>
+      ) : (
+        <p>Ingen anbefalede opgraderinger tilgængelige.</p>
       )}
     </div>
   );
