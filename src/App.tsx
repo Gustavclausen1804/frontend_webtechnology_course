@@ -7,7 +7,7 @@ import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import Payment from './pages/Payment'
 import Receipt from './pages/Receipt'
-import { CartProvider } from './Context/appContext'
+import { ShoppingProvider } from './Context/appContext'
 import { useEffect } from 'react';
 
 
@@ -24,7 +24,7 @@ function App() {
 
   return (
     <>
-      <CartProvider>
+      <ShoppingProvider>
       <BrowserRouter>
         <Routes>
         
@@ -35,7 +35,7 @@ function App() {
           <Route path="/receipt" element = {<Receipt/>} />
         </Routes>
       </BrowserRouter>
-      </CartProvider>
+      </ShoppingProvider>
     </> 
 
   )

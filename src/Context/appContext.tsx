@@ -10,7 +10,7 @@ interface AppProviderProps {
   children: ReactNode;
 }
 
-export const CartProvider: React.FC<AppProviderProps> = ({ children }) => {
+export const ShoppingProvider: React.FC<AppProviderProps> = ({ children }) => {
 
   const {state, dispatch} = useFetchProducts();
 
