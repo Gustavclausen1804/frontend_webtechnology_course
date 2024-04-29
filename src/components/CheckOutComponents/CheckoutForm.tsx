@@ -262,12 +262,13 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     setIsValid(Object.keys(validationErrors).length === 0);
 
     // Perform actions if the form is valid
-    if (isValid) {
-      sendData();
-      console.log('Form submitted successfully:', formData);
-      // Redirect to the payment page
-
-      navigate('/payment');
+    if (isValid && term) {
+      
+        sendData();
+        console.log('Form submitted successfully:', formData);
+        // Redirect to the payment page
+  
+        navigate('/payment');
     }
   };
   
