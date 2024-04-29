@@ -277,7 +277,7 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
       <div className="country">
         <div>
           <label htmlFor="country" style={{ marginBottom: '20px' }}>Land</label>
-          <input type="text"id="country"name="country"value={formData.country}/>
+          <input type="text"id="country"name="country"value={formData.country} onChange={handleInputChange}/>
           <div> 
             {errors.country && <span>{errors.country}</span>}
           </div>
