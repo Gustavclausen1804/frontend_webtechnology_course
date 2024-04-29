@@ -249,11 +249,13 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     <form onSubmit={handleFormSubmit} className="formStyling">
 
       {/* Country */}
-      <div>
-        <label htmlFor="country" style={{ marginBottom: '20px' }}>Land</label>
-        <input type="text"id="country"name="country"value={formData.country}/>
-        <div> 
-          {errors.country && <span>{errors.country}</span>}
+      <div className="country">
+        <div>
+          <label htmlFor="country" style={{ marginBottom: '20px' }}>Land</label>
+          <input type="text"id="country"name="country"value={formData.country}/>
+          <div> 
+            {errors.country && <span>{errors.country}</span>}
+          </div>
         </div>
       </div>
 
@@ -472,20 +474,17 @@ const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 
     </div>
   )}
-      
-      
-      <button type="submit">
-        Til Betaling
-      </button>
-      <div>
-        <Link to="/cart">
-          <button type = "submit">Tilbage til indkøbskurv</button>
-        </Link>
-      </div>
 
-      
+  <button type="submit">
+    Til Betaling
+  </button>
+    <div>
+      <Link to="/cart">
+        <button type = "submit">Tilbage til indkøbskurv</button>
+      </Link>
+    </div>
 
-    </form>
+  </form>
     
   );
 };

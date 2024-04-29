@@ -173,214 +173,122 @@ const CheckoutForm: React.FC = () => {
       {/* Country */}
       <div>
         <label htmlFor="country">Land</label>
-        <input
-                type="text"
-                id="country"
-                name="country"
-                value={formData.country}
-                onChange={handleInputChange}
-            /><div> 
-            {errors.country && <span>{errors.country}</span>}
+        <input type="text"id="country"name="country"value={formData.country}onChange={handleInputChange}/>
+        <div> 
+          {errors.country && <span>{errors.country}</span>}
         </div>
-
       </div>
     
       {/* ----------------------------- NAMES ----------------------------- */}
 
-      <div className="name-fields">
-    <div style={{ display: 'flex' }}>
-        <div style={{ width: '50%' }}>
-            <label htmlFor="firstName">Fornavn</label>
-        </div>
-        
-        <div style={{ width: '50%' }}>
-            <label htmlFor="lastName">Efternavn</label>
-        </div>
-    </div>
-
-    <div style={{ display: 'flex' }}>
-        <div style={{ width: '50%' }}>
-            <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleInputChange}
-            />
-            <div> 
-                {errors.firstName && <span>{errors.firstName}</span>}
-            </div>
+      <div className="checkoutinformation-fields">
+        <div>
+          <label htmlFor="firstName">Fornavn</label>
+          <input type="text" id="firstName" name="firstName" value={formData.firstName} onChange={handleInputChange} />
+          <div>
+            {errors.firstName && <span>{errors.firstName}</span>}
+          </div>
         </div>
 
-        <div style={{ width: '50%' }}>
-            <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleInputChange}
-            />
-            <div>
-                {errors.lastName && <span>{errors.lastName}</span>}
-            </div>
+        <div>
+          <label htmlFor="lastName">Efternavn</label>
+          <input type="text" id="lastName" name="lastName"value={formData.lastName}onChange={handleInputChange} />
+          <div> 
+            {errors.lastName && <span>{errors.lastName}</span>}
+          </div>
         </div>
-    </div>
-</div>
+      </div>
 
     
     {/* ----------------------------- ADDRESSES ----------------------------- */}
 
-    <div style={{ display: 'flex' }}>
-      <div style={{ width: '50%' }}>
-        <label>Adresse linje 1</label>
-      </div>
-      <div style={{ width: '50%' }}>
-        <label>Adresse linje 2</label>
-      </div>
-    </div>
-
-    <div style={{ display: 'flex' }}>    
-      <div style={{ width: '50%' }}>
-        <input
-          type="text"
-          name="addressLine1"
-          value={formData.addressLine1}
-          onChange={handleInputChange}
-        /> 
+    <div className="checkoutinformation-fields">
         <div>
-        {errors.addressLine1 && <span>{errors.addressLine1}</span>}
+          <label htmlFor="addressLine1">Adresse linje 1</label>
+            <input type="text"name="addressLine1"value={formData.addressLine1}onChange={handleInputChange}/>
+            <div>
+              {errors.addressLine1 && <span>{errors.addressLine1}</span>}
+            </div>
         </div>
-      </div>
 
-      
-      <div style={{ width: '50%' }}>
-        <input
-          type="text"
-          name="addressLine2"
-          value={formData.addressLine2}
-          onChange={handleInputChange}
-        />
+        <div>
+          <label htmlFor="addressLine2">Adresse linje 2</label>
+          <input type="text"name="addressLine2" value={formData.addressLine2} onChange={handleInputChange} />
+            <div>
+              {errors.addressLine2 && <span>{errors.addressLine2}</span>}
+            </div>
         </div>
       </div>
 
     {/* ----------------------------- Phone and Email ----------------------------- */}
 
-    <div style={{ display: 'flex' }}>
-      <div style={{ width: '50%' }}>
-          <label>Telefonnummer</label>
-        </div>
-        <div style={{ width: '50%' }}>
-          <label>Email</label>
-        </div>
-      </div>
-
-      <div style={{ display: 'flex' }}>
-        <div style={{ width: '50%' }}>
-        <input
-          type="text"
-          name="phone"
-          value={formData.phone}
-          onChange={handleInputChange}
-        />
+    <div className="checkoutinformation-fields">
+      <div>
+        <label htmlFor="phone">Telefonnummer</label>
+        <input type="text"name="phone"value={formData.phone}onChange={handleInputChange}/>
         <div>
-        {errors.phone && <span>{errors.phone}</span>}
+          {errors.phone && <span>{errors.phone}</span>}
         </div>
       </div>
 
-      <div style={{ width: '50%' }}>
-        
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleInputChange}
-        />
+      <div>
+        <label htmlFor="email">Email</label>
+        <input type="email"name="email"value={formData.email}onChange={handleInputChange}/>
         <div>
-        {errors.email && <span>{errors.email}</span>}
+          {errors.email && <span>{errors.email}</span>}
         </div>
-      </div>
-      </div>
-
-    {/* ----------------------------- CompanyName and VAT ----------------------------- */}
-
-    <div style={{ display: 'flex' }}>
-      <div style={{ width: '50%' }}>
-        <label>Virksomheds Navn</label>
-      </div>
-      <div style={{ width: '50%' }}>
-        <label>CVR</label>
       </div>
     </div>
 
+    {/* ----------------------------- CompanyName and VAT ----------------------------- */}
 
-        
-    <div style={{ display: 'flex' }}>
-      <div style={{ width: '50%' }}>
-        <input
-          type="text"
-          name="companyName"
-          value={formData.companyName}
-          onChange={handleInputChange}
-        />
+    <div className="checkoutinformation-fields">
+      <div>
+        <label htmlFor="companyName">Virksomheds Navn</label>
+        <input type="text"name="companyName"value={formData.companyName}onChange={handleInputChange}/>
         <div>
-        {errors.companyName && <span>{errors.companyName}</span>}
+          {errors.companyName && <span>{errors.companyName}</span>}
         </div>
       </div>
 
-      <div style={{ width: '50%' }}>
-        <input
-          type="text"
-          name="vatNumber"
-          value={formData.vatNumber}
-          onChange={handleInputChange}
-        />
+      <div>
+        <label htmlFor="vatNumber">CVR</label>
+        <input type="text"name="vatNumber"value={formData.vatNumber} onChange={handleInputChange}/>
         <div>
-            {errors.vatNumber && <span>{errors.vatNumber}</span>}
+          {errors.vatNumber && <span>{errors.vatNumber}</span>}
         </div>
       </div>
-      </div>
+    </div>
 
       {/* ----------------------------- ZipCode and City ----------------------------- */}
-      <div style={{ display: 'flex' }}>
-              <div style={{ width: '50%' }}>
-                <label>Postnummer</label>
-              </div>
-              <div style={{ width: '50%' }}>
-                <label>By</label>
-              </div>
-            </div>
-
-
-        <div style={{ display: 'flex' }}>
-          <div style={{ width: '50%' }}>
-            <input type="text"value={zipCode} onChange={zipCodeChanged} ></input>
-            <div>
-              {errors.zipCode && <span>{errors.zipCode}</span>}
-            </div>
-          </div>
-
-
-          <div style={{ width: '50%' }}>
-            <input id="city" type="text" value={city} onChange={cityChange} ></input>
-            <div>
-              {errors.city && <span>{errors.city}</span>}
-            </div>
-          </div> 
-        </div>
-      
-      
-
-      
-      <button type="submit">
-        Submit
-      </button>
+      <div className="checkoutinformation-fields">
       <div>
-        <Link to="/cart">
-          <button type = "submit">Back to Cart</button>
-        </Link>
+        <label htmlFor="zipCode">Postnummer</label>
+        <input type="text"value={zipCode}onChange={zipCodeChanged}/>
+        <div>
+          {errors.zipCode && <span>{errors.zipCode}</span>}
+        </div>
       </div>
 
-    </form>
+      <div>
+        <label htmlFor="city">By</label>
+        <input id="city"type="text"value={city}onChange={cityChange}/>
+        <div>
+          {errors.city && <span>{errors.city}</span>}
+        </div>
+      </div>
+    </div>
+      
+    <button type="submit">
+      Submit
+    </button>
+    <div>
+      <Link to="/cart">
+        <button type = "submit">Back to Cart</button>
+      </Link>
+    </div>
+
+  </form>
   );
 };
 

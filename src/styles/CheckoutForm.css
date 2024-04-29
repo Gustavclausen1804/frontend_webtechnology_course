@@ -1,3 +1,16 @@
+.country{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.country > div {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    initial-value: black;
+}
+
 .checkoutinformation-fields {
     display: flex;
     flex-direction: row; 
@@ -18,5 +31,8 @@
 }
 
 .checkboxes > div {
-    align-items: end;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 1%;
 }
