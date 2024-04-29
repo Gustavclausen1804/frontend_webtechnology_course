@@ -20,6 +20,8 @@ function render(
     const defaultState: CartState = {
         products: productsData,
         cartItems: initialState?.cartItems || [],
+        loading: false,
+        error: null,
         ...initialState
     };
 
@@ -54,7 +56,7 @@ describe('UpSellProductList', () => {
     });
 
     it('renders the upsell product list with initialized products', async () => {
-        render(<UpSellProductList />, { initialState: { cartItems, products: productsData } });
+        render(<UpSellProductList />, { initialState: { cartItems, products: productsData, loading: false, error: null } });
 
         const lastProductName = productsData[productsData.length - 1].name;
         await screen.findByText(lastProductName);
@@ -63,7 +65,7 @@ describe('UpSellProductList', () => {
 
     it('calls dispatch when add to cart button is clicked', async () => {
         const mockDispatch = vi.fn();
-        render(<UpSellProductList />, { dispatch: mockDispatch, initialState: { cartItems, products: productsData } });
+        render(<UpSellProductList />, { dispatch: mockDispatch, initialState: { cartItems, products: productsData, loading: false, error: null } });
 
         const buttons = screen.getAllByRole('button');
         if (buttons.length > 0) {
@@ -74,7 +76,7 @@ describe('UpSellProductList', () => {
 
     it('calls dispatch when replace in cart button is clicked', async () => {
         const mockDispatch = vi.fn();
-        render(<UpSellProductList />, { dispatch: mockDispatch, initialState: { cartItems, products: productsData } });
+        render(<UpSellProductList />, { dispatch: mockDispatch, initialState: { cartItems, products: productsData, loading: false, error: null } });
 
         const buttons = screen.getAllByRole('button');
         if (buttons.length > 1) {

@@ -22,6 +22,8 @@ const mockDispatch = vi.fn();
 
 const MockCartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cartItems, setCartItems] = React.useState<CartState['cartItems']>(initialCartItems);
+  const [loading, ] = React.useState<boolean>(false);
+  const [error, ] = React.useState<string | null>(null);
 
   const handleDelete: Dispatch<CartActions> = (action: CartActions) => {
     if (action.type === 'REMOVE_FROM_CART') {
@@ -32,12 +34,13 @@ const MockCartProvider: React.FC<{ children: React.ReactNode }> = ({ children })
 
   return (
     <CartDispatchContext.Provider value={handleDelete}>
-      <CartStateContext.Provider value={{ products, cartItems }}>
+      <CartStateContext.Provider value={{ products, cartItems, loading, error }}>
         {children}
       </CartStateContext.Provider>
     </CartDispatchContext.Provider>
   );
 };
+
 
 describe('CartList Component Tests', () => {
   beforeEach(async () => {

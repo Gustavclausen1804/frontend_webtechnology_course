@@ -46,6 +46,8 @@ describe('CheckoutForm Component Tests', () => {
   const mockContextValue = {
     products: mockProducts,
     cartItems: mockCartItems,
+    loading: false,
+    error: null,
   };
 
 

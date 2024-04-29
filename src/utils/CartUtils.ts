@@ -71,7 +71,7 @@ export const formatPrice = (value: number, locale: string = 'da-DK', currency: s
 
    
   export const calculateDiscountedTotalPrice = (price: number, quantity: number, rebateQuantity: number, rebatePercent: number): number => {
-    return quantity >= rebateQuantity ? quantity * price * (1 - rebatePercent / 100) : price;
+    return quantity >= rebateQuantity ? quantity * price * (1 - rebatePercent / 100) : price * quantity;
   };
 
   export const shuoldProductBeDiscounted = (quantity: number, rebateQuantity: number): boolean => {
