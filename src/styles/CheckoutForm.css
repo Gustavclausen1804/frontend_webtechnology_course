@@ -1,0 +1,38 @@
+.country{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.country > div {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    initial-value: black;
+}
+
+.checkoutinformation-fields {
+    display: flex;
+    flex-direction: row; 
+}
+
+.checkoutinformation-fields > div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.checkoutinformation-fields > div > div {
+    width: 50%;
+}
+
+.checkoutinformation-fields label {
+    margin-right: 10px; /* Adjust margin as needed */
+}
+
+.checkboxes > div {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 1%;
+}
